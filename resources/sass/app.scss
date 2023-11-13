@@ -1,0 +1,365 @@
+// Fonts
+//@import url('https://fonts.googleapis.com/css?family=Tangerine');
+// Variables
+@import 'variables';
+@import '~@mdi/font/css/materialdesignicons.css';
+
+//ref website -> https://materialdesignicons.com/
+//npm i @mdi/font
+// Bootstrap
+//@import '~bootstrap/scss/bootstrap';
+//font awesome
+//@import '~font-awesome/css/font-awesome.css';
+//npm i font-awesome
+//https://fontawesome.com/v4.7.0/
+
+// 
+// #0A4D68
+//#088395
+//#05BFDB
+//#00FFCA
+// color pallete for ensys
+
+// html body {
+//     font-family: 'Amaranth', sans-serif;
+//     background: white;
+// }
+
+.navbar {
+    border-bottom: 0.5px solid #0A4D68;
+    // box-shadow: 0 1px 10px rgb(224, 224, 224);
+}
+
+button{
+    border-radius: 0 !important;
+}
+
+
+.w-button {
+    display: inline-block;
+    padding: 10px 24px;
+    border: 1px solid #1426c2;
+    background-color: white;
+    border-radius: 4px;
+    transition: all 0.2s ease-in;
+    position: relative;
+    overflow: hidden;
+    font-size: 19px;
+    color: black;
+    font-weight: bold;
+    font-size: 0.8em;
+    z-index: 1;
+}
+
+.w-button:before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) scaleY(1) scaleX(1.25);
+    top: 100%;
+    width: 140%;
+    height: 180%;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 50%;
+    display: block;
+    transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+    z-index: -1;
+}
+
+.w-button:after {
+    content: "";
+    position: absolute;
+    left: 55%;
+    transform: translateX(-50%) scaleY(1) scaleX(1.45);
+    top: 180%;
+    width: 160%;
+    height: 190%;
+    background-color: #39bda7;
+    border-radius: 50%;
+    display: block;
+    transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+    z-index: -1;
+}
+
+.w-button:hover {
+    color: #ffffff;
+    border: 1px solid #39bda7;
+}
+
+.w-button:hover:before {
+    top: -35%;
+    background-color: #39bda7;
+    transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+}
+
+.w-button:hover:after {
+    top: -45%;
+    background-color: #39bda7;
+    transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+}
+
+
+
+.w2-button {
+    padding: 0.8em 1.8em;
+    border: 2px solid #17C3B2;
+    position: relative;
+    overflow: hidden;
+    background-color: transparent;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 12px;
+    transition: .3s;
+    z-index: 1;
+    font-family: inherit;
+    color: #17C3B2;
+}
+
+.w2-button::before {
+    content: '';
+    width: 0;
+    height: 300%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    background: #17C3B2;
+    transition: .5s ease;
+    display: block;
+    z-index: -1;
+}
+
+.w2-button:hover::before {
+    width: 105%;
+}
+
+.w2-button:hover {
+    color: rgb(255, 255, 255);
+}
+
+
+
+@media screen and (max-width: 1023px) {
+    .b-sidebar {
+        .sidebar-content {
+            &.is-mini-mobile {
+
+                &:not(.is-mini-expand),
+                &.is-mini-expand:not(:hover):not(.is-mini-delayed) {
+                    .menu-list {
+                        li {
+                            a {
+                                span:nth-child(2) {
+                                    display: none;
+                                }
+                            }
+
+                            ul {
+                                padding-left: 0;
+
+                                li {
+                                    a {
+                                        display: inline-block;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .menu-label:not(:last-child) {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .b-sidebar {
+        .sidebar-content {
+            &.is-mini {
+
+                &:not(.is-mini-expand),
+                &.is-mini-expand:not(:hover):not(.is-mini-delayed) {
+                    .menu-list {
+                        li {
+                            a {
+                                span:nth-child(2) {
+                                    display: none;
+                                }
+                            }
+
+                            ul {
+                                padding-left: 0;
+
+                                li {
+                                    a {
+                                        display: inline-block;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .menu-label:not(:last-child) {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.is-mini-expand {
+    .menu-list a {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+.box {
+    border: 1px solid rgb(228, 228, 228);
+}
+
+.top-border-green {
+    border-top: 3px solid rgb(22, 128, 8);
+}
+
+.debug {
+    border: 1px solid red;
+}
+
+//@import '~animate.css/animate';
+//npm install animate.css --save
+// Import Bulma's core
+@import "~bulma/sass/utilities/_all";
+//
+////Set your colors
+$primary: #0A4D68;
+$primary-light: findLightColor($primary);
+$primary-dark: findDarkColor($primary);
+$primary-invert: findColorInvert($primary);
+$twitter: #4099FF;
+$twitter-invert: findColorInvert($twitter);
+// Lists and maps
+$custom-colors: null !default;
+$custom-shades: null !default;
+// Setup $colors to use as bulma classes (e.g. 'is-twitter')
+$colors: mergeColorMaps(("white": ($white, $black, ), "black": ($black, $white, ), "light": ($light, $light-invert, ), "dark": ($dark, $dark-invert, ), "primary": ($primary, $primary-invert, $primary-light, $primary-dark, ), "link": ($link, $link-invert, $link-light, $link-dark, ), "info": ($info, $info-invert, $info-light, $info-dark, ), "success": ($success, $success-invert, $success-light, $success-dark, ), "warning": ($warning, $warning-invert, $warning-light, $warning-dark, ), "danger": ($danger, $danger-invert, $danger-light, $danger-dark, ), ), $custom-colors);
+//// Links
+$link: $primary;
+$link-invert: $primary-invert;
+$link-focus-border: $primary;
+//navbar
+$navbar-height: 5rem;
+$navbar-item-img-max-height: 4rem;
+//$input-background-color: rgb(217, 255, 230);
+$input-radius: 0px;
+
+//$modal-background-background-color: #00c8d6;
+
+$modal-card-head-background-color: #ffffff;
+
+
+.table-text{
+    font-weight: bold;
+    font-size: 1.4em;
+    text-align: center;
+    padding: 10px 5px;
+    border-bottom: 1px solid rgb(185, 185, 185);
+    margin: 5px 0 30px 0;
+}
+
+// .box-text{
+//     font-weight: bold;
+//     font-size: 1.2em;
+//     border-bottom: 1px solid rgb(185, 185, 185);
+//     margin: 5px 0 30px 0;
+// }
+
+
+h2 {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #000;
+    line-height: 0.1em;
+    margin: 30px 0 40px 0;
+}
+
+h2 span {
+    background: #fff;
+    padding: 0 10px;
+    font-weight: bold;
+}
+
+
+.divider{
+    //border: 2px solid rgb(194, 194, 194);
+    background-color: #7a7a7a;
+    padding: 5px;
+    color: white;
+    font-weight: bold;
+    margin: 5px 0 15px 0;
+}
+
+
+@media print {
+
+    .nprint{
+        display: none;
+    }
+    header, footer, aside, nav, form, iframe, .menu, .hero, .adslot, footer {
+        display: none;
+    }
+
+    .box{
+        display: none;
+    }
+
+    .footer{
+        display: none;
+    }
+
+    .buttons{
+        display: none;
+    }
+
+}
+//$navbar-burger-color: white;
+//$navbar-item-color: #ffffff;
+//$navbar-item-hover-color: #a7f1a7;
+//.navbar-start > .navbar-item {
+//    font-weight: bold;
+//
+//}
+//.navbar-start > .navbar-item{
+//    transition: 0.5s;
+//}
+//
+//.navbar-start > .navbar-item:hover{
+//    background-color: transparent;
+//    border-bottom: 3px solid blue;
+//}
+//.navbar-start > .navbar-item > .navbar-link:hover{
+//    border-bottom: 3px solid blue;
+//}
+// Import Bulma and Buefy styles
+@import "~bulma";
+
+.sidebar-content {
+    background-color: #2a2a2a;
+}
+
+@import "~buefy/src/scss/buefy";
+// Import only what you need from Bulma
+//@import "~bulma/sass/utilities/_all.sass";
+//@import "~bulma/sass/base/_all.sass";
+//@import "~bulma/sass/elements/button.sass";
+//@import "~bulma/sass/elements/container.sass";
+//@import "~bulma/sass/elements/title.sass";
+//@import "~bulma/sass/form/_all.sass";
+//@import "~bulma/sass/components/navbar.sass";
+//@import "~bulma/sass/layout/hero.sass";
+//@import "~bulma/sass/layout/section.sass";
