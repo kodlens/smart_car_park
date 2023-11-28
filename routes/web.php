@@ -6,10 +6,6 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
 
-use App\Models\User;
-use App\Models\Category;
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,7 +18,7 @@ use App\Models\Category;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
 
@@ -32,21 +28,14 @@ Auth::routes([
     'register' => false
 ]);
 
-Route::get('/load-user', function(){
-    if(Auth::check()){
-        return Auth::user();
-    }
-});
 
 
-
-
-Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login']);
-
-Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout']);
-
+//Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login']);
+//Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
 
 Route::get('/registration', [App\Http\Controllers\RegistrationController::class, 'index']);
 Route::post('/registration', [App\Http\Controllers\RegistrationController::class, 'store']);
