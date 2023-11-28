@@ -25,14 +25,12 @@
 //     background: white;
 // }
 
+
 .navbar {
     border-bottom: 0.5px solid #0A4D68;
     // box-shadow: 0 1px 10px rgb(224, 224, 224);
 }
 
-button{
-    border-radius: 0 !important;
-}
 
 
 .w-button {
@@ -231,13 +229,19 @@ button{
     border: 1px solid red;
 }
 
+
+
+
+
 //@import '~animate.css/animate';
 //npm install animate.css --save
 // Import Bulma's core
 @import "~bulma/sass/utilities/_all";
+
+
 //
 ////Set your colors
-$primary: #0A4D68;
+$primary: #2A2A72;
 $primary-light: findLightColor($primary);
 $primary-dark: findDarkColor($primary);
 $primary-invert: findColorInvert($primary);
@@ -261,23 +265,6 @@ $input-radius: 0px;
 //$modal-background-background-color: #00c8d6;
 
 $modal-card-head-background-color: #ffffff;
-
-
-.table-text{
-    font-weight: bold;
-    font-size: 1.4em;
-    text-align: center;
-    padding: 10px 5px;
-    border-bottom: 1px solid rgb(185, 185, 185);
-    margin: 5px 0 30px 0;
-}
-
-// .box-text{
-//     font-weight: bold;
-//     font-size: 1.2em;
-//     border-bottom: 1px solid rgb(185, 185, 185);
-//     margin: 5px 0 30px 0;
-// }
 
 
 h2 {
@@ -327,6 +314,7 @@ h2 span {
     }
 
 }
+
 //$navbar-burger-color: white;
 //$navbar-item-color: #ffffff;
 //$navbar-item-hover-color: #a7f1a7;
@@ -363,3 +351,23 @@ h2 span {
 //@import "~bulma/sass/components/navbar.sass";
 //@import "~bulma/sass/layout/hero.sass";
 //@import "~bulma/sass/layout/section.sass";
+
+//#FFA400 orange
+//#009FFD light blue
+//#2A2A72 darker blue
+//#232528 lighter blue (bg)
+
+
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Manrope:wght@200;300;400;700&family=Poppins&family=Roboto+Condensed:wght@300;400;500;700&family=Roboto+Mono&family=Roboto:wght@300;400;700&display=swap');
+html{
+    background-color: #EAF6FF;
+}
+html, body, button{
+    font-family: 'Josefin Sans', sans-serif;
+    font-family: 'Manrope', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-family: 'Roboto Mono', monospace;
+}
+

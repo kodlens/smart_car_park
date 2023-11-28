@@ -1,5 +1,5 @@
-@extends('layouts.user-layout')
+@extends('layouts.app')
 
 @section('content')
-    <dashboard-user></dashboard-user>
+    <user-dashboard></user-dashboard>
 @endsection

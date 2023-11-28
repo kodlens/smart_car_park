@@ -20,7 +20,7 @@ class UserController extends Controller
         return view('administrator.users');
     }
 
-    public function getAccounts(Request $req){
+    public function getData(Request $req){
         $sort = explode('.', $req->sort_by);
 
         $users = User::where('lname', 'like', $req->lname . '%')
@@ -55,7 +55,7 @@ class UserController extends Controller
             'lname' => strtoupper($req->lname),
             'fname' => strtoupper($req->fname),
             'mname' => strtoupper($req->mname),
-            'extension' => strtoupper($req->extension),
+            'suffix' => strtoupper($req->suffix),
             'sex' => $req->sex,
             'email' => $req->email,
             'contact_no' => $req->contact_no,
@@ -84,7 +84,7 @@ class UserController extends Controller
         $data->lname = strtoupper($req->lname);
         $data->fname = strtoupper($req->fname);
         $data->mname = strtoupper($req->mname);
-        $data->extension = strtoupper($req->extension);
+        $data->suffix = strtoupper($req->suffix);
         $data->sex = $req->sex;
         $data->email = $req->email;
         $data->contact_no = $req->contact_no;

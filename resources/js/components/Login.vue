@@ -1,7 +1,7 @@
 <template>
     <div class="login-wrapper">
         <form @submit.prevent="submit">
-            <div class="login-card">
+            <div class="box">
                 <div class="title is-4 is-centered">
                     SIGN IN
                 </div>
@@ -10,7 +10,7 @@
                 <div class="panel-body">
                     <div class="columns">
                         <div class="column">
-                            <img src="/img/login-logo.png" />
+                            <img src="/img/login-logo.png" class="logo"/>
                         </div>
 
                         <div class="column">
@@ -24,8 +24,14 @@
                                 <b-input type="password" icon="lock" v-model="fields.password" password-reveal placeholder="Password" />
                             </b-field>
 
-                            <div class="buttons is-centered mt-4">
-                                <button class="button is-primary is-outlined">LOGIN</button>
+                            <div class="buttons expanded mt-4">
+                                <button 
+                                    class="button is-fullwidth is-primary is-outlined
+                                        has-text-weight-bold">
+                                        LOGIN
+
+                                        <b-icon class="ml-2" icon="login"></b-icon>
+                                    </button>
                             </div>
                         </div>
                     </div>

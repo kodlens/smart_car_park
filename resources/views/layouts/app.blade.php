@@ -23,56 +23,75 @@
 
 <body>
     
+   
     <div id="app">
         
         <b-navbar>
             <template #brand>
                 <b-navbar-item>
-                    <img src="/img/tcnhs_logo.png" />
-                    ENSYS
+                    <img src="/img/car_park_logo.png" />
                 </b-navbar-item>
             </template>
     
             <template #start>
-               
+            
     
             </template>
     
             <template #end>
-                <b-navbar-item href="/">
-                        Home
+                
+                <b-navbar-item href="/user/dashboard">
+                    Home
                 </b-navbar-item>
-                @auth()
-                    <b-navbar-item tag="div">
+
+                <b-navbar-dropdown label="Settings">
+
+                    <b-navbar-item href="/#">
+                        Item 1
+                    </b-navbar-item>
+
+                    <b-navbar-item href="/#">
+                        Item 2
+                    </b-navbar-item>
+    
+                </b-navbar-dropdown>
+
+                <b-navbar-dropdown label="{{ strtoupper(Auth::user()->fname) }}">
+
+                    <b-navbar-item href="/#">
+                        My Profile
+                    </b-navbar-item>
+
+                    <b-navbar-item href="/#">
+                        Change Password
+                    </b-navbar-item>
+
+                </b-navbar-dropdown>
+                <b-navbar-item tag="div">
+                    @auth()
                         <div class="buttons">
                             <b-button label="LOGOUT" icon-left="logout" onclick="document.getElementById('logout').submit()">
                             </b-button>
                         </div>
-                    </b-navbar-item>
-                @else
-                    <b-navbar-item href="/registration">
-                        Register
-                    </b-navbar-item>
-                    
-                    <b-navbar-item tag="div">
+                    @else
                         <div class="buttons">
                             <a class="button is-primary is-outlined" href="/login">
                                 <strong>Login</strong>
                             </a>
                         </div>
-                    </b-navbar-item>
-                @endauth
+                    @endauth
+                </b-navbar-item>
                 
             </template>
         </b-navbar>
 
         <form id="logout" action="/logout" method="post"> @csrf </form>
 
-        <div>
-            @yield('content')
-        </div>
+        @yield('content')
         
     </div>
+        
+  
 
     <script>
         

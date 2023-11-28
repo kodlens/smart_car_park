@@ -20,17 +20,6 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Manrope:wght@200;300;400;700&family=Poppins&family=Roboto+Condensed:wght@300;400;500;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-
-    <style>
-        html, body {
-            font-family: 'Josefin Sans', sans-serif;
-            font-family: 'Manrope', sans-serif;
-            font-family: 'Poppins', sans-serif;
-            font-family: 'Roboto', sans-serif;
-            font-family: 'Roboto Condensed', sans-serif;
-        }
     </style>
 </head>
 
@@ -41,12 +30,7 @@
         <b-navbar>
             <template #brand>
                 <b-navbar-item>
-                    <img src="/img/tcnhs_logo.png" />
-                    @auth()
-                        {{ Auth::user()->role }}
-                    @else
-                        ENSYS
-                    @endauth
+                    <img src="/img/car_park_logo.png" />
                 </b-navbar-item>
             </template>
     
@@ -57,39 +41,21 @@
     
             <template #end>
                 
-                <b-navbar-item href="/admin-home">
+                <b-navbar-item href="/dashboard">
                     Home
                 </b-navbar-item>
 
                 <b-navbar-dropdown label="Settings">
 
-                    <b-navbar-item href="/academic-years">
-                        Academic Years
+                    <b-navbar-item href="/#">
+                        Item 1
                     </b-navbar-item>
 
-                    <b-navbar-item href="/tracks">
-                        Tracks
+                    <b-navbar-item href="/#">
+                        Item 2
                     </b-navbar-item>
-                    <b-navbar-item href="/strands">
-                        Strands
-                    </b-navbar-item>
-                    <b-navbar-item href="/sections">
-                        Sections
-                    </b-navbar-item>
-                    <b-navbar-item href="/courses">
-                        Subjects
-                    </b-navbar-item>
-                 
-
+      
                 </b-navbar-dropdown>
-
-                <b-navbar-item href="/manage-learners">
-                    Learners
-                </b-navbar-item>
-
-                <b-navbar-item href="/enrollee">
-                    Enrollee
-                </b-navbar-item>
 
                 <b-navbar-item href="/users">
                     Users

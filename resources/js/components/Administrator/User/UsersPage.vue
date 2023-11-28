@@ -4,29 +4,40 @@
             <div class="columns is-centered">
                 <div class="column is-8">
                     <div class="box">
-                        <div class="has-text-weight-bold subtitle is-4">USERS</div>
-                        <b-field label="Search">
-                            <b-input type="text"
+                        <div class="has-text-weight-bold subtitle is-4 table-header">LIST OF USERS</div>
+
+                        <div class="columns">
+                            <div class="column">
+                                <b-field label="Search" label-position="on-border">
+                                    <b-input type="text"
                                         v-model="search.lname" placeholder="Search Lastname"
                                         @keyup.native.enter="loadAsyncData"/>
-                            <p class="control">
-                                    <b-tooltip label="Search" type="is-success">
-                                <b-button type="is-primary" icon-right="account-filter" @click="loadAsyncData"/>
-                                    </b-tooltip>
-                            </p>
-                        </b-field>
+                                    <p class="control">
+                                            <b-tooltip label="Search" type="is-success">
+                                        <b-button type="is-primary" icon-right="account-filter" @click="loadAsyncData"/>
+                                            </b-tooltip>
+                                    </p>
+                                </b-field>
+                            </div>
 
-                        <div class="buttons is-right mt-3">
-                            <b-button @click="openModal" icon-left="plus" class="is-primary is-small">NEW</b-button>
+                            <div class="column">
+                                <div class="buttons is-right mt-3">
+                                    <b-button @click="openModal" icon-left="plus" class="is-primary is-small">NEW</b-button>
+                                </div>
+                            </div>
                         </div>
+                        
+
+                     
 
                         <b-table
+                            class="is-info"
                             :data="data"
                             :loading="loading"
                             paginated
+                            
                             backend-pagination
                             :total="total"
-                            :pagination-rounded="true"
                             :per-page="perPage"
                             @page-change="onPageChange"
                             aria-next-label="Next page"
@@ -41,27 +52,28 @@
                                 {{ props.row.user_id }}
                             </b-table-column>
 
-                            <b-table-column field="username" label="Username" sortable v-slot="props">
+                            <b-table-column field="username" label="USERNAME" sortable v-slot="props">
                                 {{ props.row.username }}
                             </b-table-column>
 
-                            <b-table-column field="lname" label="Name" sortable v-slot="props">
+                            <b-table-column field="lname" label="NAME" sortable v-slot="props">
                                 {{ props.row.lname }}, {{ props.row.fname }} {{ props.row.mname }}
                             </b-table-column>
 
-                            <b-table-column field="sex" label="Sex" v-slot="props">
+                            <b-table-column field="sex" label="SEX" v-slot="props">
                                 {{ props.row.sex }}
                             </b-table-column>
 
-                            <b-table-column field="role" label="Role" v-slot="props">
+                            <b-table-column field="role" label="ROLE" v-slot="props">
                                 {{ props.row.role }}
                             </b-table-column>
 
-                            <b-table-column field="contact_no" label="Contact No." v-slot="props">
+                            <b-table-column field="contact_no" label="CONTACT NO." v-slot="props">
                                 {{ props.row.contact_no }}
                             </b-table-column>
 
-                            <b-table-column label="Action" v-slot="props">
+
+                            <b-table-column label="OPTIONS" v-slot="props">
                                 <div class="is-flex">
                                     <b-tooltip label="Edit" type="is-warning">
                                         <b-button class="button is-small mr-1" tag="a" icon-right="pencil" @click="getData(props.row.user_id)"></b-button>
@@ -79,7 +91,8 @@
                         <div class="columns">
                             <div class="column">
                                 <b-field label="Page" label-position="on-border">
-                                    <b-select v-model="perPage" @input="setPerPage" class="is-small">
+                                    <b-select v-model="perPage" @input="setPerPage" 
+                                        size="is-small">
                                         <option value="5">5 per page</option>
                                         <option value="10">10 per page</option>
                                         <option value="15">15 per page</option>
@@ -107,7 +120,7 @@
             <form @submit.prevent="submit">
                 <div class="modal-card">
                     <header class="modal-card-head">
-                        <p class="modal-card-title">User Information</p>
+                        <p class="modal-card-title has-text-weight-bold is-size-6">USER INFORMATION</p>
                         <button
                             type="button"
                             class="delete"
@@ -234,8 +247,7 @@
                                              :message="this.errors.role ? this.errors.role[0] : ''">
                                         <b-select v-model="fields.role" expanded>
                                             <option value="ADMINISTRATOR">ADMINISTRATOR</option>
-                                            <option value="STUDENT">STUDENT</option>
-                                            <option value="STAFF">NURSE</option>
+                                            <option value="USER">USER</option>
                                         </b-select>
                                     </b-field>
                                 </div>
@@ -245,7 +257,10 @@
                         </div>
                     </section>
                     <footer class="modal-card-foot">
-                        <button class="button is-primary">Save User</button>
+                        <button class="button is-primary has-text-weight-bold">
+                            SAVE USER
+                            <b-icon class="ml-4" icon="content-save-outline"></b-icon>
+                        </button>
                     </footer>
                 </div>
             </form><!--close form-->
@@ -339,7 +354,7 @@ export default{
                 lname: '', 
                 fname: '',
                 mname: '',
-                extension: '',
+                suffix: '',
           
                 password: '', 
                 password_confirmation : '',
@@ -368,7 +383,7 @@ export default{
             ].join('&')
 
             this.loading = true
-            axios.get(`/get-accounts?${params}`)
+            axios.get(`/get-users?${params}`)
                 .then(({ data }) => {
                     this.data = [];
                     let currentTotal = data.total
@@ -420,7 +435,7 @@ export default{
         submit: function(){
             if(this.global_id > 0){
                 //update
-                axios.put('/accounts/'+this.global_id, this.fields).then(res=>{
+                axios.put('/users/'+this.global_id, this.fields).then(res=>{
                     if(res.data.status === 'updated'){
                         this.$buefy.dialog.alert({
                             title: 'UPDATED!',
@@ -441,7 +456,7 @@ export default{
                 })
             }else{
                 //INSERT HERE
-                axios.post('/accounts', this.fields).then(res=>{
+                axios.post('/users', this.fields).then(res=>{
                     if(res.data.status === 'saved'){
                         this.$buefy.dialog.alert({
                             title: 'SAVED!',
@@ -466,19 +481,19 @@ export default{
 
 
         //alert box ask for deletion
-        confirmDelete(delete_id) {
+        confirmDelete(dataId) {
             this.$buefy.dialog.confirm({
                 title: 'DELETE!',
                 type: 'is-danger',
                 message: 'Are you sure you want to delete this data?',
                 cancelText: 'Cancel',
-                confirmText: 'Delete user account?',
-                onConfirm: () => this.deleteSubmit(delete_id)
+                confirmText: 'Delete',
+                onConfirm: () => this.deleteSubmit(dataId)
             });
         },
         //execute delete after confirming
-        deleteSubmit(delete_id) {
-            axios.delete('/accounts/' + delete_id).then(res => {
+        deleteSubmit(dataId) {
+            axios.delete('/users/' + dataId).then(res => {
                 this.loadAsyncData();
                 this.clearFields()
             }).catch(err => {
@@ -496,7 +511,7 @@ export default{
                 lname: '', 
                 fname: '',
                 mname: '',
-                extension: '',
+                suffix: '',
              
                 password: '', 
                 password_confirmation : '',
@@ -514,7 +529,7 @@ export default{
             this.isModalCreate = true;
 
             //nested axios for getting the address 1 by 1 or request by request
-            axios.get('/accounts/'+data_id).then(res=>{
+            axios.get('/users/'+data_id).then(res=>{
                 this.fields = res.data;
             });
         },
@@ -564,14 +579,23 @@ export default{
 
 <style>
 
+    .table-wrapper{
+        border: 1px solid gray;
+        padding: 15px;
+    }
     .table > tbody > tr {
         /* background-color: blue; */
         transition: background-color 0.5s ease;
     }
 
     .table > tbody > tr:hover {
-        background-color: rgb(233, 233, 233);
+        background-color: #EAF6FF;
 
+    }
+
+    .table-header{
+        background-color: #009FFD;
+        padding: 15px;
     }
 
 </style>
