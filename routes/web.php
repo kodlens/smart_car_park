@@ -47,6 +47,8 @@ Route::middleware(['auth', 'admin'])->group(function(){
     Route::get('/dashboard', [App\Http\Controllers\Administrator\DashboardController::class, 'index']);
     Route::get('/load-reports', [App\Http\Controllers\Administrator\AdminHomeController::class, 'loadReports']);
 
+    Route::resource('/parking-fees', App\Http\Controllers\Administrator\ParkingFeeController::class);
+    Route::get('/get-parking-fees', [App\Http\Controllers\Administrator\ParkingFeeController::class, 'getData']);
 
     Route::resource('/users', App\Http\Controllers\Administrator\UserController::class);
     Route::get('/get-users', [App\Http\Controllers\Administrator\UserController::class, 'getData']);

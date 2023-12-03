@@ -47,8 +47,8 @@
 
                 <b-navbar-dropdown label="Settings">
 
-                    <b-navbar-item href="/#">
-                        Item 1
+                    <b-navbar-item href="/parking-fees">
+                        Parking Fees
                     </b-navbar-item>
 
                     <b-navbar-item href="/#">
