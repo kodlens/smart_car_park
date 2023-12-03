@@ -40,11 +40,11 @@
     
             <template #end>
                 
-                <b-navbar-item href="/user/dashboard">
+                <b-navbar-item href="/home">
                     Home
                 </b-navbar-item>
 
-                <b-navbar-dropdown label="Settings">
+                <!-- <b-navbar-dropdown label="Settings">
 
                     <b-navbar-item href="/parking-fees">
                         Parking Fees
@@ -54,11 +54,15 @@
                         Item 2
                     </b-navbar-item>
     
-                </b-navbar-dropdown>
+                </b-navbar-dropdown> -->
 
                 <b-navbar-dropdown label="{{ strtoupper(Auth::user()->fname) }}">
 
-                    <b-navbar-item href="/#">
+                    <b-navbar-item href="/my-wallet">
+                        My Wallet
+                    </b-navbar-item>
+
+                    <b-navbar-item href="/my-profile">
                         My Profile
                     </b-navbar-item>
 

@@ -29,7 +29,7 @@ class RedirectIfAuthenticated
                 }
 
                 if($user->role === 'USER'){
-                    return redirect('/user/home');
+                    return redirect('/home');
                 }
 
                 //return redirect(RouteServiceProvider::HOME);

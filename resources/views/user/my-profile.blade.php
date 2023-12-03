@@ -1,5 +1,5 @@
-@extends('layouts.user-layout')
+@extends('layouts.app')
 @section('content')
-    <my-profie></my-profie>
+    <my-profile></my-profile>
 @endsection
 

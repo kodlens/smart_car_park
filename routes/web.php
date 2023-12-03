@@ -53,10 +53,7 @@ Route::middleware(['auth', 'admin'])->group(function(){
     Route::resource('/users', App\Http\Controllers\Administrator\UserController::class);
     Route::get('/get-users', [App\Http\Controllers\Administrator\UserController::class, 'getData']);
 
-
     Route::post('/user-reset-password/{userid}', [App\Http\Controllers\Administrator\UserController::class, 'resetPassword']);
-
-
 
 });
 
@@ -66,6 +63,10 @@ Route::middleware(['auth', 'admin'])->group(function(){
 
 //  ------------------------USER -------------------------------------
 Route::middleware(['auth', 'user'])->group(function(){
-    Route::get('/user/home', [App\Http\Controllers\User\HomeController::class, 'index']);
+    Route::get('/home', [App\Http\Controllers\User\HomeController::class, 'index']);
+    
+    
+    Route::resource('/my-profile', App\Http\Controllers\User\MyProfileController::class);
+    Route::get('/load-profile', [App\Http\Controllers\User\MyProfileController::class, 'loadProfile']);
 
 });
