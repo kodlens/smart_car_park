@@ -577,7 +577,7 @@ export default{
 </script>
 
 
-<style>
+<style scoped>
 
     .table-wrapper{
         border: 1px solid gray;
@@ -596,6 +596,8 @@ export default{
     .table-header{
         background-color: #009FFD;
         padding: 15px;
+        color: white;
+
     }
 
 </style>

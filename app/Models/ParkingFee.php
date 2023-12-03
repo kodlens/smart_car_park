@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class ParkingFee extends Model
 {
     use HasFactory;
+
+
+    
+    protected $table = 'parking_fees';
+    protected $primaryKey = 'parking_fee_id';
+
+    protected $fillable = [
+        'parking_hour',
+        'parking_price',
+    ];
+
+
 }

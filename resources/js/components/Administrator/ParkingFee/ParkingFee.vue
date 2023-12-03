@@ -10,7 +10,7 @@
                             <div class="column">
                                 <b-field label="Search" label-position="on-border">
                                     <b-input type="text"
-                                        v-model="search.lname" placeholder="Search Lastname"
+                                        v-model="search.parking_hour" placeholder="Search Lastname"
                                         @keyup.native.enter="loadAsyncData"/>
                                     <p class="control">
                                             <b-tooltip label="Search" type="is-success">
@@ -27,8 +27,6 @@
                             </div>
                         </div>
                         
-
-                     
 
                         <b-table
                             class="is-info"
@@ -47,26 +45,31 @@
                             backend-sorting
                             :default-sort-direction="defaultSortDirection"
                             @sort="onSort">
-
+<!-- 
                             <b-table-column field="parking_fee_id" label="ID" sortable v-slot="props">
                                 {{ props.row.parking_fee_id }}
-                            </b-table-column>
+                            </b-table-column> -->
 
-                            <b-table-column field="parking_hour" label="Parking Hour" sortable v-slot="props">
+                            <b-table-column field="parking_hour" centered label="Parking Hour" sortable v-slot="props">
                                 {{ props.row.parking_hour }}
                             </b-table-column>
 
-                            <b-table-column field="lname" label="Parking Price" sortable v-slot="props">
+                            <b-table-column field="lname" label="Parking Price" centered sortable v-slot="props">
                                 {{ props.row.parking_price }}
                             </b-table-column>
 
                             <b-table-column label="OPTIONS" v-slot="props">
                                 <div class="is-flex">
                                     <b-tooltip label="Edit" type="is-warning">
-                                        <b-button class="button is-small mr-1" tag="a" icon-right="pencil" @click="getData(props.row.user_id)"></b-button>
+                                        <b-button class="button is-small mr-1" 
+                                            tag="a" 
+                                            icon-right="pencil" 
+                                            @click="getData(props.row.parking_fee_id)"></b-button>
                                     </b-tooltip>
                                     <b-tooltip label="Delete" type="is-danger">
-                                        <b-button class="button is-small mr-1" icon-right="delete" @click="confirmDelete(props.row.user_id)"></b-button>
+                                        <b-button class="button is-small mr-1" 
+                                            icon-right="delete" 
+                                            @click="confirmDelete(props.row.parking_fee_id)"></b-button>
                                     </b-tooltip>
                               
                                 </div>
@@ -117,8 +120,8 @@
                             <div class="columns">
                                 <div class="column">
                                     <b-field label="Parking Hour" label-position="on-border"
-                                             :type="this.errors.parking_hours ? 'is-danger':''"
-                                             :message="this.errors.parking_hours ? this.errors.parking_hours[0] : ''">
+                                             :type="this.errors.parking_hour ? 'is-danger':''"
+                                             :message="this.errors.parking_hour ? this.errors.parking_hour[0] : ''">
                                         <b-numberinput v-model="fields.parking_hour"
                                             :controls="false"
                                             placeholder="Parking Hour" required>
@@ -140,7 +143,6 @@
                                 </div>
                             </div>
  
-
                         </div>
                     </section>
                     <footer class="modal-card-foot">
@@ -179,7 +181,7 @@ export default{
             global_id : 0,
 
             search: {
-                lname: '',
+                parking_hour: '',
             },
 
             isModalCreate: false,
@@ -202,7 +204,7 @@ export default{
         loadAsyncData() {
             const params = [
                 `sort_by=${this.sortField}.${this.sortOrder}`,
-                `lname=${this.search.lname}`,
+                `park=${this.search.parking_hour}`,
                 `perpage=${this.perPage}`,
                 `page=${this.page}`
             ].join('&')
@@ -250,7 +252,7 @@ export default{
 
         openModal(){
             this.isModalCreate=true;
-            this.fields = {};
+            this.clearFields()
             this.errors = {};
         },
 
@@ -260,7 +262,7 @@ export default{
         submit: function(){
             if(this.global_id > 0){
                 //update
-                axios.put('/users/'+this.global_id, this.fields).then(res=>{
+                axios.put('/parking-fees/'+this.global_id, this.fields).then(res=>{
                     if(res.data.status === 'updated'){
                         this.$buefy.dialog.alert({
                             title: 'UPDATED!',
@@ -281,7 +283,7 @@ export default{
                 })
             }else{
                 //INSERT HERE
-                axios.post('/users', this.fields).then(res=>{
+                axios.post('/parking-fees', this.fields).then(res=>{
                     if(res.data.status === 'saved'){
                         this.$buefy.dialog.alert({
                             title: 'SAVED!',
@@ -330,8 +332,8 @@ export default{
 
         clearFields(){
             this.global_id = 0;
-
-           
+            this.fields.parking_hour = null
+            this.fields.parking_price = null
         },
 
 
@@ -342,7 +344,7 @@ export default{
             this.isModalCreate = true;
 
             //nested axios for getting the address 1 by 1 or request by request
-            axios.get('/users/'+data_id).then(res=>{
+            axios.get('/parking-fees/'+ data_id).then(res=>{
                 this.fields = res.data;
             });
         },
@@ -360,7 +362,7 @@ export default{
 </script>
 
 
-<style>
+<style scoped>
 
     .table-wrapper{
         border: 1px solid gray;
@@ -379,6 +381,7 @@ export default{
     .table-header{
         background-color: #009FFD;
         padding: 15px;
+        color: white;
     }
 
 </style>
