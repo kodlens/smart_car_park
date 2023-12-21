@@ -39,6 +39,7 @@ Route::get('/load-provinces', [App\Http\Controllers\AddressController::class, 'l
 Route::get('/load-cities', [App\Http\Controllers\AddressController::class, 'loadCities']);
 Route::get('/load-barangays', [App\Http\Controllers\AddressController::class, 'loadBarangays']);
 
+Route::get('/load-parking-spaces', [App\Http\Controllers\ParkingSpacesController::class, 'loadParkingSpaces']);
 
 
 // -----------------------ADMINSITRATOR-------------------------------------------
