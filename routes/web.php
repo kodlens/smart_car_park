@@ -70,3 +70,11 @@ Route::middleware(['auth', 'user'])->group(function(){
     Route::get('/load-profile', [App\Http\Controllers\User\MyProfileController::class, 'loadProfile']);
 
 });
+
+
+
+//paypal controller
+Route::get('/paypal', [App\Http\Controllers\PaypalController::class, 'index']);
+Route::post('/paypal/payment', [App\Http\Controllers\PaypalController::class, 'payment'])->name('paypal');
+Route::get('/paypal/success', [App\Http\Controllers\PaypalController::class, 'success'])->name('paypal_success');
+Route::get('/paypal/cancel', [App\Http\Controllers\PaypalController::class, 'cancel'])->name('paypal_cancel');
