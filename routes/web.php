@@ -1,5 +1,10 @@
 <?php
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -30,8 +35,8 @@ Auth::routes([
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/registration', [App\Http\Controllers\RegistrationController::class, 'index']);
-Route::post('/registration', [App\Http\Controllers\RegistrationController::class, 'store']);
+// Route::get('/registration', [App\Http\Controllers\RegistrationController::class, 'index']);
+// Route::post('/registration', [App\Http\Controllers\RegistrationController::class, 'store']);
 
 
 //ADDRESS
@@ -45,7 +50,7 @@ Route::get('/load-barangays', [App\Http\Controllers\AddressController::class, 'l
 Route::middleware(['auth', 'admin'])->group(function(){
 
     Route::get('/dashboard', [App\Http\Controllers\Administrator\DashboardController::class, 'index']);
-    Route::get('/load-reports', [App\Http\Controllers\Administrator\AdminHomeController::class, 'loadReports']);
+    // Route::get('/load-reports', [App\Http\Controllers\Administrator\AdminHomeController::class, 'loadReports']);
 
     Route::resource('/parking-fees', App\Http\Controllers\Administrator\ParkingFeeController::class);
     Route::get('/get-parking-fees', [App\Http\Controllers\Administrator\ParkingFeeController::class, 'getData']);
@@ -78,3 +83,10 @@ Route::get('/paypal', [App\Http\Controllers\PaypalController::class, 'index']);
 Route::post('/paypal/payment', [App\Http\Controllers\PaypalController::class, 'payment'])->name('paypal');
 Route::get('/paypal/success', [App\Http\Controllers\PaypalController::class, 'success'])->name('paypal_success');
 Route::get('/paypal/cancel', [App\Http\Controllers\PaypalController::class, 'cancel'])->name('paypal_cancel');
+
+
+//paymongo controllers
+
+Route::get('/pay',[App\Http\Controllers\PaymongoController::class,'pay']);
+Route::get('/success',[App\Http\Controllers\PaymongoController::class,'success']);
+
