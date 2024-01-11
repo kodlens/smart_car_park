@@ -33,7 +33,7 @@
                                         <div class="available">AVAILABLE</div>
                                         <div>
                                             <b-button class="is-link"
-                                                @click="openModalReserveMe"
+                                                @click="openModalReserveMe(park)"
                                                 size="is-small" label="RESERVE ME"></b-button>
                                         </div>
                                     </div>
@@ -88,7 +88,10 @@
                     </section>
                     <footer class="modal-card-foot">
                         <button
-                            class="button is-primary">SAVE</button>
+                            class="button is-primary">
+                                PAY
+                                <b-icon icon="arrow-right" class="ml-2"></b-icon>    
+                        </button>
                     </footer>
                 </div>
             </form><!--close form-->
@@ -124,8 +127,9 @@ export default {
         },
 
 
-        openModalReserveMe(){
+        openModalReserveMe(row){
             this.modalReserveMe = true
+            console.log(row);
         }
 	},
 

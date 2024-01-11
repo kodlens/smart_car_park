@@ -7684,6 +7684,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -7703,8 +7706,9 @@ __webpack_require__.r(__webpack_exports__);
         _this.parkingSpaces = res.data;
       })["catch"](function (err) {});
     },
-    openModalReserveMe: function openModalReserveMe() {
+    openModalReserveMe: function openModalReserveMe(row) {
       this.modalReserveMe = true;
+      console.log(row);
     }
   },
   mounted: function mounted() {
@@ -48446,7 +48450,11 @@ var render = function () {
                                       size: "is-small",
                                       label: "RESERVE ME",
                                     },
-                                    on: { click: _vm.openModalReserveMe },
+                                    on: {
+                                      click: function ($event) {
+                                        return _vm.openModalReserveMe(park)
+                                      },
+                                    },
                                   }),
                                 ],
                                 1
@@ -48522,9 +48530,20 @@ var render = function () {
               ]),
               _vm._v(" "),
               _c("footer", { staticClass: "modal-card-foot" }, [
-                _c("button", { staticClass: "button is-primary" }, [
-                  _vm._v("SAVE"),
-                ]),
+                _c(
+                  "button",
+                  { staticClass: "button is-primary" },
+                  [
+                    _vm._v(
+                      "\n                            PAY\n                            "
+                    ),
+                    _c("b-icon", {
+                      staticClass: "ml-2",
+                      attrs: { icon: "arrow-right" },
+                    }),
+                  ],
+                  1
+                ),
               ]),
             ]),
           ]),
