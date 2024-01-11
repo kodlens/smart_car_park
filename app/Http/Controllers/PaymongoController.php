@@ -7,7 +7,7 @@ use Curl;
 
 class PaymongoController extends Controller
 {
-    public function pay(){
+    public function pay(Request $req){
 
         $data = [
             'data' => [
@@ -20,7 +20,7 @@ class PaymongoController extends Controller
                     'line_items' =>[
                         [
                             'currency'      =>'PHP',
-                            'amount'        => 2000,
+                            'amount'        => 4000,
                             'description'   =>'text', 
                             'name'          =>'Park Fee',
                             'quantity'      =>1,
@@ -30,9 +30,10 @@ class PaymongoController extends Controller
                     'payment_method_types' =>[
                         'card','gcash'
                     ],
-                    'success_url' => 'http://127.0.0.1:8000/paymongo/success',
+                    'success_url' => 'http://127.0.0.1:8000/paymongo/success', //we will change this with our domain name <127.0.0.1>
                     'cancel_url' => 'http://127.0.0.1:8000/paymongo/cancel',
-                    'description'   =>'Payment for parking fee.'
+                    'description'   =>'Payment for parking fee.',
+                    'send_email_receipt' => true //set true
                 ],
             ]
         ];
