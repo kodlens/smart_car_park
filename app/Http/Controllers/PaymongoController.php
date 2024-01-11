@@ -3,26 +3,32 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Park;
 use Curl;
+use Auth;
+
 
 class PaymongoController extends Controller
 {
-    public function pay(Request $req){
 
+    public function pay(Request $req){
+        $user = Auth::user();
+        $amount = ($req->hours * 20)*100; 
+        $parkName = "Parking Space No:".$req->park+1;
         $data = [
             'data' => [
                 'attributes' => [
                     "billing" => [ //this is for billing email
-                        "email" => "etiennewayne@gmail.com",
-                        "name" => "Etienne Wayne",
-                        "phone" => "09167789585"
+                        "email" => $user->email,
+                        "name" => $user->fname.' '.$user->mname.' '.$user->lname ,
+                        "phone" => $user->contact_no
                     ],
                     'line_items' =>[
                         [
                             'currency'      =>'PHP',
-                            'amount'        => 4000,
-                            'description'   =>'text', 
-                            'name'          =>'Park Fee',
+                            'amount'        => $amount,
+                            'description'   =>'Payment for parking for '.$req->hours.' hours.', 
+                            'name'          =>$parkName,
                             'quantity'      =>1,
                         ]
                     ],
@@ -32,7 +38,7 @@ class PaymongoController extends Controller
                     ],
                     'success_url' => 'http://127.0.0.1:8000/paymongo/success', //we will change this with our domain name <127.0.0.1>
                     'cancel_url' => 'http://127.0.0.1:8000/paymongo/cancel',
-                    'description'   =>'Payment for parking fee.',
+                    'description'   =>'Parking fee payment for '.$req->hours.' hour(s).',
                     'send_email_receipt' => true //set true
                 ],
             ]
@@ -63,11 +69,13 @@ class PaymongoController extends Controller
             ->withHeader('Authorization: Basic '.env('AUTH_PAY'))
             ->asJson()
             ->get();
+        $itemName = $response->data->attributes->line_items[0]->name;
+        preg_match('/(\d+)/', $itemName, $parkRow);
 
-        return $response;
-
-        
-
-        //dd($response);
+        Park::where('park_id', $parkRow)
+            ->update([
+                'is_occupied' => 1,
+            ]);
+            return redirect('/home');
     }
 }

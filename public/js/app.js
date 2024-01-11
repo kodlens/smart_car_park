@@ -7685,6 +7685,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -7693,7 +7705,10 @@ __webpack_require__.r(__webpack_exports__);
       reports: [],
       modalReserveMe: false,
       errors: {},
-      fields: {}
+      fields: {
+        hr: 1,
+        amount: 20
+      }
     };
   },
   methods: {
@@ -7705,12 +7720,18 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {});
     },
     openModalReserveMe: function openModalReserveMe(row) {
+      this.fields.row = row;
       this.modalReserveMe = true;
       console.log(row);
+    },
+    computeAmount: function computeAmount() {
+      this.fields.amount = this.fields.hr * 20;
     }
   },
+  computed: {},
   mounted: function mounted() {
     this.loadParkingSpaces();
+    this.fields;
   }
 });
 
@@ -29028,7 +29049,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.welcome-container[data-v-e0ca07d2]{\r\n    height: 100vh;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.park-container[data-v-e0ca07d2]{\r\n    border-top: 2px solid #000; /* Set the top border */\r\n    border-left: 2px solid #000; /* Set the left border */\r\n    border-bottom: 2px solid #000; /* Set the bottom border */\r\n    border-right: none; /* No border on the right */\r\n    margin-bottom: 10px;\r\n    height: 200px;\r\n    min-width: 300px;\n}\n.occupied[data-v-e0ca07d2]{\r\n    color: red;\r\n    font-weight: bolder;\n}\n.available[data-v-e0ca07d2]{\r\n    color: green;\r\n    font-weight: bolder;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.welcome-container[data-v-e0ca07d2]{\r\n    height: 100vh;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.park-container[data-v-e0ca07d2]{\r\n    border-top: 2px solid #000; /* Set the top border */\r\n    border-left: 2px solid #000; /* Set the left border */\r\n    border-bottom: 2px solid #000; /* Set the bottom border */\r\n    border-right: none; /* No border on the right */\r\n    margin-bottom: 10px;\r\n    height: 220px;\r\n    min-width: 300px;\n}\n.occupied[data-v-e0ca07d2]{\r\n    color: red;\r\n    font-weight: bolder;\n}\n.available[data-v-e0ca07d2]{\r\n    color: green;\r\n    font-weight: bolder;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -48450,7 +48471,7 @@ var render = function () {
                                     },
                                     on: {
                                       click: function ($event) {
-                                        return _vm.openModalReserveMe(park)
+                                        return _vm.openModalReserveMe(index)
                                       },
                                     },
                                   }),
@@ -48464,6 +48485,8 @@ var render = function () {
                               ]),
                               _vm._v(" "),
                               _vm._m(0, true),
+                              _vm._v(" "),
+                              _vm._m(1, true),
                             ]),
                       ]),
                     ]),
@@ -48522,15 +48545,59 @@ var render = function () {
               _c("section", { staticClass: "modal-card-body" }, [
                 _c("div", {}, [
                   _c("div", { staticClass: "columns" }, [
-                    _c("div", { staticClass: "column" }, [
-                      _c("p", [
-                        _vm._v(
-                          "To make reservation for this parking area, a payment must be made."
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c("p", [
+                          _vm._v("PARKING FEE: ₱" + _vm._s(_vm.fields.amount)),
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: this.fields.row,
+                              expression: "this.fields.row",
+                            },
+                          ],
+                          attrs: { type: "hidden", name: "park" },
+                          domProps: { value: this.fields.row },
+                          on: {
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(this.fields, "row", $event.target.value)
+                            },
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "b-field",
+                          [
+                            _c("b-numberinput", {
+                              attrs: {
+                                name: "hours",
+                                placeholder: "1",
+                                min: 1,
+                              },
+                              on: { input: _vm.computeAmount },
+                              model: {
+                                value: _vm.fields.hr,
+                                callback: function ($$v) {
+                                  _vm.$set(_vm.fields, "hr", $$v)
+                                },
+                                expression: "fields.hr",
+                              },
+                            }),
+                          ],
+                          1
                         ),
-                      ]),
-                      _vm._v(" "),
-                      _c("p", [_vm._v("PARKING FEE: ₱40")]),
-                    ]),
+                      ],
+                      1
+                    ),
                   ]),
                 ]),
               ]),
@@ -48569,6 +48636,18 @@ var staticRenderFns = [
         staticStyle: { width: "250px" },
         attrs: { src: "/img/car.png", alt: "" },
       }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mb-2" }, [
+      _c("button", { staticClass: "button is-warning mb-2" }, [
+        _vm._v(
+          "\n                                            Exit Parking Space\n                                        "
+        ),
+      ]),
     ])
   },
 ]

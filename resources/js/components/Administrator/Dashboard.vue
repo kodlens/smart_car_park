@@ -33,7 +33,7 @@
                                         <div class="available">AVAILABLE</div>
                                         <div>
                                             <b-button class="is-link"
-                                                @click="openModalReserveMe(park)"
+                                                @click="openModalReserveMe(index)"
                                                 size="is-small" label="RESERVE ME"></b-button>
                                         </div>
                                     </div>
@@ -42,6 +42,12 @@
                                         <div>
                                             <img src="/img/car.png" style="width: 250px;" alt="">
                                         </div>
+                                        <div class="mb-2">
+                                            <button class="button is-warning mb-2">
+                                                Exit Parking Space
+                                            </button>
+                                        </div>
+                                        
 
                                     </div>
                                    
@@ -77,8 +83,14 @@
                         <div class="">
                             <div class="columns">
                                 <div class="column">
-                                   <p>To make reservation for this parking area, a payment must be made.</p>
-                                    <p>PARKING FEE: &#8369;40</p>
+                                   <!-- <p>To make reservation for this parking area, a payment must be made.</p>-->
+                                    <p>PARKING FEE: &#8369;{{ fields.amount }}</p> 
+
+                                    <input type="hidden" name="park" v-model="this.fields.row">
+                                    <b-field >
+                                        <b-numberinput v-model="fields.hr" name="hours" @input="computeAmount" placeholder="1" :min="1"></b-numberinput>
+                                    </b-field>
+
                                    
                                 </div>
                             </div>
@@ -110,7 +122,10 @@ export default {
 
             modalReserveMe: false,
             errors: {},
-            fields: {},
+            fields: {
+                hr:1,
+                amount:20
+            },
 
 		}
 	},
@@ -126,13 +141,24 @@ export default {
 
 
         openModalReserveMe(row){
+            this.fields.row = row
             this.modalReserveMe = true
             console.log(row);
-        }
+        },
+        computeAmount(){
+            this.fields.amount = this.fields.hr * 20
+        },
+        
+        
 	},
+    computed:{
+       
+    },
 
     mounted() {
-    this.loadParkingSpaces()
+    this.loadParkingSpaces();
+    this.fields;
+
     }
 }
 </script>
@@ -157,7 +183,7 @@ export default {
     border-bottom: 2px solid #000; /* Set the bottom border */
     border-right: none; /* No border on the right */
     margin-bottom: 10px;
-    height: 200px;
+    height: 220px;
     min-width: 300px;
 }
 
