@@ -48524,7 +48524,15 @@ var render = function () {
               _c("section", { staticClass: "modal-card-body" }, [
                 _c("div", {}, [
                   _c("div", { staticClass: "columns" }, [
-                    _c("div", { staticClass: "column" }, [_c("p")]),
+                    _c("div", { staticClass: "column" }, [
+                      _c("p", [
+                        _vm._v(
+                          "To make reservation for this parking area, a payment must be made."
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [_vm._v("PARKING FEE: ₱40")]),
+                    ]),
                   ]),
                 ]),
               ]),

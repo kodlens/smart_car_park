@@ -79,8 +79,8 @@
                         <div class="">
                             <div class="columns">
                                 <div class="column">
-                                   
-                                    <p></p>
+                                   <p>To make reservation for this parking area, a payment must be made.</p>
+                                    <p>PARKING FEE: &#8369;40</p>
                                    
                                 </div>
                             </div>
