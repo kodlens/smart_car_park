@@ -7640,12 +7640,59 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       info: {},
       parkingSpaces: [],
-      reports: []
+      reports: [],
+      modalReserveMe: false,
+      errors: {},
+      fields: {}
     };
   },
   methods: {
@@ -7655,6 +7702,9 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/load-parking-spaces').then(function (res) {
         _this.parkingSpaces = res.data;
       })["catch"](function (err) {});
+    },
+    openModalReserveMe: function openModalReserveMe() {
+      this.modalReserveMe = true;
     }
   },
   mounted: function mounted() {
@@ -48339,84 +48389,150 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "welcome-container" }, [
-      _c("div", { staticClass: "columns" }, [
-        _c(
-          "div",
-          { staticClass: "column is-6" },
-          [
-            _c(
-              "div",
-              { staticClass: "buttons" },
-              [
-                _c("b-button", {
-                  attrs: {
-                    label: "Search",
-                    type: "is-info",
-                    "icon-right": "magnify",
-                  },
-                  on: { click: _vm.loadParkingSpaces },
-                }),
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _vm._l(_vm.parkingSpaces, function (park, index) {
-              return _c("div", { key: index, staticClass: "report-text" }, [
-                _c("div", { staticClass: "park-container" }, [
-                  _c("div", { staticClass: "p-4" }, [
-                    _c("div", [
-                      _c(
-                        "div",
-                        { staticClass: "has-text-weight-bold is-size-6" },
-                        [
-                          _vm._v(
-                            "\n                                    " +
-                              _vm._s(park.name) +
-                              "\n                                "
-                          ),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      park.is_occupied === 0
-                        ? _c("div", [
-                            _c("div", { staticClass: "available" }, [
-                              _vm._v("AVAILABLE"),
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              [
-                                _c("b-button", {
-                                  staticClass: "is-link",
-                                  attrs: {
-                                    size: "is-small",
-                                    label: "RESERVE ME",
-                                  },
-                                }),
-                              ],
-                              1
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "welcome-container" }, [
+        _c("div", { staticClass: "columns" }, [
+          _c(
+            "div",
+            { staticClass: "column is-6" },
+            [
+              _c(
+                "div",
+                { staticClass: "buttons" },
+                [
+                  _c("b-button", {
+                    attrs: {
+                      label: "Search",
+                      type: "is-info",
+                      "icon-right": "magnify",
+                    },
+                    on: { click: _vm.loadParkingSpaces },
+                  }),
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _vm._l(_vm.parkingSpaces, function (park, index) {
+                return _c("div", { key: index, staticClass: "report-text" }, [
+                  _c("div", { staticClass: "park-container" }, [
+                    _c("div", { staticClass: "p-4" }, [
+                      _c("div", [
+                        _c(
+                          "div",
+                          { staticClass: "has-text-weight-bold is-size-6" },
+                          [
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(park.name) +
+                                "\n                                "
                             ),
-                          ])
-                        : _c("div", [
-                            _c("div", { staticClass: "mb-2 occupied" }, [
-                              _vm._v("OCCUPIED"),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        park.is_occupied === 0
+                          ? _c("div", [
+                              _c("div", { staticClass: "available" }, [
+                                _vm._v("AVAILABLE"),
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                [
+                                  _c("b-button", {
+                                    staticClass: "is-link",
+                                    attrs: {
+                                      size: "is-small",
+                                      label: "RESERVE ME",
+                                    },
+                                    on: { click: _vm.openModalReserveMe },
+                                  }),
+                                ],
+                                1
+                              ),
+                            ])
+                          : _c("div", [
+                              _c("div", { staticClass: "mb-2 occupied" }, [
+                                _vm._v("OCCUPIED"),
+                              ]),
+                              _vm._v(" "),
+                              _vm._m(0, true),
                             ]),
-                            _vm._v(" "),
-                            _vm._m(0, true),
-                          ]),
+                      ]),
                     ]),
                   ]),
-                ]),
-              ])
-            }),
-          ],
-          2
-        ),
+                ])
+              }),
+            ],
+            2
+          ),
+        ]),
       ]),
-    ]),
-  ])
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          attrs: {
+            "has-modal-card": "",
+            "trap-focus": "",
+            width: 640,
+            "aria-role": "dialog",
+            "aria-label": "Modal",
+            "aria-modal": "",
+          },
+          model: {
+            value: _vm.modalReserveMe,
+            callback: function ($$v) {
+              _vm.modalReserveMe = $$v
+            },
+            expression: "modalReserveMe",
+          },
+        },
+        [
+          _c("form", { attrs: { action: "/paymongo/pay" } }, [
+            _c("div", { staticClass: "modal-card" }, [
+              _c("header", { staticClass: "modal-card-head" }, [
+                _c(
+                  "p",
+                  {
+                    staticClass:
+                      "modal-card-title has-text-weight-bold is-size-5",
+                  },
+                  [_vm._v("RESERVE ME")]
+                ),
+                _vm._v(" "),
+                _c("button", {
+                  staticClass: "delete",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function ($event) {
+                      _vm.modalReserveMe = false
+                    },
+                  },
+                }),
+              ]),
+              _vm._v(" "),
+              _c("section", { staticClass: "modal-card-body" }, [
+                _c("div", {}, [
+                  _c("div", { staticClass: "columns" }, [
+                    _c("div", { staticClass: "column" }, [_c("p")]),
+                  ]),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("footer", { staticClass: "modal-card-foot" }, [
+                _c("button", { staticClass: "button is-primary" }, [
+                  _vm._v("SAVE"),
+                ]),
+              ]),
+            ]),
+          ]),
+        ]
+      ),
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function () {

@@ -33,6 +33,7 @@
                                         <div class="available">AVAILABLE</div>
                                         <div>
                                             <b-button class="is-link"
+                                                @click="openModalReserveMe"
                                                 size="is-small" label="RESERVE ME"></b-button>
                                         </div>
                                     </div>
@@ -51,7 +52,50 @@
                 </div>
             </div>
  
-        </div>
+        </div> <!--welcome container-->
+
+
+
+
+        <!--modal reserve-->
+        <b-modal v-model="modalReserveMe" has-modal-card
+                 trap-focus
+                 :width="640"
+                 aria-role="dialog"
+                 aria-label="Modal"
+                 aria-modal>
+
+            <form action="/paymongo/pay">
+                <div class="modal-card">
+                    <header class="modal-card-head">
+                        <p class="modal-card-title has-text-weight-bold is-size-5">RESERVE ME</p>
+                        <button
+                            type="button"
+                            class="delete"
+                            @click="modalReserveMe = false"/>
+                    </header>
+
+                    <section class="modal-card-body">
+                        <div class="">
+                            <div class="columns">
+                                <div class="column">
+                                   
+                                    <p></p>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <footer class="modal-card-foot">
+                        <button
+                            class="button is-primary">SAVE</button>
+                    </footer>
+                </div>
+            </form><!--close form-->
+        </b-modal>
+        <!--close modal-->
+
+
     </div>
 </template>
 
@@ -63,6 +107,10 @@ export default {
             parkingSpaces: [],
             reports: [],
 
+            modalReserveMe: false,
+            errors: {},
+            fields: {},
+
 		}
 	},
 
@@ -73,6 +121,11 @@ export default {
             }).catch(err=>{
             
             })
+        },
+
+
+        openModalReserveMe(){
+            this.modalReserveMe = true
         }
 	},
 
