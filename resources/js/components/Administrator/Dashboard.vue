@@ -55,8 +55,6 @@
         </div> <!--welcome container-->
 
 
-
-
         <!--modal reserve-->
         <b-modal v-model="modalReserveMe" has-modal-card
                  trap-focus

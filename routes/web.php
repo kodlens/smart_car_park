@@ -46,11 +46,13 @@ Route::get('/load-barangays', [App\Http\Controllers\AddressController::class, 'l
 
 Route::get('/load-parking-spaces', [App\Http\Controllers\ParkingSpacesController::class, 'loadParkingSpaces']);
 
+Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index']);
+
+
 
 // -----------------------ADMINSITRATOR-------------------------------------------
 Route::middleware(['auth', 'admin'])->group(function(){
 
-    Route::get('/dashboard', [App\Http\Controllers\Administrator\DashboardController::class, 'index']);
     // Route::get('/load-reports', [App\Http\Controllers\Administrator\AdminHomeController::class, 'loadReports']);
 
     Route::resource('/parking-fees', App\Http\Controllers\Administrator\ParkingFeeController::class);
