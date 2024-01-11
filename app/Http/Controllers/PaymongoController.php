@@ -8,7 +8,7 @@ use Curl;
 class PaymongoController extends Controller
 {
     public function pay(Request $req){
-
+        
         $data = [
             'data' => [
                 'attributes' => [
@@ -66,7 +66,7 @@ class PaymongoController extends Controller
 
         return $response;
 
-        
+
 
         //dd($response);
     }
