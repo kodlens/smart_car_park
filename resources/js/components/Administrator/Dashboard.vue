@@ -42,8 +42,10 @@
                                         <div>
                                             <img src="/img/car.png" style="width: 250px;" alt="">
                                         </div>
-                                        <div class="mb-2">
-                                            <button class="button is-warning mb-2">
+
+                                        <div class="mb-2" v-if="park.user_id === user.user_id">
+                                            <button class="button is-warning mb-2"
+                                                @click="exitPark(index)">
                                                 Exit Parking Space
                                             </button>
                                         </div>
@@ -119,6 +121,7 @@ export default {
             info: {},
             parkingSpaces: [],
             reports: [],
+            user: [],
 
             modalReserveMe: false,
             errors: {},
@@ -138,12 +141,27 @@ export default {
             
             })
         },
+        loadProfile(){
+            axios.get('/load-profile').then(res=>{
+                this.user = res.data;
+            }).catch(err=>{
+            
+            })
+        },
+
+        exitPark(row){
+            this.fields.park_id = row
+            axios.post('/exit-park',this.fields).then(res=>{
+                window.location = '/home';
+            }).catch(err=>{
+
+            })
+        },
 
 
         openModalReserveMe(row){
             this.fields.row = row
             this.modalReserveMe = true
-            console.log(row);
         },
         computeAmount(){
             this.fields.amount = this.fields.hr * 20
@@ -156,8 +174,10 @@ export default {
     },
 
     mounted() {
+    
     this.loadParkingSpaces();
     this.fields;
+    this.loadProfile();
 
     }
 }

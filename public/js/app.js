@@ -7697,12 +7697,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       info: {},
       parkingSpaces: [],
       reports: [],
+      user: [],
       modalReserveMe: false,
       errors: {},
       fields: {
@@ -7719,10 +7722,22 @@ __webpack_require__.r(__webpack_exports__);
         _this.parkingSpaces = res.data;
       })["catch"](function (err) {});
     },
+    loadProfile: function loadProfile() {
+      var _this2 = this;
+
+      axios.get('/load-profile').then(function (res) {
+        _this2.user = res.data;
+      })["catch"](function (err) {});
+    },
+    exitPark: function exitPark(row) {
+      this.fields.park_id = row;
+      axios.post('/exit-park', this.fields).then(function (res) {
+        window.location = '/home';
+      })["catch"](function (err) {});
+    },
     openModalReserveMe: function openModalReserveMe(row) {
       this.fields.row = row;
       this.modalReserveMe = true;
-      console.log(row);
     },
     computeAmount: function computeAmount() {
       this.fields.amount = this.fields.hr * 20;
@@ -7732,6 +7747,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.loadParkingSpaces();
     this.fields;
+    this.loadProfile();
   }
 });
 
@@ -48486,7 +48502,26 @@ var render = function () {
                               _vm._v(" "),
                               _vm._m(0, true),
                               _vm._v(" "),
-                              _vm._m(1, true),
+                              park.user_id === _vm.user.user_id
+                                ? _c("div", { staticClass: "mb-2" }, [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "button is-warning mb-2",
+                                        on: {
+                                          click: function ($event) {
+                                            return _vm.exitPark(index)
+                                          },
+                                        },
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                            Exit Parking Space\n                                        "
+                                        ),
+                                      ]
+                                    ),
+                                  ])
+                                : _vm._e(),
                             ]),
                       ]),
                     ]),
@@ -48636,18 +48671,6 @@ var staticRenderFns = [
         staticStyle: { width: "250px" },
         attrs: { src: "/img/car.png", alt: "" },
       }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mb-2" }, [
-      _c("button", { staticClass: "button is-warning mb-2" }, [
-        _vm._v(
-          "\n                                            Exit Parking Space\n                                        "
-        ),
-      ]),
     ])
   },
 ]

@@ -18,6 +18,7 @@ class Park extends Model
         'device_mac',
         'device_ip',
         'is_occupied',
+        'user_id'
     ];
 
 
