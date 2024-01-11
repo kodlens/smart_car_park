@@ -25,7 +25,7 @@ class CreateTransactionsTable extends Migration
             $table->string('amount', 30)->nullable();
             $table->string('currency', 30)->nullable();
             $table->string('payment_name', 50)->nullable();
-            $table->int('qty')->nullable()->default(0);
+            $table->integer('qty')->nullable()->default(0);
 
             $table->timestamps();
         });
