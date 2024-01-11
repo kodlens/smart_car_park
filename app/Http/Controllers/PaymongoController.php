@@ -11,6 +11,7 @@ use Auth;
 class PaymongoController extends Controller
 {
 
+
     public function pay(Request $req){
         $user = Auth::user();
         $amount = ($req->hours * 20)*100; 
@@ -72,10 +73,14 @@ class PaymongoController extends Controller
         $itemName = $response->data->attributes->line_items[0]->name;
         preg_match('/(\d+)/', $itemName, $parkRow);
 
+
         Park::where('park_id', $parkRow)
             ->update([
                 'is_occupied' => 1,
             ]);
             return redirect('/home');
+
+
+
     }
 }
