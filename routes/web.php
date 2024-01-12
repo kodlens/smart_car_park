@@ -69,6 +69,8 @@ Route::middleware(['auth', 'admin'])->group(function(){
 
 
 
+
+
 //  ------------------------USER -------------------------------------
 Route::middleware(['auth', 'user'])->group(function(){
     Route::get('/home', [App\Http\Controllers\User\HomeController::class, 'index']);
@@ -78,7 +80,6 @@ Route::middleware(['auth', 'user'])->group(function(){
     Route::get('/load-profile', [App\Http\Controllers\User\MyProfileController::class, 'loadProfile']);
 
 });
-
 
 
 //paypal controller
