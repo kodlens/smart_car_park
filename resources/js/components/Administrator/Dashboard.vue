@@ -14,6 +14,7 @@
                 <div class="circle"></div>
                 <div class="circle"></div>
             </div>-->
+
             <div class="columns">
                 <div class="column is-6">
                     <div class="buttons">
@@ -89,8 +90,20 @@
                                     <p>PARKING FEE: &#8369;{{ fields.amount }}</p> 
 
                                     <input type="hidden" name="park" v-model="this.fields.row">
-                                    <b-field >
-                                        <b-numberinput v-model="fields.hr" name="hours" @input="computeAmount" placeholder="1" :min="1"></b-numberinput>
+
+                                    <b-field label="Reservation From">
+                                        <b-datetimepicker v-model="fields.date_time_reserve_from" name="date_time_reserve_from" 
+                                            @input="computeAmount" placeholder="Date and Time Reservation"></b-datetimepicker>
+                                    </b-field>
+
+                                    <b-field label="Reservation To">
+                                        <b-datetimepicker v-model="fields.date_time_reserve_to" name="date_time_reserve_to" 
+                                            @input="computeAmount" placeholder="Date and Time Reservation"></b-datetimepicker>
+                                    </b-field>
+
+                                    <b-field label="No. of Hours">
+                                        <input type="text" v-model="fields.hr" name="hours" 
+                                            @input="computeAmount" placeholder="1" :min="1"></input>
                                     </b-field>
 
                                    
@@ -164,7 +177,13 @@ export default {
             this.modalReserveMe = true
         },
         computeAmount(){
-            this.fields.amount = this.fields.hr * 20
+            var a = new Date(this.fields.date_time_reserve_to);
+            var b = new Date(this.fields.date_time_reserve_from);
+            var hours = Math.abs(b - a) / 36e5;
+
+            //this.fields.amount = this.fields.hr * 20
+            this.fields.hr = hours
+            this.fields.amount = hours * 20
         },
         
         

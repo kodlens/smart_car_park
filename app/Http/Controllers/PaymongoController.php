@@ -13,6 +13,10 @@ class PaymongoController extends Controller
 
 
     public function pay(Request $req){
+
+        return $req;
+
+        
         $user = Auth::user();
         $amount = ($req->hours * 20)*100; 
         $parkName = "Parking Space No:".$req->park+1;
