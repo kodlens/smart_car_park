@@ -7751,11 +7751,8 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {});
     },
     loadParkReservation: function loadParkReservation() {
-      var _this3 = this;
-
       axios.get('/load-parking-reservation').then(function (res) {
         console.log(res.data);
-        _this3.parkReserved = res.data;
       })["catch"](function (err) {});
     },
     exitPark: function exitPark(row) {

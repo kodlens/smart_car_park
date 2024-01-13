@@ -20,8 +20,12 @@ class ParkingFee extends Model
         'user_id',
         'park_id',
         'start_time',
-        'end_time'
+        'end_time',
+        'enter_time',
+        'exit_time'
     ];
+
+    
 
 
 }

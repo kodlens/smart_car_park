@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\ParkingFee;
 
 class Park extends Model
 {
@@ -21,5 +22,7 @@ class Park extends Model
         'user_id'
     ];
 
-
+    public function parkReservation(){
+        return $this->hasMany(parkingFee::class, 'parking_reservation_id', 'parking_reservation_id');
+    }
 }

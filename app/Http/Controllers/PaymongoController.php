@@ -7,6 +7,7 @@ use App\Models\Park;
 use App\Models\ParkingFee;
 use Curl;
 use Auth;
+use DateTime;
 
 
 class PaymongoController extends Controller
@@ -16,7 +17,8 @@ class PaymongoController extends Controller
     public function pay(Request $req){
 
         $user = Auth::user();
-        $amount = ($req->hours * 20)*100; 
+        $hrs = round($req->hours);
+        $amount = ($hrs * 20)*100; 
         $parkName = "Parking Space No:".$req->park+1;
         $user_id = $req->user_id;
         $data = [
@@ -31,7 +33,7 @@ class PaymongoController extends Controller
                         [
                             'currency'      =>'PHP',
                             'amount'        => $amount,
-                            'description'   =>'Payment for parking for '.$req->hours.' hours.', 
+                            'description'   =>'Payment for parking for '.$hrs.' hours.', 
                             'name'          =>$parkName,
                             'quantity'      =>1,
                             'ID'            =>$user_id,
@@ -42,7 +44,7 @@ class PaymongoController extends Controller
                         'park_id' => $req->park+1,
                         'start'   => $req->start,
                         'end'     => $req->end,
-                        'hr'      => $req->hours
+                        'hr'      => $hrs
                     ],
                 
                     'payment_method_types' =>[
@@ -50,7 +52,7 @@ class PaymongoController extends Controller
                     ],
                     'success_url' => 'http://127.0.0.1:8000/paymongo/success', //we will change this with our domain name <127.0.0.1>
                     'cancel_url' => 'http://127.0.0.1:8000/paymongo/cancel',
-                    'description'   =>'Parking fee payment for '.$req->hours.' hour(s).',
+                    'description'   =>'Parking fee payment for '.$hrs.' hour(s).',
                     'send_email_receipt' => true //set true
                 ],
             ]
@@ -64,7 +66,7 @@ class PaymongoController extends Controller
             ->asJson()
             ->post();
 
-            dd($response);
+            //dd($response);
             \Session::put('session_id',$response->data->id);
 
             return redirect()->to($response->data->attributes->checkout_url);
@@ -88,14 +90,12 @@ class PaymongoController extends Controller
         $hour = $response->data->attributes->metadata->hr;
         $price = $response->data->attributes->line_items[0]->amount;
 
-        $end_time = date('Y-m-d h:i:s',strtotime($end));
-        $start_time = date('Y-m-d h:i:s',strtotime($start));
-        dd($response);
+        $end_time = date('Y-m-d H:i:s',strtotime($end));
+        $start_time = date('Y-m-d H:i:s',strtotime($start));
 
         Park::where('park_id', $park_id)
             ->update([
                 'is_occupied' => 1,
-                'user_id' => $user_id 
             ]);
         ParkingFee::insert([
             'park_id' => $park_id,

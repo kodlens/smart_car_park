@@ -174,8 +174,7 @@ export default {
 
         loadParkReservation(){
             axios.get('/load-parking-reservation').then(res=>{
-                console.log(res.data);
-                this.parkReserved = res.data;
+                console.log(res.data)
             }).catch(err=>{
                 
             })
@@ -217,7 +216,6 @@ export default {
     this.fields;
     this.loadProfile();
     this.loadParkReservation();
-
     }
 }
 </script>
