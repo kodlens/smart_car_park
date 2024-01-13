@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Park;
+use App\Models\ParkingFee;
 use Curl;
 use Auth;
 
@@ -14,12 +15,10 @@ class PaymongoController extends Controller
 
     public function pay(Request $req){
 
-        return $req;
-
-        
         $user = Auth::user();
         $amount = ($req->hours * 20)*100; 
         $parkName = "Parking Space No:".$req->park+1;
+        $user_id = $req->user_id;
         $data = [
             'data' => [
                 'attributes' => [
@@ -35,7 +34,15 @@ class PaymongoController extends Controller
                             'description'   =>'Payment for parking for '.$req->hours.' hours.', 
                             'name'          =>$parkName,
                             'quantity'      =>1,
+                            'ID'            =>$user_id,
                         ]
+                    ],
+                    'metadata' =>[
+                        'user_id' => $user_id,
+                        'park_id' => $req->park+1,
+                        'start'   => $req->start,
+                        'end'     => $req->end,
+                        'hr'      => $req->hours
                     ],
                 
                     'payment_method_types' =>[
@@ -57,7 +64,7 @@ class PaymongoController extends Controller
             ->asJson()
             ->post();
 
-            //dd($response);
+            dd($response);
             \Session::put('session_id',$response->data->id);
 
             return redirect()->to($response->data->attributes->checkout_url);
@@ -74,15 +81,32 @@ class PaymongoController extends Controller
             ->withHeader('Authorization: Basic '.env('AUTH_PAY'))
             ->asJson()
             ->get();
-        $itemName = $response->data->attributes->line_items[0]->name;
-        preg_match('/(\d+)/', $itemName, $parkRow);
+        $park_id = $response->data->attributes->metadata->park_id;
+        $user_id = $response->data->attributes->metadata->user_id;
+        $start = $response->data->attributes->metadata->start;
+        $end = $response->data->attributes->metadata->end;
+        $hour = $response->data->attributes->metadata->hr;
+        $price = $response->data->attributes->line_items[0]->amount;
 
+        $end_time = date('Y-m-d h:i:s',strtotime($end));
+        $start_time = date('Y-m-d h:i:s',strtotime($start));
+        dd($response);
 
-        Park::where('park_id', $parkRow)
+        Park::where('park_id', $park_id)
             ->update([
                 'is_occupied' => 1,
+                'user_id' => $user_id 
             ]);
+        ParkingFee::insert([
+            'park_id' => $park_id,
+            'user_id' => $user_id,
+            'hour'    => $hour,
+            'price'   => $price/100,
+            'start_time' => $start_time,
+            'end_time'  => $end_time
+        ]);
             return redirect('/home');
+        
 
 
 

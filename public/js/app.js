@@ -7712,6 +7712,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -7742,6 +7750,14 @@ __webpack_require__.r(__webpack_exports__);
         _this2.user = res.data;
       })["catch"](function (err) {});
     },
+    loadParkReservation: function loadParkReservation() {
+      var _this3 = this;
+
+      axios.get('/load-parking-reservation').then(function (res) {
+        console.log(res.data);
+        _this3.parkReserved = res.data;
+      })["catch"](function (err) {});
+    },
     exitPark: function exitPark(row) {
       this.fields.park_id = row;
       axios.post('/exit-park', this.fields).then(function (res) {
@@ -7766,6 +7782,7 @@ __webpack_require__.r(__webpack_exports__);
     this.loadParkingSpaces();
     this.fields;
     this.loadProfile();
+    this.loadParkReservation();
   }
 });
 
@@ -48215,6 +48232,23 @@ var render = function () {
                                     _c(
                                       "button",
                                       {
+                                        staticClass: "button is-success mb-2",
+                                        on: {
+                                          click: function ($event) {
+                                            return _vm.exitPark(index)
+                                          },
+                                        },
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                            Enter Parking Space\n                                        "
+                                        ),
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
                                         staticClass: "button is-warning mb-2",
                                         on: {
                                           click: function ($event) {
@@ -48301,18 +48335,39 @@ var render = function () {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: this.fields.row,
-                              expression: "this.fields.row",
+                              value: _vm.fields.row,
+                              expression: "fields.row",
                             },
                           ],
                           attrs: { type: "hidden", name: "park" },
-                          domProps: { value: this.fields.row },
+                          domProps: { value: _vm.fields.row },
                           on: {
                             input: function ($event) {
                               if ($event.target.composing) {
                                 return
                               }
-                              _vm.$set(this.fields, "row", $event.target.value)
+                              _vm.$set(_vm.fields, "row", $event.target.value)
+                            },
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.user.user_id,
+                              expression: "user.user_id",
+                            },
+                          ],
+                          attrs: { type: "hidden", name: "user_id" },
+                          domProps: { value: _vm.user.user_id },
+                          on: {
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.user, "user_id", $event.target.value)
                             },
                           },
                         }),
@@ -48403,6 +48458,58 @@ var render = function () {
                             },
                           }),
                         ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.fields.date_time_reserve_from,
+                              expression: "fields.date_time_reserve_from",
+                            },
+                          ],
+                          attrs: { type: "hidden", name: "start" },
+                          domProps: {
+                            value: _vm.fields.date_time_reserve_from,
+                          },
+                          on: {
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.fields,
+                                "date_time_reserve_from",
+                                $event.target.value
+                              )
+                            },
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.fields.date_time_reserve_to,
+                              expression: "fields.date_time_reserve_to",
+                            },
+                          ],
+                          attrs: { type: "hidden", name: "end" },
+                          domProps: { value: _vm.fields.date_time_reserve_to },
+                          on: {
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.fields,
+                                "date_time_reserve_to",
+                                $event.target.value
+                              )
+                            },
+                          },
+                        }),
                       ],
                       1
                     ),

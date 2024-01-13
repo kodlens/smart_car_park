@@ -20,6 +20,8 @@ class CreateParksTable extends Migration
             $table->string('device_ip', 100)->nullable();
             $table->tinyInteger('is_occupied')->nullable()
                 ->default(0);
+            $table->tinyInteger('user_id')->nullable()
+                ->default(0);
 
             $table->timestamps();
         });

@@ -45,6 +45,10 @@
                                         </div>
 
                                         <div class="mb-2" v-if="park.user_id === user.user_id">
+                                            <button class="button is-success mb-2"
+                                                @click="exitPark(index)">
+                                                Enter Parking Space
+                                            </button>
                                             <button class="button is-warning mb-2"
                                                 @click="exitPark(index)">
                                                 Exit Parking Space
@@ -89,7 +93,8 @@
                                    <!-- <p>To make reservation for this parking area, a payment must be made.</p>-->
                                     <p>PARKING FEE: &#8369;{{ fields.amount }}</p> 
 
-                                    <input type="hidden" name="park" v-model="this.fields.row">
+                                    <input type="hidden" name="park" v-model="fields.row">
+                                    <input type="hidden" name="user_id" v-model="user.user_id">
 
                                     <b-field label="Reservation From">
                                         <b-datetimepicker v-model="fields.date_time_reserve_from" name="date_time_reserve_from" 
@@ -103,8 +108,11 @@
 
                                     <b-field label="No. of Hours">
                                         <input type="text" v-model="fields.hr" name="hours" 
-                                            @input="computeAmount" placeholder="1" :min="1"></input>
+                                            @input="computeAmount" placeholder="1" :min="1">
                                     </b-field>
+
+                                    <input type="hidden" name="start" v-model="fields.date_time_reserve_from">
+                                    <input type="hidden" name="end" v-model="fields.date_time_reserve_to">
 
                                    
                                 </div>
@@ -150,6 +158,7 @@ export default {
         loadParkingSpaces(){
             axios.get('/load-parking-spaces').then(res=>{
                 this.parkingSpaces = res.data
+                
             }).catch(err=>{
             
             })
@@ -157,8 +166,18 @@ export default {
         loadProfile(){
             axios.get('/load-profile').then(res=>{
                 this.user = res.data;
+                
             }).catch(err=>{
             
+            })
+        },
+
+        loadParkReservation(){
+            axios.get('/load-parking-reservation').then(res=>{
+                console.log(res.data);
+                this.parkReserved = res.data;
+            }).catch(err=>{
+                
             })
         },
 
@@ -197,6 +216,7 @@ export default {
     this.loadParkingSpaces();
     this.fields;
     this.loadProfile();
+    this.loadParkReservation();
 
     }
 }

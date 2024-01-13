@@ -28,7 +28,8 @@ class CreateParkReservationsTable extends Migration
 
             $table->integer('hour')->nullable()->default(0);
             $table->double('price')->nullable()->default(0);
-            
+            $table->datetime('start_time')->nullable();
+            $table->datetime('end_time')->nullable();
             $table->timestamps();
         });
     }
