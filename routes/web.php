@@ -94,5 +94,6 @@ Route::get('/paypal/cancel', [App\Http\Controllers\PaypalController::class, 'can
 Route::get('/paymongo/pay',[App\Http\Controllers\PaymongoController::class,'pay']);
 Route::get('/paymongo/success',[App\Http\Controllers\PaymongoController::class,'success']);
 
-Route::post('/exit-park',[App\Http\Controllers\ParkingSpacesController::class,'exitPark']);
+Route::post('/exit-park',[App\Http\Controllers\ParkReservationController::class,'exitPark']);
+Route::post('/enter-park',[App\Http\Controllers\ParkReservationController::class,'enterPark']);
 

@@ -7720,6 +7720,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -7727,6 +7730,7 @@ __webpack_require__.r(__webpack_exports__);
       parkingSpaces: [],
       reports: [],
       user: [],
+      parkReserved: [],
       modalReserveMe: false,
       errors: {},
       fields: {
@@ -7750,15 +7754,23 @@ __webpack_require__.r(__webpack_exports__);
         _this2.user = res.data;
       })["catch"](function (err) {});
     },
-    loadParkReservation: function loadParkReservation() {
-      axios.get('/load-parking-reservation').then(function (res) {
-        console.log(res.data);
+    loadParkReservation: function loadParkReservation(park) {
+      var _this3 = this;
+
+      axios.get('/load-parking-reservation', park).then(function (res) {
+        _this3.parkReserved = res.data;
       })["catch"](function (err) {});
     },
     exitPark: function exitPark(row) {
       this.fields.park_id = row;
       axios.post('/exit-park', this.fields).then(function (res) {
         window.location = '/home';
+      })["catch"](function (err) {});
+    },
+    enterPark: function enterPark(row) {
+      this.fields.park_id = row;
+      axios.post('/enter-park', this.fields).then(function (res) {
+        console.log(res.data);
       })["catch"](function (err) {});
     },
     openModalReserveMe: function openModalReserveMe(row) {
@@ -48224,41 +48236,47 @@ var render = function () {
                               _vm._v(" "),
                               _vm._m(0, true),
                               _vm._v(" "),
-                              park.user_id === _vm.user.user_id
+                              _vm.parkReserved.user_id == _vm.user.user_id
                                 ? _c("div", { staticClass: "mb-2" }, [
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass: "button is-success mb-2",
-                                        on: {
-                                          click: function ($event) {
-                                            return _vm.exitPark(index)
+                                    _vm.parkReserved.enter_time == null
+                                      ? _c(
+                                          "button",
+                                          {
+                                            staticClass:
+                                              "button is-success mb-2",
+                                            on: {
+                                              click: function ($event) {
+                                                return _vm.enterPark(index)
+                                              },
+                                            },
                                           },
-                                        },
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                            Enter Parking Space\n                                        "
-                                        ),
-                                      ]
-                                    ),
+                                          [
+                                            _vm._v(
+                                              "\n                                            Enter Parking Space\n                                        "
+                                            ),
+                                          ]
+                                        )
+                                      : _vm._e(),
                                     _vm._v(" "),
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass: "button is-warning mb-2",
-                                        on: {
-                                          click: function ($event) {
-                                            return _vm.exitPark(index)
+                                    _vm.parkReserved.enter_time !== null
+                                      ? _c(
+                                          "button",
+                                          {
+                                            staticClass:
+                                              "button is-warning mb-2",
+                                            on: {
+                                              click: function ($event) {
+                                                return _vm.exitPark(index)
+                                              },
+                                            },
                                           },
-                                        },
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                            Exit Parking Space\n                                        "
-                                        ),
-                                      ]
-                                    ),
+                                          [
+                                            _vm._v(
+                                              "\n                                            Exit Parking Space\n                                        "
+                                            ),
+                                          ]
+                                        )
+                                      : _vm._e(),
                                   ])
                                 : _vm._e(),
                             ]),

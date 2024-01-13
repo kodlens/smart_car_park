@@ -29,6 +29,7 @@
                                     <div class="has-text-weight-bold is-size-6">
                                         {{ park.name }}
                                     </div>
+                                    <!-- {{ loadParkReservation(park.par_id) }} -->
 
                                     <div v-if="park.is_occupied === 0">
                                         <div class="available">AVAILABLE</div>
@@ -44,12 +45,14 @@
                                             <img src="/img/car.png" style="width: 250px;" alt="">
                                         </div>
 
-                                        <div class="mb-2" v-if="park.user_id === user.user_id">
+                                        <div class="mb-2" v-if="parkReserved.user_id == user.user_id">
                                             <button class="button is-success mb-2"
-                                                @click="exitPark(index)">
+                                                @click="enterPark(index)"
+                                                v-if="parkReserved.enter_time == null">
                                                 Enter Parking Space
                                             </button>
                                             <button class="button is-warning mb-2"
+                                                v-if="parkReserved.enter_time !== null"
                                                 @click="exitPark(index)">
                                                 Exit Parking Space
                                             </button>
@@ -143,6 +146,7 @@ export default {
             parkingSpaces: [],
             reports: [],
             user: [],
+            parkReserved: [],
 
             modalReserveMe: false,
             errors: {},
@@ -172,9 +176,9 @@ export default {
             })
         },
 
-        loadParkReservation(){
-            axios.get('/load-parking-reservation').then(res=>{
-                console.log(res.data)
+        loadParkReservation(park){
+            axios.get('/load-parking-reservation',park).then(res=>{
+                this.parkReserved = res.data
             }).catch(err=>{
                 
             })
@@ -184,6 +188,16 @@ export default {
             this.fields.park_id = row
             axios.post('/exit-park',this.fields).then(res=>{
                 window.location = '/home';
+            }).catch(err=>{
+
+            })
+        },
+
+        enterPark(row){
+            this.fields.park_id = row
+            axios.post('/enter-park',this.fields).then(res=>{
+
+                console.log(res.data)
             }).catch(err=>{
 
             })
