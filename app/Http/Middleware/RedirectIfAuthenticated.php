@@ -32,6 +32,10 @@ class RedirectIfAuthenticated
                     return redirect('/home');
                 }
 
+                if($user->role === 'SCANNER'){
+                    return redirect('/scanner-home');
+                }
+
                 //return redirect(RouteServiceProvider::HOME);
             }
         }

@@ -97,3 +97,12 @@ Route::get('/paymongo/success',[App\Http\Controllers\PaymongoController::class,'
 Route::post('/exit-park',[App\Http\Controllers\ParkReservationController::class,'exitPark']);
 Route::post('/enter-park',[App\Http\Controllers\ParkReservationController::class,'enterPark']);
 
+
+
+//  ------------------------SCANNER -------------------------------------
+Route::middleware(['auth', 'scanner'])->group(function(){
+    Route::resource('/scanner-home', App\Http\Controllers\Scanner\ScannerHomeController::class);
+    
+
+});
+
