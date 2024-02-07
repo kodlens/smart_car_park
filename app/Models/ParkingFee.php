@@ -22,7 +22,8 @@ class ParkingFee extends Model
         'start_time',
         'end_time',
         'enter_time',
-        'exit_time'
+        'exit_time',
+        'qr_ref'
     ];
 
     

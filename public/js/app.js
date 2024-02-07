@@ -7734,6 +7734,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -7743,11 +7781,13 @@ __webpack_require__.r(__webpack_exports__);
       user: [],
       parkReserved: [],
       modalReserveMe: false,
+      modalQR: false,
       errors: {},
       fields: {
         hr: 1,
         amount: 20
-      }
+      },
+      qr: null
     };
   },
   methods: {
@@ -7770,6 +7810,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/load-parking-reservation', park).then(function (res) {
         _this3.parkReserved = res.data;
+        _this3.qr = _this3.parkReserved.qr_ref;
       })["catch"](function (err) {});
     },
     exitPark: function exitPark(row) {
@@ -7797,7 +7838,11 @@ __webpack_require__.r(__webpack_exports__);
       this.fields.amount = hours * 20;
     }
   },
-  computed: {},
+  computed: {
+    qrCode: function qrCode() {
+      return this.parkReserved.qr_ref;
+    }
+  },
   mounted: function mounted() {
     this.loadParkingSpaces();
     this.fields;
@@ -10508,14 +10553,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -10551,14 +10588,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this.isProcessing = true; //await this.timeout(3000);
 
-                axios.post('/submit-details/', {
-                  student_id: _this.result[0].split(':')[1],
-                  fullname: _this.result[1].split(':')[1],
-                  program: _this.result[3].split(':')[1].split('-')[0],
-                  year_level: _this.result[3].split(':')[1].split('-')[1],
-                  contact_no: _this.result[2].split(':')[1]
-                }).then(function (res) {
-                  _this.alertBox();
+                axios.post('/decode-qr/' + content).then(function (res) {
+                  _this.alertCustom();
                 })["catch"](function (err) {
                   _this.isProcessing = false;
                   _this.data = {};
@@ -10592,10 +10623,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         window.setTimeout(resolve, ms);
       });
     },
-    alertBox: function alertBox() {
-      this.$buefy.snackbar.open({
-        message: "Successfully scanned.",
-        position: 'is-top'
+    alertCustom: function alertCustom() {
+      this.$buefy.dialog.alert({
+        title: 'Title Alert',
+        message: 'I have a title, a custom button and <b>HTML</b>!',
+        confirmText: 'Cool!'
       });
     }
   },
@@ -11051,6 +11083,9 @@ Vue.prototype.$formatTime = function (value) {
   return timeString;
 };
 
+Vue.use((vue_qrcode_reader__WEBPACK_IMPORTED_MODULE_0___default())); //https://gruhn.github.io/vue-qrcode-reader/demos/CustomTracking.html
+
+Vue.component((_chenfengyuan_vue_qrcode__WEBPACK_IMPORTED_MODULE_1___default().name), (_chenfengyuan_vue_qrcode__WEBPACK_IMPORTED_MODULE_1___default()));
 var app = new Vue({
   el: '#app'
 });
@@ -29307,7 +29342,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.welcome-container[data-v-e0ca07d2]{\r\n    height: 100vh;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.park-container[data-v-e0ca07d2]{\r\n    border-top: 2px solid #000; /* Set the top border */\r\n    border-left: 2px solid #000; /* Set the left border */\r\n    border-bottom: 2px solid #000; /* Set the bottom border */\r\n    border-right: none; /* No border on the right */\r\n    margin-bottom: 10px;\r\n    height: 220px;\r\n    min-width: 300px;\n}\n.occupied[data-v-e0ca07d2]{\r\n    color: red;\r\n    font-weight: bolder;\n}\n.available[data-v-e0ca07d2]{\r\n    color: green;\r\n    font-weight: bolder;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.welcome-container[data-v-e0ca07d2]{\r\n    height: 100vh;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.park-container[data-v-e0ca07d2]{\r\n    border-top: 2px solid #000; /* Set the top border */\r\n    border-left: 2px solid #000; /* Set the left border */\r\n    border-bottom: 2px solid #000; /* Set the bottom border */\r\n    border-right: none; /* No border on the right */\r\n    margin-bottom: 10px;\r\n    height: 220px;\r\n    min-width: 300px;\n}\n.occupied[data-v-e0ca07d2]{\r\n    color: red;\r\n    font-weight: bolder;\n}\n.available[data-v-e0ca07d2]{\r\n    color: green;\r\n    font-weight: bolder;\n}\n.qr[data-v-e0ca07d2]{\r\n    display: flex;\r\n    justify-content: center;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -49659,7 +49694,7 @@ var render = function () {
                                               "button is-success mb-2",
                                             on: {
                                               click: function ($event) {
-                                                return _vm.enterPark(index)
+                                                _vm.modalQR = true
                                               },
                                             },
                                           },
@@ -49961,6 +49996,97 @@ var render = function () {
                   1
                 ),
               ]),
+            ]),
+          ]),
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          attrs: {
+            "has-modal-card": "",
+            "trap-focus": "",
+            width: 640,
+            "aria-role": "dialog",
+            "aria-label": "Modal",
+            "aria-modal": "",
+          },
+          model: {
+            value: _vm.modalQR,
+            callback: function ($$v) {
+              _vm.modalQR = $$v
+            },
+            expression: "modalQR",
+          },
+        },
+        [
+          _c("div", { staticClass: "modal-card" }, [
+            _c("header", { staticClass: "modal-card-head" }, [
+              _c(
+                "p",
+                {
+                  staticClass:
+                    "modal-card-title has-text-weight-bold is-size-5",
+                },
+                [_vm._v("RESERVATION QR")]
+              ),
+              _vm._v(" "),
+              _c("button", {
+                staticClass: "delete",
+                attrs: { type: "button" },
+                on: {
+                  click: function ($event) {
+                    _vm.modalQR = false
+                  },
+                },
+              }),
+            ]),
+            _vm._v(" "),
+            _c("section", { staticClass: "modal-card-body" }, [
+              _c("div", {}, [
+                _c("div", { staticClass: "columns" }, [
+                  _c("div", { staticClass: "column" }, [
+                    _c(
+                      "div",
+                      { staticClass: "qr" },
+                      [
+                        _c("qrcode", {
+                          attrs: {
+                            value: _vm.parkReserved.qr_ref,
+                            options: { width: 400 },
+                          },
+                        }),
+                      ],
+                      1
+                    ),
+                  ]),
+                ]),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("footer", { staticClass: "modal-card-foot" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "button is-primary",
+                  on: {
+                    click: function ($event) {
+                      _vm.modalQR = false
+                    },
+                  },
+                },
+                [
+                  _vm._v(
+                    "\n                            Close\n                            "
+                  ),
+                  _c("b-icon", {
+                    staticClass: "ml-2",
+                    attrs: { icon: "arrow-right" },
+                  }),
+                ],
+                1
+              ),
             ]),
           ]),
         ]
@@ -55075,8 +55201,6 @@ var render = function () {
         _c("div", { staticClass: "column is-6" }, [
           _vm._m(0),
           _vm._v(" "),
-          _vm._m(1),
-          _vm._v(" "),
           _c(
             "div",
             { staticClass: "camera" },
@@ -55139,30 +55263,6 @@ var render = function () {
   ])
 }
 var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "columns" }, [
-      _c("div", { staticClass: "column" }, [
-        _c("h2", [_c("b", [_vm._v(" How to get your QR code? ")])]),
-        _vm._v(" "),
-        _c("ol", { staticClass: "m-3", attrs: { type: "1" } }, [
-          _c("li", [
-            _vm._v("Login to your student "),
-            _c("a", { attrs: { href: "http://mygadtc.gadtc.edu.ph/login" } }, [
-              _vm._v("portal"),
-            ]),
-            _vm._v("."),
-          ]),
-          _vm._v(" "),
-          _c("li", [_vm._v("Below the enroll button are your QR code. ")]),
-          _vm._v(" "),
-          _c("li", [_vm._v("Scan the QR code using the camera.")]),
-        ]),
-      ]),
-    ])
-  },
   function () {
     var _vm = this
     var _h = _vm.$createElement

@@ -102,7 +102,6 @@ Route::post('/enter-park',[App\Http\Controllers\ParkReservationController::class
 //  ------------------------SCANNER -------------------------------------
 Route::middleware(['auth', 'scanner'])->group(function(){
     Route::resource('/scanner-home', App\Http\Controllers\Scanner\ScannerHomeController::class);
-    
-
+    Route::get('/decode-qr/{qr}', [App\Http\Controllers\Scanner\ScannerHomeController::class, 'decodeQr']);
 });
 

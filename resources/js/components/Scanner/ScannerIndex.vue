@@ -8,17 +8,6 @@
 
                     <div class="columns">
                         <div class="column">
-                            <h2> <b> How to get your QR code? </b> </h2>
-                            <ol type="1" class="m-3">
-                                <li>Login to your student <a href="http://mygadtc.gadtc.edu.ph/login">portal</a>.</li>
-                                <li>Below the enroll button are your QR code. </li>
-                                <li>Scan the QR code using the camera.</li>  
-                            </ol>   
-                        </div>
-                    </div>
-
-                    <div class="columns">
-                        <div class="column">
                             <h2 style="text-align: center;"> <b> Scan QR here! </b> </h2>
                         </div>
                     </div>
@@ -48,6 +37,9 @@
 
                 </div><!--col-->
             </div><!--close div -->
+
+
+            
 
         </div><!--section -->
 
@@ -98,14 +90,8 @@ export default {
             this.isProcessing = true;
             //await this.timeout(3000);
 
-            axios.post('/submit-details/', {
-                student_id : this.result[0].split(':')[1],
-                fullname : this.result[1].split(':')[1],
-                program : this.result[3].split(':')[1].split('-')[0],
-                year_level : this.result[3].split(':')[1].split('-')[1],
-                contact_no : this.result[2].split(':')[1],
-            }).then(res=>{
-               this.alertBox()
+            axios.post('/decode-qr/'+content).then(res=>{
+               this.alertCustom()
             }).catch(err=>{
                 this.isProcessing = false;
                 this.data = {};
@@ -138,12 +124,13 @@ export default {
             })
         },
 
-        alertBox(){
-            this.$buefy.snackbar.open({
-                message: "Successfully scanned.",
-                position: 'is-top',
-            })
-        }
+        alertCustom() {
+                this.$buefy.dialog.alert({
+                    title: 'Title Alert',
+                    message: 'I have a title, a custom button and <b>HTML</b>!',
+                    confirmText: 'Cool!'
+                })
+        },
 
     },
 

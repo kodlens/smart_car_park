@@ -25,6 +25,8 @@ class CreateParkReservationsTable extends Migration
             $table->foreign('user_id')->references('user_id')->on('users')
                 ->onDelete('cascade')->onUpdate('cascade');
 
+            $table->string('qr_ref',50)->nullable();
+
 
             $table->integer('hour')->nullable()->default(0);
             $table->double('price')->nullable()->default(0);

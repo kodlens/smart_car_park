@@ -47,7 +47,7 @@
 
                                         <div class="mb-2" v-if="parkReserved.user_id == user.user_id">
                                             <button class="button is-success mb-2"
-                                                @click="enterPark(index)"
+                                                @click="modalQR = true"
                                                 v-if="parkReserved.enter_time == null">
                                                 Enter Parking Space
                                             </button>
@@ -134,6 +134,44 @@
         </b-modal>
         <!--close modal-->
 
+        <b-modal v-model="modalQR" has-modal-card
+                 trap-focus
+                 :width="640"
+                 aria-role="dialog"
+                 aria-label="Modal"
+                 aria-modal>
+                <div class="modal-card">
+                    <header class="modal-card-head">
+                        <p class="modal-card-title has-text-weight-bold is-size-5">RESERVATION QR</p>
+                        <button
+                            type="button"
+                            class="delete"
+                            @click="modalQR = false"/>
+                    </header>
+
+                    <section class="modal-card-body">
+                        <div class="">
+                            <div class="columns">
+                                <div class="column">
+                                    <div class="qr">
+                                        <qrcode :value="parkReserved.qr_ref" :options="{ width: 400 }"></qrcode>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <footer class="modal-card-foot">
+                        <button
+                            @click="modalQR = false"
+                            class="button is-primary">
+                                Close
+                                <b-icon icon="arrow-right" class="ml-2"></b-icon>    
+                        </button>
+                    </footer>
+                </div>
+        </b-modal>
+
 
     </div>
 </template>
@@ -149,12 +187,13 @@ export default {
             parkReserved: [],
 
             modalReserveMe: false,
+            modalQR: false,
             errors: {},
             fields: {
                 hr:1,
                 amount:20
             },
-
+            qr: null
 		}
 	},
 
@@ -178,7 +217,8 @@ export default {
 
         loadParkReservation(park){
             axios.get('/load-parking-reservation',park).then(res=>{
-                this.parkReserved = res.data
+                this.parkReserved = res.data;
+                this.qr = this.parkReserved.qr_ref;
             }).catch(err=>{
                 
             })
@@ -221,7 +261,9 @@ export default {
         
 	},
     computed:{
-       
+        qrCode(){
+            return this.parkReserved.qr_ref;
+        }
     },
 
     mounted() {
@@ -267,6 +309,10 @@ export default {
 .available{
     color: green;
     font-weight: bolder;
+}
+.qr{
+    display: flex;
+    justify-content: center;
 }
 
 </style>

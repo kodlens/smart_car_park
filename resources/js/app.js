@@ -119,7 +119,8 @@ Vue.prototype.$formatTime = function(value) {
     return timeString;
 };
 
-
+Vue.use(VueQrcodeReader); //https://gruhn.github.io/vue-qrcode-reader/demos/CustomTracking.html
+Vue.component(VueQrcode.name, VueQrcode);
 
 
 

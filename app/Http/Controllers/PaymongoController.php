@@ -65,8 +65,7 @@ class PaymongoController extends Controller
             ->withData($data)
             ->asJson()
             ->post();
-
-            //dd($response);
+            // dd($response);
             \Session::put('session_id',$response->data->id);
 
             return redirect()->to($response->data->attributes->checkout_url);
@@ -93,6 +92,8 @@ class PaymongoController extends Controller
         $end_time = date('Y-m-d H:i:s',strtotime($end));
         $start_time = date('Y-m-d H:i:s',strtotime($start));
 
+        $qr = substr(md5(time() . $park_id . '0' . $user_id . '0' . $park_id), -10);
+
         Park::where('park_id', $park_id)
             ->update([
                 'is_occupied' => 1,
@@ -103,7 +104,8 @@ class PaymongoController extends Controller
             'hour'    => $hour,
             'price'   => $price/100,
             'start_time' => $start_time,
-            'end_time'  => $end_time
+            'end_time'  => $end_time,
+            'qr_ref' => $qr
         ]);
             return redirect('/home');
         

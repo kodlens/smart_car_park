@@ -11,4 +11,7 @@ class ScannerHomeController extends Controller
     public function index(){
         return view('scanner.scanner-index');
     }
+    public function decodeQr(){
+        
+    }
 }
