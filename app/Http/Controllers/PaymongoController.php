@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Park;
-use App\Models\ParkingFee;
+use App\Models\ParkReservation;
 use Curl;
 use Auth;
 use DateTime;
@@ -102,7 +102,7 @@ class PaymongoController extends Controller
                 'is_occupied' => 1,
             ]);
 
-        ParkingFee::insert([
+        ParkReservation::insert([
             'park_id' => $park_id,
             'user_id' => $user_id,
             'hour'    => $hour,

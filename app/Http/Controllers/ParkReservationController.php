@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\ParkingFee;
+use App\Models\ParkReservation;
 use App\Models\Park;
 use Auth;
 
 class ParkReservationController extends Controller
 {
     public function loadParkReservation(Request $req){
-        $park = ParkingFee::where('park_id', $req->park_id+1)
+        $park = ParkReservation::where('park_id', $req->park_id+1)
         ->orderByDesc('park_reservation_id')
         ->first();
 
@@ -28,7 +28,7 @@ class ParkReservationController extends Controller
                 'is_occupied' => 0,
             ]);
 
-        ParkingFee::where('park_reservation_id',$req->park_reservation_id)
+        ParkReservation::where('park_reservation_id',$req->park_reservation_id)
         ->update(
             [
                 'exit_time' =>  $exit_time
@@ -45,7 +45,7 @@ class ParkReservationController extends Controller
         $now = now();
         $enter_time = date('Y-m-d H:i:s',strtotime($now));
 
-        ParkingFee::where('park_reservation_id',$req->park_reservation_id)
+        ParkReservation::where('park_reservation_id',$req->park_reservation_id)
         ->update(
             [
                 'enter_time' =>  $enter_time
