@@ -33,7 +33,7 @@ Auth::routes([
 //Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login']);
 //Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout']);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Route::get('/registration', [App\Http\Controllers\RegistrationController::class, 'index']);
 // Route::post('/registration', [App\Http\Controllers\RegistrationController::class, 'store']);

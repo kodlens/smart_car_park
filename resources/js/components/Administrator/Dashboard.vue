@@ -57,10 +57,7 @@
                                                 Exit Parking Space
                                             </button>
                                         </div>
-                                        
-
                                     </div>
-                                   
                                 </div>
                             </div>
                         </div> 
@@ -100,18 +97,18 @@
                                     <input type="hidden" name="user_id" v-model="user.user_id">
 
                                     <b-field label="Reservation From">
-                                        <b-datetimepicker v-model="fields.date_time_reserve_from" name="date_time_reserve_from" 
+                                        <b-datetimepicker v-model="fields.date_time_reserve_from" editable name="date_time_reserve_from" 
                                             @input="computeAmount" placeholder="Date and Time Reservation"></b-datetimepicker>
                                     </b-field>
 
                                     <b-field label="Reservation To">
-                                        <b-datetimepicker v-model="fields.date_time_reserve_to" name="date_time_reserve_to" 
+                                        <b-datetimepicker v-model="fields.date_time_reserve_to" editable name="date_time_reserve_to" 
                                             @input="computeAmount" placeholder="Date and Time Reservation"></b-datetimepicker>
                                     </b-field>
 
                                     <b-field label="No. of Hours">
-                                        <input type="text" v-model="fields.hr" name="hours" 
-                                            @input="computeAmount" placeholder="1" :min="1">
+                                        <b-input type="text" v-model="fields.hr" name="hours" 
+                                            @input="computeAmount" readonly placeholder="1" :min="1" />
                                     </b-field>
 
                                     <input type="hidden" name="start" v-model="fields.date_time_reserve_from">
@@ -178,7 +175,12 @@
 
 <script>
 export default {
+
+ 
 	data(){
+
+        const currentDate = new Date();
+    
 		return{
             info: {},
             parkingSpaces: [],
@@ -190,6 +192,9 @@ export default {
             modalQR: false,
             errors: {},
             fields: {
+                date_time_reserve_from: currentDate,
+                date_time_reserve_to: new Date(currentDate.getTime() + (1 * 60 * 60 * 1000)), // Add 1 hour
+
                 hr:1,
                 amount:20
             },

@@ -82,6 +82,9 @@ class PaymongoController extends Controller
             ->withHeader('Authorization: Basic '.env('AUTH_PAY'))
             ->asJson()
             ->get();
+
+        return $response;
+        
         $park_id = $response->data->attributes->metadata->park_id;
         $user_id = $response->data->attributes->metadata->user_id;
         $start = $response->data->attributes->metadata->start;
@@ -107,7 +110,8 @@ class PaymongoController extends Controller
             'end_time'  => $end_time,
             'qr_ref' => $qr
         ]);
-            return redirect('/home');
+        
+        return redirect('/home');
         
 
 

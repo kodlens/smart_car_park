@@ -7769,11 +7769,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
+    var currentDate = new Date();
     return {
       info: {},
       parkingSpaces: [],
@@ -7784,6 +7782,9 @@ __webpack_require__.r(__webpack_exports__);
       modalQR: false,
       errors: {},
       fields: {
+        date_time_reserve_from: currentDate,
+        date_time_reserve_to: new Date(currentDate.getTime() + 1 * 60 * 60 * 1000),
+        // Add 1 hour
         hr: 1,
         amount: 20
       },
@@ -49841,6 +49842,7 @@ var render = function () {
                           [
                             _c("b-datetimepicker", {
                               attrs: {
+                                editable: "",
                                 name: "date_time_reserve_from",
                                 placeholder: "Date and Time Reservation",
                               },
@@ -49867,6 +49869,7 @@ var render = function () {
                           [
                             _c("b-datetimepicker", {
                               attrs: {
+                                editable: "",
                                 name: "date_time_reserve_to",
                                 placeholder: "Date and Time Reservation",
                               },
@@ -49887,40 +49890,30 @@ var render = function () {
                           1
                         ),
                         _vm._v(" "),
-                        _c("b-field", { attrs: { label: "No. of Hours" } }, [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
+                        _c(
+                          "b-field",
+                          { attrs: { label: "No. of Hours" } },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                type: "text",
+                                name: "hours",
+                                readonly: "",
+                                placeholder: "1",
+                                min: 1,
+                              },
+                              on: { input: _vm.computeAmount },
+                              model: {
                                 value: _vm.fields.hr,
+                                callback: function ($$v) {
+                                  _vm.$set(_vm.fields, "hr", $$v)
+                                },
                                 expression: "fields.hr",
                               },
-                            ],
-                            attrs: {
-                              type: "text",
-                              name: "hours",
-                              placeholder: "1",
-                              min: 1,
-                            },
-                            domProps: { value: _vm.fields.hr },
-                            on: {
-                              input: [
-                                function ($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.fields,
-                                    "hr",
-                                    $event.target.value
-                                  )
-                                },
-                                _vm.computeAmount,
-                              ],
-                            },
-                          }),
-                        ]),
+                            }),
+                          ],
+                          1
+                        ),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
