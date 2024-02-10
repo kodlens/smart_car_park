@@ -83,8 +83,8 @@ class PaymongoController extends Controller
             ->asJson()
             ->get();
 
-        return $response;
-        
+        //return $response;
+
         $park_id = $response->data->attributes->metadata->park_id;
         $user_id = $response->data->attributes->metadata->user_id;
         $start = $response->data->attributes->metadata->start;
@@ -101,6 +101,7 @@ class PaymongoController extends Controller
             ->update([
                 'is_occupied' => 1,
             ]);
+
         ParkingFee::insert([
             'park_id' => $park_id,
             'user_id' => $user_id,
