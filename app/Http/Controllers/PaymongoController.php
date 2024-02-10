@@ -84,7 +84,6 @@ class PaymongoController extends Controller
             ->get();
 
         //return $response;
-
         $park_id = $response->data->attributes->metadata->park_id;
         $user_id = $response->data->attributes->metadata->user_id;
         $start = $response->data->attributes->metadata->start;
@@ -92,8 +91,15 @@ class PaymongoController extends Controller
         $hour = $response->data->attributes->metadata->hr;
         $price = $response->data->attributes->line_items[0]->amount;
 
-        $end_time = date('Y-m-d H:i:s',strtotime($end));
-        $start_time = date('Y-m-d H:i:s',strtotime($start));
+        // $end_time = date('Y-m-d H:i:s',strtotime($end));
+        // $start_time = date('Y-m-d H:i:s',strtotime($start));
+        $start_remove_space = preg_replace('/\(.*\)/', '', $start);
+        $date_start = new DateTime($start_remove_space);
+        $start_time = $date_start->format('Y-m-d H:i:s');
+
+        $end_remove_space = preg_replace('/\(.*\)/', '', $end);
+        $date_end = new DateTime($end_remove_space);
+        $end_time = $date_end->format('Y-m-d H:i:s');
 
         $qr = substr(md5(time() . $park_id . '0' . $user_id . '0' . $park_id), -10);
 
