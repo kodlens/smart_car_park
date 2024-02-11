@@ -16,6 +16,10 @@ class PaymongoController extends Controller
 
     public function pay(Request $req){
 
+
+        $port = request()->getPort();
+        $hostWithPort = request()->getScheme() . '://'. request()->getHost() . ($port ? ':' . $port : '');
+        //$fullUrl = request()->getScheme() . '://' . request()->getHost() . ':' . request()->getPort();
         $user = Auth::user();
         $hrs = round($req->hours);
         $amount = ($hrs * 20)*100; 
@@ -50,8 +54,8 @@ class PaymongoController extends Controller
                     'payment_method_types' =>[
                         'card','gcash'
                     ],
-                    'success_url' => 'http://127.0.0.1:8000/paymongo/success', //we will change this with our domain name <127.0.0.1>
-                    'cancel_url' => 'http://127.0.0.1:8000/paymongo/cancel',
+                    'success_url' => $hostWithPort .'/paymongo/success', //we will change this with our domain name <127.0.0.1>
+                    'cancel_url' =>  $hostWithPort. '/paymongo/cancel',
                     'description'   =>'Parking fee payment for '.$hrs.' hour(s).',
                     'send_email_receipt' => true //set true
                 ],

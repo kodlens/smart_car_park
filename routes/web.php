@@ -21,6 +21,10 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
+Route::get('/url', function () {
+    $port = request()->getPort();
+    return $hostWithPort = request()->getScheme() . '://'. request()->getHost() . ($port ? ':' . $port : '');
+});
 
 
 Auth::routes([
@@ -75,6 +79,7 @@ Route::middleware(['auth', 'admin'])->group(function(){
 Route::middleware(['auth', 'user'])->group(function(){
     Route::get('/home', [App\Http\Controllers\User\HomeController::class, 'index']);
     
+    Route::resource('/my-reservations', App\Http\Controllers\User\MyReservationController::class);
     
     Route::resource('/my-profile', App\Http\Controllers\User\MyProfileController::class);
     Route::get('/load-profile', [App\Http\Controllers\User\MyProfileController::class, 'loadProfile']);

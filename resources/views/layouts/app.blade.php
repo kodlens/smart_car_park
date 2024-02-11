@@ -58,8 +58,8 @@
 
                 <b-navbar-dropdown label="{{ strtoupper(Auth::user()->fname) }}">
 
-                    <b-navbar-item href="/my-wallet">
-                        My Wallet
+                    <b-navbar-item href="/my-reservations">
+                        My Reservations
                     </b-navbar-item>
 
                     <b-navbar-item href="/my-profile">
