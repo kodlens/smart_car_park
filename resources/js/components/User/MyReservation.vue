@@ -48,32 +48,29 @@
                             :default-sort-direction="defaultSortDirection"
                             @sort="onSort">
 
-                            <b-table-column field="user_id" label="ID" sortable v-slot="props">
-                                {{ props.row.user_id }}
+                            <b-table-column field="park_reservation_id" label="ID" sortable v-slot="props">
+                                {{ props.row.park_reservation_id }}
                             </b-table-column>
 
-                            <b-table-column field="username" label="USERNAME" sortable v-slot="props">
-                                {{ props.row.username }}
+                            <b-table-column field="qr_ref" label="QR Ref" sortable v-slot="props">
+                                {{ props.row.qr_ref }}
                             </b-table-column>
 
-                            <b-table-column field="lname" label="NAME" sortable v-slot="props">
-                                {{ props.row.lname }}, {{ props.row.fname }} {{ props.row.mname }}
+                            <b-table-column field="park" label="Park Name" sortable v-slot="props">
+                                {{ props.row.park.name }}
                             </b-table-column>
+
+                           
 
                             <b-table-column field="sex" label="SEX" v-slot="props">
                                 {{ props.row.sex }}
                             </b-table-column>
 
-                            <b-table-column field="role" label="ROLE" v-slot="props">
-                                {{ props.row.role }}
-                            </b-table-column>
 
-                            <b-table-column field="contact_no" label="CONTACT NO." v-slot="props">
-                                {{ props.row.contact_no }}
-                            </b-table-column>
+                    
 
 
-                            <b-table-column label="OPTIONS" v-slot="props">
+                            <!-- <b-table-column label="OPTIONS" v-slot="props">
                                 <div class="is-flex">
                                     <b-tooltip label="Edit" type="is-warning">
                                         <b-button class="button is-small mr-1" tag="a" icon-right="pencil" @click="getData(props.row.user_id)"></b-button>
@@ -85,7 +82,7 @@
                                         <b-button class="button is-small mr-1" icon-right="lock" @click="openModalResetPassword(props.row.user_id)"></b-button>
                                     </b-tooltip>
                                 </div>
-                            </b-table-column>
+                            </b-table-column> -->
                         </b-table>
 
                         <div class="columns">
