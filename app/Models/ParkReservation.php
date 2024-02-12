@@ -22,4 +22,12 @@ class ParkReservation extends Model
         'exit_time',
         'qr_ref'
     ];
+
+    public function user(){
+        return $this->hasOne(User::class, 'user_id','user_id');
+    }
+
+    public function park(){
+        return $this->hasOne(Park::class, 'park_id', 'park_id');
+    }
 }

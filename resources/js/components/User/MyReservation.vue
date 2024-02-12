@@ -10,7 +10,7 @@
                             <div class="column">
                                 <b-field label="Search" label-position="on-border">
                                     <b-input type="text"
-                                        v-model="search.ref" placeholder="Search Lastname"
+                                        v-model="search.qrref" placeholder="Search"
                                         @keyup.native.enter="loadAsyncData"/>
                                     <p class="control">
                                             <b-tooltip label="Search" type="is-success">
@@ -20,16 +20,13 @@
                                 </b-field>
                             </div>
 
-                            <div class="column">
+                            <!-- <div class="column">
                                 <div class="buttons is-right mt-3">
                                     <b-button @click="openModal" icon-left="plus" class="is-primary is-small">NEW</b-button>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         
-
-                     
-
                         <b-table
                             class="is-info"
                             :data="data"
@@ -60,15 +57,24 @@
                                 {{ props.row.park.name }}
                             </b-table-column>
 
-                           
-
-                            <b-table-column field="sex" label="SEX" v-slot="props">
-                                {{ props.row.sex }}
+                            <b-table-column field="price" label="Price" v-slot="props">
+                                {{ props.row.price }}
                             </b-table-column>
 
+                            <b-table-column field="reservation" label="Reservation" v-slot="props">
+                                {{ new Date(props.row.start_time).toLocaleString() }} - {{ new Date(props.row.end_time).toLocaleString() }}
+                            </b-table-column>
 
-                    
-
+                            <b-table-column field="reservation" label="Enter Time" v-slot="props">
+                                <span v-if="props.row.enter_time">
+                                    {{ new Date(props.row.enter_time).toLocaleString() }}
+                                </span>
+                            </b-table-column>
+                            <b-table-column field="reservation" label="Exit Time" v-slot="props">
+                                <span v-if="props.row.exit_time">
+                                    {{ new Date(props.row.exit_time).toLocaleString() }}
+                                </span>
+                            </b-table-column>
 
                             <!-- <b-table-column label="OPTIONS" v-slot="props">
                                 <div class="is-flex">
@@ -83,6 +89,7 @@
                                     </b-tooltip>
                                 </div>
                             </b-table-column> -->
+
                         </b-table>
 
                         <div class="columns">
@@ -105,219 +112,6 @@
         </div><!--section div-->
 
 
-
-        <!--modal create-->
-        <b-modal v-model="isModalCreate" has-modal-card
-                 trap-focus
-                 :width="640"
-                 aria-role="dialog"
-                 aria-label="Modal"
-                 aria-modal>
-
-            <form @submit.prevent="submit">
-                <div class="modal-card">
-                    <header class="modal-card-head">
-                        <p class="modal-card-title has-text-weight-bold is-size-6">USER INFORMATION</p>
-                        <button
-                            type="button"
-                            class="delete"
-                            @click="isModalCreate = false"/>
-                    </header>
-
-                    <section class="modal-card-body">
-                        <div class="">
-                            <div class="columns">
-                                <div class="column">
-                                    <b-field label="Username" label-position="on-border"
-                                             :type="this.errors.username ? 'is-danger':''"
-                                             :message="this.errors.username ? this.errors.username[0] : ''">
-                                        <b-input v-model="fields.username"
-                                                 placeholder="Username" required>
-                                        </b-input>
-                                    </b-field>
-                                </div>
-                            </div>
-
-                            <div class="columns">
-                                <div class="column">
-                                    <b-field label="Last Name" label-position="on-border"
-                                             :type="this.errors.lname ? 'is-danger':''"
-                                             :message="this.errors.lname ? this.errors.lname[0] : ''">
-                                        <b-input v-model="fields.lname"
-                                            icon="account"
-                                            placeholder="Last Name" required>
-                                        </b-input>
-                                    </b-field>
-                                </div>
-                                <div class="column">
-                                    <b-field label="First Name" label-position="on-border"
-                                             :type="this.errors.fname ? 'is-danger':''"
-                                             :message="this.errors.fname ? this.errors.fname[0] : ''">
-                                        <b-input v-model="fields.fname"
-                                                 placeholder="First Name" required>
-                                        </b-input>
-                                    </b-field>
-                                </div>
-                            </div>
-
-                            <div class="columns">
-                                <div class="column">
-                                    <b-field label="Middle Name" label-position="on-border"
-                                             :type="this.errors.mname ? 'is-danger':''"
-                                             :message="this.errors.mname ? this.errors.mname[0] : ''">
-                                        <b-input v-model="fields.mname"
-                                                 placeholder="Middle Name">
-                                        </b-input>
-                                    </b-field>
-                                </div>
-                                <div class="column">
-                                    <b-field label="Suffix" label-position="on-border"
-                                             :type="this.errors.suffix ? 'is-danger':''"
-                                             :message="this.errors.suffix ? this.errors.suffix[0] : ''">
-                                        <b-input v-model="fields.suffix"
-                                                 placeholder="Suffix">
-                                        </b-input>
-                                    </b-field>
-                                </div>
-                            </div>
-
-                            <div class="columns">
-                                <div class="column">
-                                    <b-field label="Contact No" label-position="on-border"
-                                             :type="this.errors.contact_no ? 'is-danger':''"
-                                             :message="this.errors.contact_no ? this.errors.contact_no[0] : ''">
-                                        <b-input type="number" v-model="fields.contact_no"
-                                                 placeholder="Contact No" required>
-                                        </b-input>
-                                    </b-field>
-                                </div>
-                                <div class="column">
-                                    <b-field label="Email" label-position="on-border"
-                                             :type="this.errors.email ? 'is-danger':''"
-                                             :message="this.errors.email ? this.errors.email[0] : ''">
-                                        <b-input type="email" v-model="fields.email" icon="email"
-                                                 placeholder="Email" required>
-                                        </b-input>
-                                    </b-field>
-                                </div>
-                            
-                            </div>
-
-                            <div class="columns" v-if="global_id < 1">
-                                <div class="column">
-                                    <b-field label="Password" label-position="on-border"
-                                             :type="this.errors.password ? 'is-danger':''"
-                                             :message="this.errors.password ? this.errors.password[0] : ''">
-                                        <b-input type="password" password-reveal v-model="fields.password"
-                                                 placeholder="Password" required>
-                                        </b-input>
-                                    </b-field>
-                                </div>
-                                <div class="column">
-                                    <b-field label="Confirm Password" label-position="on-border"
-                                             :type="this.errors.password_confirmation ? 'is-danger':''"
-                                             :message="this.errors.password_confirmation ? this.errors.password_confirmation[0] : ''">
-                                        <b-input type="password" password-reveal v-model="fields.password_confirmation"
-                                                 placeholder="Confirm Password" required>
-                                        </b-input>
-                                    </b-field>
-                                </div>
-                            </div>
-
-
-                            <div class="columns">
-                                <div class="column">
-                                    <b-field label="Sex" label-position="on-border" expanded
-                                             :type="this.errors.sex ? 'is-danger':''"
-                                             :message="this.errors.sex ? this.errors.sex[0] : ''"
-                                            >
-                                        <b-select v-model="fields.sex" expanded>
-                                            <option value="MALE">MALE</option>
-                                            <option value="FEMALE">FEMALE</option>
-                                        </b-select>
-                                    </b-field>
-                                </div>
-
-                                <div class="column">
-                                    <b-field label="Role" label-position="on-border" expanded
-                                             :type="this.errors.role ? 'is-danger':''"
-                                             :message="this.errors.role ? this.errors.role[0] : ''">
-                                        <b-select v-model="fields.role" expanded>
-                                            <option value="ADMINISTRATOR">ADMINISTRATOR</option>
-                                            <option value="USER">USER</option>
-                                        </b-select>
-                                    </b-field>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </section>
-                    <footer class="modal-card-foot">
-                        <button class="button is-primary has-text-weight-bold">
-                            SAVE USER
-                            <b-icon class="ml-4" icon="content-save-outline"></b-icon>
-                        </button>
-                    </footer>
-                </div>
-            </form><!--close form-->
-        </b-modal>
-        <!--close modal-->
-
-
-
-
-        <!--modal reset password-->
-        <b-modal v-model="modalResetPassword" has-modal-card
-                 trap-focus
-                 :width="640"
-                 aria-role="dialog"
-                 aria-label="Modal"
-                 aria-modal>
-
-            <form @submit.prevent="resetPassword">
-                <div class="modal-card">
-                    <header class="modal-card-head">
-                        <p class="modal-card-title">Change Password</p>
-                        <button
-                            type="button"
-                            class="delete"
-                            @click="modalResetPassword = false"/>
-                    </header>
-
-                    <section class="modal-card-body">
-                        <div class="">
-                            <div class="columns">
-                                <div class="column">
-                                    <b-field label="Password" label-position="on-border"
-                                             :type="this.errors.password ? 'is-danger':''"
-                                             :message="this.errors.password ? this.errors.password[0] : ''">
-                                        <b-input type="password" v-model="fields.password" password-reveal
-                                                 placeholder="Password" required>
-                                        </b-input>
-                                    </b-field>
-                                    <b-field label="Confirm Password" label-position="on-border"
-                                             :type="this.errors.password_confirmation ? 'is-danger':''"
-                                             :message="this.errors.password_confirmation ? this.errors.password_confirmation[0] : ''">
-                                        <b-input type="password" v-model="fields.password_confirmation"
-                                                 password-reveal
-                                                 placeholder="Confirm Password" required>
-                                        </b-input>
-                                    </b-field>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <footer class="modal-card-foot">
-                        <button
-                            class="button is-primary">SAVE</button>
-                    </footer>
-                </div>
-            </form><!--close form-->
-        </b-modal>
-        <!--close modal-->
-
-
     </div>
 </template>
 
@@ -330,7 +124,7 @@ export default{
             data: [],
             total: 0,
             loading: false,
-            sortField: 'user_id',
+            sortField: 'park_reservation_id',
             sortOrder: 'desc',
             page: 1,
             perPage: 10,
@@ -340,25 +134,13 @@ export default{
             global_id : 0,
 
             search: {
-                lname: '',
+                qrref: '',
             },
 
             isModalCreate: false,
             modalResetPassword: false,
 
-            fields: {
-                username: '',
-                lname: '', 
-                fname: '',
-                mname: '',
-                suffix: '',
-          
-                password: '', 
-                password_confirmation : '',
-                sex : '', role: '', 
-                contact_no : '',
-                email: '',
-            },
+            fields: {},
             errors: {},
 
 
@@ -374,13 +156,13 @@ export default{
         loadAsyncData() {
             const params = [
                 `sort_by=${this.sortField}.${this.sortOrder}`,
-                `lname=${this.search.lname}`,
+                `qrref=${this.search.qrref}`,
                 `perpage=${this.perPage}`,
                 `page=${this.page}`
             ].join('&')
 
             this.loading = true
-            axios.get(`/get-users?${params}`)
+            axios.get(`/get-my-reservations?${params}`)
                 .then(({ data }) => {
                     this.data = [];
                     let currentTotal = data.total
