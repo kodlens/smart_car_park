@@ -112,7 +112,7 @@ class PaymongoController extends Controller
                 'is_occupied' => 1,
             ]);
 
-        ParkReservation::insert([
+        ParkReservation::create([
             'park_id' => $park_id,
             'user_id' => $user_id,
             'hour'    => $hour,

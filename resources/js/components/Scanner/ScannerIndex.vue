@@ -7,8 +7,8 @@
                 <div class="column is-6">
 
                     <div class="columns">
-                        <div class="column">
-                            <h2 style="text-align: center;"> <b> Scan QR here! </b> </h2>
+                        <div class="column ma-5">
+                            <h1 style="text-align: center;"> <b> Scan QR here! </b> </h1>
                         </div>
                     </div>
 
@@ -28,30 +28,29 @@
                         </qrcode-stream>
                     </div>
 
-                   
+
 
                     <div class="buttons mt-1 is-centered">
-                        <b-button @click="turnCameraOn" label="TURN ON"></b-button>
-                        <b-button @click="turnCameraOff" label="TURN OFF"></b-button>
+                        <b-button @click="turnCameraOn" label="TURN ON SCANNER" type="is-info"></b-button>
                     </div>
 
                 </div><!--col-->
             </div><!--close div -->
 
 
-            
+
 
         </div><!--section -->
 
-        
+
 
     </div><!--root div-->
 </template>
 
 <script>
 export default {
-    data(){
-        return{
+    data() {
+        return {
 
             isValid: undefined,
             camera: 'off',
@@ -69,36 +68,36 @@ export default {
 
     methods: {
 
-        onInit (promise) {
+        onInit(promise) {
             promise
                 .catch(console.error)
                 .then(this.resetValidationState)
         },
 
-        resetValidationState () {
+        resetValidationState() {
             this.isValid = undefined
         },
 
-        async onDecode (content) {
+        async onDecode(content) {
             //console.log(content);
             this.result = content.split(';');
 
             this.turnCameraOff();
-           
+
 
             // pretend it's taking really long
             this.isProcessing = true;
             //await this.timeout(3000);
 
-            axios.post('/decode-qr/'+content).then(res=>{
-               this.alertCustom()
-            }).catch(err=>{
+            axios.post('/decode-qr/' + content).then(res => {
+                this.alertCustom()
+            }).catch(err => {
                 this.isProcessing = false;
                 this.data = {};
             })
-            
-           
-           
+
+
+
 
             this.isProcessing = false;
             this.isValid = false;
@@ -107,30 +106,36 @@ export default {
 
             // some more delay, so users have time to read the message
             await this.timeout(2000);
-            this.turnCameraOn()
+            this.turnCameraOff();
         },
 
-        turnCameraOn () {
+        turnCameraOn() {
             this.camera = 'auto';
         },
 
-        turnCameraOff () {
+        turnCameraOff() {
             this.camera = 'off'
         },
 
-        timeout (ms) {
+        timeout(ms) {
             return new Promise(resolve => {
                 window.setTimeout(resolve, ms)
             })
         },
 
         alertCustom() {
-                this.$buefy.dialog.alert({
-                    title: 'Title Alert',
-                    message: 'I have a title, a custom button and <b>HTML</b>!',
-                    confirmText: 'Cool!'
-                })
+            let dialog = this.$buefy.dialog.alert({
+                title: 'Message',
+                message: 'QR Successfully Scanned!',
+                confirmText: 'Cool!'
+            })
+
+            // Close the dialog after 3 seconds (3000 milliseconds)
+            setTimeout(() => {
+                dialog.close(); // Close the dialog
+            }, 3000);
         },
+
 
     },
 
@@ -149,8 +154,8 @@ export default {
         },
     },
 
-    mounted(){
-        this.turnCameraOn()
+    mounted() {
+
     }
 
 
@@ -158,7 +163,6 @@ export default {
 </script>
 
 <style scoped>
-
 .validation-success,
 .validation-failure,
 .validation-pending {
@@ -176,23 +180,23 @@ export default {
     flex-flow: column nowrap;
     justify-content: center;
 }
+
 .validation-success {
     color: green;
 }
+
 .validation-failure {
     color: red;
 }
 
-.camera{
+.camera {
     margin: auto;
-    width:300px;
+    width: 300px;
     height: 300px;
     border: 1px solid gray;
 }
 
-.decode-result{
+.decode-result {
     text-align: center;
 }
-
-
 </style>

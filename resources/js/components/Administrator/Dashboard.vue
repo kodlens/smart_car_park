@@ -45,15 +45,15 @@
                                             <img src="/img/car.png" style="width: 250px;" alt="">
                                         </div>
 
-                                        <div class="mb-2" v-if="parkReserved.user_id == user.user_id">
+                                        <div class="mb-2" v-if="park.parkReservation">
                                             <button class="button is-success mb-2"
-                                                @click="modalQR = true"
-                                                v-if="parkReserved.enter_time == null">
+                                                @click="displayQr(index)"
+                                                v-if="(park.parkReservation.enter_time == null) && (park.parkReservation.user_id == user.user_id)">
                                                 Enter Parking Space
                                             </button>
                                             <button class="button is-warning mb-2"
-                                                v-if="parkReserved.enter_time !== null"
-                                                @click="exitPark(index)">
+                                                v-if="(park.parkReservation.enter_time !== null) && (park.parkReservation.user_id == user.user_id)"
+                                                @click="displayQr(index)">
                                                 Exit Parking Space
                                             </button>
                                         </div>
@@ -143,7 +143,7 @@
                         <button
                             type="button"
                             class="delete"
-                            @click="modalQR = false"/>
+                            @click="loadParkingSpaces"/>
                     </header>
 
                     <section class="modal-card-body">
@@ -151,7 +151,7 @@
                             <div class="columns">
                                 <div class="column">
                                     <div class="qr">
-                                        <qrcode :value="parkReserved.qr_ref" :options="{ width: 400 }"></qrcode>
+                                        <qrcode :value="qr" :options="{ width: 400 }"></qrcode>
                                     </div>
                                     
                                 </div>
@@ -160,9 +160,9 @@
                     </section>
                     <footer class="modal-card-foot">
                         <button
-                            @click="modalQR = false"
+                            @click="loadParkingSpaces"
                             class="button is-primary">
-                                Close
+                                done
                                 <b-icon icon="arrow-right" class="ml-2"></b-icon>    
                         </button>
                     </footer>
@@ -186,7 +186,6 @@ export default {
             parkingSpaces: [],
             reports: [],
             user: [],
-            parkReserved: [],
 
             modalReserveMe: false,
             modalQR: false,
@@ -206,6 +205,7 @@ export default {
         loadParkingSpaces(){
             axios.get('/load-parking-spaces').then(res=>{
                 this.parkingSpaces = res.data
+                this.modalQR = false
                 
             }).catch(err=>{
             
@@ -220,35 +220,6 @@ export default {
             })
         },
 
-        loadParkReservation(park){
-            axios.get('/load-parking-reservation',park).then(res=>{
-                this.parkReserved = res.data;
-                this.qr = this.parkReserved.qr_ref;
-            }).catch(err=>{
-                
-            })
-        },
-
-        exitPark(row){
-            this.fields.park_id = row
-            axios.post('/exit-park',this.fields).then(res=>{
-                window.location = '/home';
-            }).catch(err=>{
-
-            })
-        },
-
-        enterPark(row){
-            this.fields.park_id = row
-            axios.post('/enter-park',this.fields).then(res=>{
-
-                console.log(res.data)
-            }).catch(err=>{
-
-            })
-        },
-
-
         openModalReserveMe(row){
             this.fields.row = row
             this.modalReserveMe = true
@@ -262,6 +233,10 @@ export default {
             this.fields.hr = hours
             this.fields.amount = hours * 20
         },
+        displayQr(index){
+            this.qr = this.parkingSpaces[index].parkReservation.qr_ref;
+            this.modalQR = true;
+        }
         
         
 	},
@@ -276,7 +251,6 @@ export default {
     this.loadParkingSpaces();
     this.fields;
     this.loadProfile();
-    this.loadParkReservation();
     }
 }
 </script>

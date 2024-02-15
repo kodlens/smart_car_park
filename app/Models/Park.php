@@ -23,6 +23,6 @@ class Park extends Model
     ];
 
     public function parkReservation(){
-        return $this->hasMany(parkingFee::class, 'parking_reservation_id', 'parking_reservation_id');
+        return $this->hasMany(ParkReservation::class, 'park_id', 'park_id');
     }
 }

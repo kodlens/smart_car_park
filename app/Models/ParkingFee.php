@@ -11,22 +11,6 @@ class ParkingFee extends Model
 
 
     
-    protected $table = 'park_reservations';
-    protected $primaryKey = 'parking_reservation_id';
-
-    protected $fillable = [
-        'hour',
-        'price',
-        'user_id',
-        'park_id',
-        'start_time',
-        'end_time',
-        'enter_time',
-        'exit_time',
-        'qr_ref'
-    ];
-
-    
 
 
 }

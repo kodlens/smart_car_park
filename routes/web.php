@@ -113,6 +113,6 @@ Route::middleware(['auth'])->group(function(){
 //  ------------------------SCANNER -------------------------------------
 Route::middleware(['auth', 'scanner'])->group(function(){
     Route::resource('/scanner-home', App\Http\Controllers\Scanner\ScannerHomeController::class);
-    Route::get('/decode-qr/{qr}', [App\Http\Controllers\Scanner\ScannerHomeController::class, 'decodeQr']);
+    Route::post('/decode-qr/{qr}', [App\Http\Controllers\Scanner\ScannerHomeController::class, 'decodeQr']);
 });
 

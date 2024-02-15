@@ -21,7 +21,7 @@ class MyReservationController extends Controller
         $sort = explode('.', $req->sort_by);
 
         $data = ParkReservation::with(['park', 'user'])
-            ->where('qr_ref', 'like', $req->qrref . '%')
+            ->where('qr_ref', 'like', $req->qr_ref . '%')
             ->orderBy($sort[0], $sort[1])
             ->paginate($req->perpage);
 

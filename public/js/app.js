@@ -7777,7 +7777,6 @@ __webpack_require__.r(__webpack_exports__);
       parkingSpaces: [],
       reports: [],
       user: [],
-      parkReserved: [],
       modalReserveMe: false,
       modalQR: false,
       errors: {},
@@ -7797,6 +7796,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/load-parking-spaces').then(function (res) {
         _this.parkingSpaces = res.data;
+        _this.modalQR = false;
       })["catch"](function (err) {});
     },
     loadProfile: function loadProfile() {
@@ -7804,26 +7804,6 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/load-profile').then(function (res) {
         _this2.user = res.data;
-      })["catch"](function (err) {});
-    },
-    loadParkReservation: function loadParkReservation(park) {
-      var _this3 = this;
-
-      axios.get('/load-parking-reservation', park).then(function (res) {
-        _this3.parkReserved = res.data;
-        _this3.qr = _this3.parkReserved.qr_ref;
-      })["catch"](function (err) {});
-    },
-    exitPark: function exitPark(row) {
-      this.fields.park_id = row;
-      axios.post('/exit-park', this.fields).then(function (res) {
-        window.location = '/home';
-      })["catch"](function (err) {});
-    },
-    enterPark: function enterPark(row) {
-      this.fields.park_id = row;
-      axios.post('/enter-park', this.fields).then(function (res) {
-        console.log(res.data);
       })["catch"](function (err) {});
     },
     openModalReserveMe: function openModalReserveMe(row) {
@@ -7837,6 +7817,10 @@ __webpack_require__.r(__webpack_exports__);
 
       this.fields.hr = hours;
       this.fields.amount = hours * 20;
+    },
+    displayQr: function displayQr(index) {
+      this.qr = this.parkingSpaces[index].parkReservation.qr_ref;
+      this.modalQR = true;
     }
   },
   computed: {
@@ -7848,7 +7832,6 @@ __webpack_require__.r(__webpack_exports__);
     this.loadParkingSpaces();
     this.fields;
     this.loadProfile();
-    this.loadParkReservation();
   }
 });
 
@@ -10553,7 +10536,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -10603,7 +10585,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _this.timeout(2000);
 
               case 8:
-                _this.turnCameraOn();
+                _this.turnCameraOff();
 
               case 9:
               case "end":
@@ -10625,11 +10607,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     alertCustom: function alertCustom() {
-      this.$buefy.dialog.alert({
-        title: 'Title Alert',
-        message: 'I have a title, a custom button and <b>HTML</b>!',
+      var dialog = this.$buefy.dialog.alert({
+        title: 'Message',
+        message: 'QR Successfully Scanned!',
         confirmText: 'Cool!'
-      });
+      }); // Close the dialog after 3 seconds (3000 milliseconds)
+
+      setTimeout(function () {
+        dialog.close(); // Close the dialog
+      }, 3000);
     }
   },
   computed: {
@@ -10643,9 +10629,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return this.isValid === false;
     }
   },
-  mounted: function mounted() {
-    this.turnCameraOn();
-  }
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -29860,7 +29844,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.validation-success[data-v-562c1720],\r\n.validation-failure[data-v-562c1720],\r\n.validation-pending[data-v-562c1720] {\r\n    position: absolute;\r\n    width: 100%;\r\n    height: 100%;\r\n\r\n    background-color: rgba(255, 255, 255, .8);\r\n    text-align: center;\r\n    font-weight: bold;\r\n    font-size: 1.4rem;\r\n    padding: 10px;\r\n\r\n    display: flex;\r\n    flex-flow: column nowrap;\r\n    justify-content: center;\n}\n.validation-success[data-v-562c1720] {\r\n    color: green;\n}\n.validation-failure[data-v-562c1720] {\r\n    color: red;\n}\n.camera[data-v-562c1720]{\r\n    margin: auto;\r\n    width:300px;\r\n    height: 300px;\r\n    border: 1px solid gray;\n}\n.decode-result[data-v-562c1720]{\r\n    text-align: center;\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.validation-success[data-v-562c1720],\r\n.validation-failure[data-v-562c1720],\r\n.validation-pending[data-v-562c1720] {\r\n    position: absolute;\r\n    width: 100%;\r\n    height: 100%;\r\n\r\n    background-color: rgba(255, 255, 255, .8);\r\n    text-align: center;\r\n    font-weight: bold;\r\n    font-size: 1.4rem;\r\n    padding: 10px;\r\n\r\n    display: flex;\r\n    flex-flow: column nowrap;\r\n    justify-content: center;\n}\n.validation-success[data-v-562c1720] {\r\n    color: green;\n}\n.validation-failure[data-v-562c1720] {\r\n    color: red;\n}\n.camera[data-v-562c1720] {\r\n    margin: auto;\r\n    width: 300px;\r\n    height: 300px;\r\n    border: 1px solid gray;\n}\n.decode-result[data-v-562c1720] {\r\n    text-align: center;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -50175,9 +50159,11 @@ var render = function () {
                               _vm._v(" "),
                               _vm._m(0, true),
                               _vm._v(" "),
-                              _vm.parkReserved.user_id == _vm.user.user_id
+                              park.parkReservation
                                 ? _c("div", { staticClass: "mb-2" }, [
-                                    _vm.parkReserved.enter_time == null
+                                    park.parkReservation.enter_time == null &&
+                                    park.parkReservation.user_id ==
+                                      _vm.user.user_id
                                       ? _c(
                                           "button",
                                           {
@@ -50185,7 +50171,7 @@ var render = function () {
                                               "button is-success mb-2",
                                             on: {
                                               click: function ($event) {
-                                                _vm.modalQR = true
+                                                return _vm.displayQr(index)
                                               },
                                             },
                                           },
@@ -50197,7 +50183,9 @@ var render = function () {
                                         )
                                       : _vm._e(),
                                     _vm._v(" "),
-                                    _vm.parkReserved.enter_time !== null
+                                    park.parkReservation.enter_time !== null &&
+                                    park.parkReservation.user_id ==
+                                      _vm.user.user_id
                                       ? _c(
                                           "button",
                                           {
@@ -50205,7 +50193,7 @@ var render = function () {
                                               "button is-warning mb-2",
                                             on: {
                                               click: function ($event) {
-                                                return _vm.exitPark(index)
+                                                return _vm.displayQr(index)
                                               },
                                             },
                                           },
@@ -50518,11 +50506,7 @@ var render = function () {
               _c("button", {
                 staticClass: "delete",
                 attrs: { type: "button" },
-                on: {
-                  click: function ($event) {
-                    _vm.modalQR = false
-                  },
-                },
+                on: { click: _vm.loadParkingSpaces },
               }),
             ]),
             _vm._v(" "),
@@ -50535,10 +50519,7 @@ var render = function () {
                       { staticClass: "qr" },
                       [
                         _c("qrcode", {
-                          attrs: {
-                            value: _vm.parkReserved.qr_ref,
-                            options: { width: 400 },
-                          },
+                          attrs: { value: _vm.qr, options: { width: 400 } },
                         }),
                       ],
                       1
@@ -50553,15 +50534,11 @@ var render = function () {
                 "button",
                 {
                   staticClass: "button is-primary",
-                  on: {
-                    click: function ($event) {
-                      _vm.modalQR = false
-                    },
-                  },
+                  on: { click: _vm.loadParkingSpaces },
                 },
                 [
                   _vm._v(
-                    "\n                            Close\n                            "
+                    "\n                            done\n                            "
                   ),
                   _c("b-icon", {
                     staticClass: "ml-2",
@@ -55729,13 +55706,8 @@ var render = function () {
             { staticClass: "buttons mt-1 is-centered" },
             [
               _c("b-button", {
-                attrs: { label: "TURN ON" },
+                attrs: { label: "TURN ON SCANNER", type: "is-info" },
                 on: { click: _vm.turnCameraOn },
-              }),
-              _vm._v(" "),
-              _c("b-button", {
-                attrs: { label: "TURN OFF" },
-                on: { click: _vm.turnCameraOff },
               }),
             ],
             1
@@ -55751,8 +55723,8 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "columns" }, [
-      _c("div", { staticClass: "column" }, [
-        _c("h2", { staticStyle: { "text-align": "center" } }, [
+      _c("div", { staticClass: "column ma-5" }, [
+        _c("h1", { staticStyle: { "text-align": "center" } }, [
           _c("b", [_vm._v(" Scan QR here! ")]),
         ]),
       ]),
