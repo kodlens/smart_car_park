@@ -10545,7 +10545,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       isProcessing: false,
       isModalValidModal: false,
       data: {},
-      modalResult: false
+      modalResult: false,
+      park_id: ''
     };
   },
   methods: {
@@ -10573,6 +10574,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 axios.post('/decode-qr/' + content).then(function (res) {
                   _this.alertCustom();
+
+                  _this.park_id = res.data.park_id;
+
+                  _this.openGate();
                 })["catch"](function (err) {
                   _this.isProcessing = false;
                   _this.data = {};
@@ -10594,6 +10599,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee);
       }))();
+    },
+    openGate: function openGate() {
+      axios.post('/send-nodemcu', this.park_id).then(function (res) {
+        console.log('gateopened');
+      });
     },
     turnCameraOn: function turnCameraOn() {
       this.camera = 'auto';
