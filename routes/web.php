@@ -114,6 +114,8 @@ Route::middleware(['auth'])->group(function(){
 Route::middleware(['auth', 'scanner'])->group(function(){
     Route::resource('/scanner-home', App\Http\Controllers\Scanner\ScannerHomeController::class);
     Route::post('/decode-qr/{qr}', [App\Http\Controllers\Scanner\ScannerHomeController::class, 'decodeQr']);
-    Route::post('/send-nodemcu', [App\Http\Controllers\Scanner\ScannerHomeController::class, 'sendNodemcu']);
 });
 
+
+
+Route::get('/test', [App\Http\Controllers\TestController::class, 'Test']);

@@ -16,41 +16,25 @@ class ScannerHomeController extends Controller
     public function index(){
         return view('scanner.scanner-index');
     }
-    public function sendNodemcu(Request $req){
-        $client = new Client([
-                'base_uri' => 'http://192.168.1.101:80', // Adjust IP address and port
-                'timeout'  => 5.0,
-            ]);
-            $parkId = $req;
-            try {
-                $response = $client->request('POST', '/send-nodemcu', [
-                    'json' => ['park_id' => $parkId],
-                    'timeout'  => 5.0,
-                ]);
-    
-                $statusCode = $response->getStatusCode();
-                if ($statusCode == 200) {
-                    return response()->json(['message' => 'Data sent to NodeMCU successfully'], 200);
-                } else {
-                    return response()->json(['error' => 'Failed to send data to NodeMCU'], $statusCode);
-                }
-            } catch (\Exception $e) {
-                return response()->json(['error' => $e->getMessage()], 500);
-            }
-
-    }
 
     public function decodeQr($qr){  
-        $reservation = ParkReservation::where('qr_ref', $qr)->first();
+        $reservation = ParkReservation::with('park')->where('qr_ref', $qr)->first();
+        $esp8266IpAddress = $reservation->park->device_ip;
         if($reservation && !$reservation->enter_time){
 
-            // ParkReservation::where('park_reservation_id',$reservation->park_reservation_id)
-            // ->update([
-            //     'enter_time'=> Carbon::now(),
-            // ]);
-            return $reservation;
+            $response = Http::get("http://$esp8266IpAddress/enter");
+            ParkReservation::where('park_reservation_id',$reservation->park_reservation_id)
+            ->update([
+                'enter_time'=> Carbon::now(),
+            ]);
+            return response()->json([
+                'status' => 'updated'
+            ],200);
+
+
         }
         elseif($reservation && $reservation->enter_time){
+            $response = Http::get("http://$esp8266IpAddress/exit");
             ParkReservation::where('park_reservation_id',$reservation->park_reservation_id)
             ->update([
                 'exit_time'=> Carbon::now(),
@@ -59,7 +43,9 @@ class ScannerHomeController extends Controller
             ->update([
                 'is_occupied' => 0,
             ]);
-            return $reservation;
+            return response()->json([
+                'status' => 'updated'
+            ],200);
         }
         return response()->json([
             'status' => 'failed'

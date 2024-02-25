@@ -21,7 +21,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        \App\Console\Commands\SMSNotif::class,
     ];
 
     /**
@@ -32,39 +32,40 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('sms:send')->everyMinute();
         // $schedule->command('inspire')->hourly();
-        $schedule->call(function () {
-            // DB::table('test')->insert([
-            //     'testmsg' => 'schedule insert',
-            // ]);
+        // $schedule->call(function () {
+        //     // DB::table('test')->insert([
+        //     //     'testmsg' => 'schedule insert',
+        //     // ]);
 
             
-            $beforeDay = date('Y-m-d H:i', strtotime('+24 hour', strtotime(date('Y-m-d H:i')))); 
+        //     $beforeDay = date('Y-m-d H:i', strtotime('+24 hour', strtotime(date('Y-m-d H:i')))); 
 
-            $data = \DB::table('appointments')
-                ->where('appoint_date', date('Y-m-d', strtotime($beforeDay)))
-                ->where('appoint_time', date('H:i', strtotime($beforeDay)))
-                ->where('is_notify', 0)
-                ->get();
+        //     $data = \DB::table('appointments')
+        //         ->where('appoint_date', date('Y-m-d', strtotime($beforeDay)))
+        //         ->where('appoint_time', date('H:i', strtotime($beforeDay)))
+        //         ->where('is_notify', 0)
+        //         ->get();
         
-            foreach($data as $i){
+        //     foreach($data as $i){
 
-                $user = User::find($i->user_id);
+        //         $user = User::find($i->user_id);
 
-                $msg = 'Hi '.$user->lname . ', ' . $user->fname . ', this is just a reminder that you have an appointment tomorrow. Your ref no. is: ' . $i->qr_code . '.';
-                try{ 
-                    Http::withHeaders([
-                        'Content-Type' => 'text/plain'
-                    ])->post('http://'. env('IP_SMS_GATEWAY') .'/services/api/messaging?Message='.$msg.'&To='.$user->contact_no.'&Slot=1', []);
-                }catch(Exception $e){} //just hide the error
+        //         $msg = 'Hi '.$user->lname . ', ' . $user->fname . ', this is just a reminder that you have an appointment tomorrow. Your ref no. is: ' . $i->qr_code . '.';
+        //         try{ 
+        //             Http::withHeaders([
+        //                 'Content-Type' => 'text/plain'
+        //             ])->post('http://'. env('IP_SMS_GATEWAY') .'/services/api/messaging?Message='.$msg.'&To='.$user->contact_no.'&Slot=1', []);
+        //         }catch(Exception $e){} //just hide the error
 
-                $appoint = Appointment::find($i->appointment_id);
-                $appoint->is_notify = 1;
-                $appoint->save();
-            }
+        //         $appoint = Appointment::find($i->appointment_id);
+        //         $appoint->is_notify = 1;
+        //         $appoint->save();
+        //     }
 
 
-        })->everyMinute(); //loop everyminute
+        // })->everyMinute(); //loop everyminute
     }
 
     /**

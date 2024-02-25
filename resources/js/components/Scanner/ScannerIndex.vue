@@ -92,8 +92,6 @@ export default {
 
             axios.post('/decode-qr/' + content).then(res => {
                 this.alertCustom()
-                this.park_id = res.data.park_id;
-                this.openGate();
             }).catch(err => {
                 this.isProcessing = false;
                 this.data = {};
@@ -110,11 +108,6 @@ export default {
             // some more delay, so users have time to read the message
             await this.timeout(2000);
             this.turnCameraOff();
-        },
-        openGate(){
-            axios.post('/send-nodemcu',this.park_id).then(res=>{
-                console.log('gateopened');
-            })
         },
 
         turnCameraOn() {
