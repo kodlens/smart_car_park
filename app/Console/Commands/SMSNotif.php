@@ -46,7 +46,7 @@ class SMSNotif extends Command
 
         $beforeExit = Carbon::now()->addMinutes(30);
         $errorExit = Carbon::now()->addMinutes(31);
-        $exit = ParkReservation::whereBetween('start_time', [$beforeExit, $errorExit])->with('user')->with('park')->get();
+        $exit = ParkReservation::whereBetween('end_time', [$beforeExit, $errorExit])->with('user')->with('park')->get();
 
         $apiKey =  env('SEND_SMS');
         if ($enter) {
@@ -70,6 +70,8 @@ class SMSNotif extends Command
                 curl_close($ch);
             } //end foreach
         }
+
+        
         if ($exit) {
             foreach ($exit as $user) {
                 $ch = curl_init();

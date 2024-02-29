@@ -21,8 +21,7 @@ class ScannerHomeController extends Controller
         $reservation = ParkReservation::with('park')->where('qr_ref', $qr)->first();
         $esp8266IpAddress = $reservation->park->device_ip;
         if($reservation && !$reservation->enter_time){
-
-            $response = Http::get("http://$esp8266IpAddress/enter");
+            $response = Http::get("https://393e-103-168-39-22.ngrok-free.app/enter/$esp8266IpAddress");
             ParkReservation::where('park_reservation_id',$reservation->park_reservation_id)
             ->update([
                 'enter_time'=> Carbon::now(),
@@ -34,7 +33,7 @@ class ScannerHomeController extends Controller
 
         }
         elseif($reservation && $reservation->enter_time){
-            $response = Http::get("http://$esp8266IpAddress/exit");
+            $response = Http::get("https://393e-103-168-39-22.ngrok-free.app/exit/$esp8266IpAddress");
             ParkReservation::where('park_reservation_id',$reservation->park_reservation_id)
             ->update([
                 'exit_time'=> Carbon::now(),
