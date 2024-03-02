@@ -9587,504 +9587,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       fields: {
-        lrn: '',
-        lname: '',
-        fname: '',
-        mname: '',
-        sex: '',
-        age: '',
-        birthdate: null,
-        birthplace: '',
-        is_indigenous: null,
-        if_yes_indigenous: null,
-        is_4ps: null,
-        household_4ps_id_no: null,
-        permanent_province: '',
-        permanent_city: '',
-        permanent_barangay: '',
-        permanent_street: '',
-        permanent_zipcode: '',
-        current_province: '',
-        current_city: '',
-        current_barangay: '',
-        current_street: '',
-        current_zipcode: '',
-        semester: null,
-        track_id: null,
-        strand_id: null
+        username: null,
+        password: null,
+        lname: null,
+        fname: null,
+        mname: null,
+        sex: null,
+        province: null,
+        city: null,
+        barangay: null,
+        street: null,
+        zipcode: null
       },
       errors: {},
-      gradeLevels: [],
-      current_provinces: [],
-      current_cities: [],
-      current_barangays: [],
-      permanent_provinces: [],
-      permanent_cities: [],
-      permanent_barangays: [],
-      semesters: [],
-      tracks: [],
-      strands: [],
+      provinces: [],
+      cities: [],
+      barangays: [],
       btnClass: {
         'button': true,
         'is-loading': false,
@@ -10094,134 +9616,65 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     //ADDRESS
-    loadCurrentProvince: function loadCurrentProvince() {
+    loadProvinces: function loadProvinces() {
       var _this = this;
 
       axios.get('/load-provinces').then(function (res) {
-        _this.current_provinces = res.data;
+        _this.provinces = res.data;
       });
     },
-    loadCurrentCity: function loadCurrentCity() {
+    loadCities: function loadCities() {
       var _this2 = this;
 
-      axios.get('/load-cities?prov=' + this.fields.current_province).then(function (res) {
-        _this2.current_cities = res.data;
+      axios.get('/load-cities?prov=' + this.fields.province).then(function (res) {
+        _this2.cities = res.data;
       });
     },
-    loadCurrentBarangay: function loadCurrentBarangay() {
+    loadBarangays: function loadBarangays() {
       var _this3 = this;
 
-      axios.get('/load-barangays?prov=' + this.fields.current_province + '&city_code=' + this.fields.current_city).then(function (res) {
-        _this3.current_barangays = res.data;
-      });
-    },
-    loadPermanentProvince: function loadPermanentProvince() {
-      var _this4 = this;
-
-      axios.get('/load-provinces').then(function (res) {
-        _this4.permanent_provinces = res.data;
-      });
-    },
-    loadPermanentCity: function loadPermanentCity() {
-      var _this5 = this;
-
-      axios.get('/load-cities?prov=' + this.fields.permanent_province).then(function (res) {
-        _this5.permanent_cities = res.data;
-      });
-    },
-    loadPermanentBarangay: function loadPermanentBarangay() {
-      var _this6 = this;
-
-      axios.get('/load-barangays?prov=' + this.fields.permanent_province + '&city_code=' + this.fields.permanent_city).then(function (res) {
-        _this6.permanent_barangays = res.data;
+      axios.get('/load-barangays?prov=' + this.fields.province + '&city_code=' + this.fields.city).then(function (res) {
+        _this3.barangays = res.data;
       });
     },
     //ADDRESS
-    loadSemesters: function loadSemesters() {
-      var _this7 = this;
-
-      axios.get('/load-semesters').then(function (res) {
-        _this7.semesters = res.data;
-      });
-    },
-    loadTracks: function loadTracks() {
-      var _this8 = this;
-
-      axios.get('/load-tracks').then(function (res) {
-        _this8.tracks = res.data;
-      });
-    },
-    loadStrands: function loadStrands() {
-      var _this9 = this;
-
-      axios.get('/load-strands?trackid=' + this.fields.track_id).then(function (res) {
-        _this9.strands = res.data;
-      });
-    },
-    loadGradeLevels: function loadGradeLevels() {
-      var _this10 = this;
-
-      axios.get('/load-grade-levels').then(function (res) {
-        _this10.gradeLevels = res.data;
-      });
-    },
     //copy current address
-    copyCurrentAddress: function copyCurrentAddress() {
-      this.fields.permanent_province = this.fields.current_province;
-      this.loadPermanentCity();
-      this.fields.permanent_city = this.fields.current_city;
-      this.loadPermanentBarangay();
-      this.fields.permanent_barangay = this.fields.current_barangay;
-      this.fields.permanent_street = this.fields.current_street;
-      this.fields.permanent_zipcode = this.fields.current_zipcode;
-    },
     submit: function submit() {
-      var _this11 = this;
+      var _this4 = this;
 
       this.errors = {}; //clear all errors, to refresh errors
 
       this.btnClass['is-loading'] = true;
       axios.post('/registration', this.fields).then(function (res) {
         if (res.data.status === 'saved') {
-          _this11.btnClass['is-loading'] = false;
+          _this4.btnClass['is-loading'] = false;
 
-          _this11.$buefy.dialog.alert({
+          _this4.$buefy.dialog.alert({
             title: "SAVED!",
-            message: 'Information successfully saved and enrolled.',
+            message: 'Account successfully registered. You can login the account now.',
             type: 'is-success',
             onConfirm: function onConfirm() {
-              return window.location = '/';
+              return window.location = '/login';
             }
           });
         }
 
-        if (res.data.status === 'reg') {
-          _this11.$buefy.dialog.alert({
-            title: "SAVED!",
-            message: 'Information was successfully saved but the system cannot enrol due to no section ' + 'was set by the admin or all sections are full. Please refer this to the in-charge of the enrollment so ' + 'that the student will be enrolled manually to the system.',
-            type: 'is-info',
-            onConfirm: function onConfirm() {
-              return window.location = '/';
-            }
-          });
-        }
-
-        _this11.btnClass['is-loading'] = false;
+        _this4.btnClass['is-loading'] = false;
       })["catch"](function (err) {
-        _this11.btnClass['is-loading'] = false;
+        _this4.btnClass['is-loading'] = false;
 
         if (err.response.status === 422) {
-          _this11.errors = err.response.data.errors;
+          _this4.errors = err.response.data.errors;
 
-          if (_this11.errors.exist) {
-            _this11.$buefy.dialog.alert({
+          if (_this4.errors.exist) {
+            _this4.$buefy.dialog.alert({
               title: 'Exist!',
               hasIcon: true,
-              message: _this11.errors.exist[0],
+              message: _this4.errors.exist[0],
               type: 'is-danger'
             });
           } else {
-            _this11.$buefy.dialog.alert({
+            _this4.$buefy.dialog.alert({
               title: 'Error!',
               hasIcon: true,
               message: 'Some fields are required. Please check fields marked red.',
@@ -10233,54 +9686,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    initData: function initData() {
-      this.loadCurrentProvince();
-      this.loadPermanentProvince();
-      this.loadSemesters();
-      this.loadTracks();
-      this.loadGradeLevels();
-    },
-    debug: function debug() {
-      this.fields.grade_level = 'GRADE 11';
-      this.fields.is_returnee = 1;
-      this.fields.psa = 'PSACERT-12231';
-      this.fields.lrn = '20221123231';
-      this.fields.lname = 'Abapo';
-      this.fields.fname = 'Wayne';
-      this.fields.mname = 'Yes';
-      this.fields.extension = '';
-      this.fields.sex = 'MALE';
-      this.fields.birthdate = new Date('1988-08-08');
-      this.fields.birthplace = 'Baroy Lanao del Norte';
-      this.fields.age = '17';
-      this.fields.mother_tongue = 'Cebuano';
-      this.fields.is_indigenous = 1;
-      this.fields.if_yes_indigenous = 'IGOROT';
-      this.fields.is_4ps = 1;
-      this.fields.household_4ps_id_no = '4PS-11234';
-      this.fields.current_street = 'Juan Luna St.';
-      this.fields.current_zipcode = '9210';
-      this.fields.father_lname = 'FATHERLNAME';
-      this.fields.father_fname = 'FATHERFNAME';
-      this.fields.father_mname = 'FATHERMNAME';
-      this.fields.father_contact_no = '09161234567';
-      this.fields.mother_maiden_lname = 'MAIDENLAST';
-      this.fields.mother_maiden_fname = 'MAIDENFIRST';
-      this.fields.mother_maiden_mname = 'MAIDENTEST';
-      this.fields.mother_maiden_contact_no = '09161234567';
-      this.fields.guardian_lname = 'GLASTNAME';
-      this.fields.guardian_fname = 'GFNAME';
-      this.fields.guardian_mname = 'GMNAME';
-      this.fields.guardian_contact_no = '09161234567';
-      this.fields.last_grade_level_completed = 'GRADE 11';
-      this.fields.last_school_year_completed = '2021-2022';
-      this.fields.last_school_attended = 'LNNCHS';
-      this.fields.last_schoold_id = '2022-2211';
-      this.fields.semester_id = 1;
-      this.fields.senior_high_school_id = '200222';
-      this.fields.track_id = 1;
-      this.fields.strand_id = 1;
-      this.accept_terms = 1;
+    initData: function initData() {//this.loadProvinces();
     }
   },
   mounted: function mounted() {
@@ -53266,2220 +52672,405 @@ var render = function () {
             _c("div", { staticClass: "box" }, [
               _c("div", { staticClass: "box-title" }, [
                 _vm._v(
-                  "\n                            ENHANCED BASIC EDUCATION ENROLLMENT FORM\n                        "
+                  "\n                        PERSONAL INFORMATION\n                    "
                 ),
               ]),
               _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "panel-body" },
-                [
-                  _c("div", { staticClass: "divider" }, [
-                    _vm._v("LEARNER INFORMATION"),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Grade Level",
-                              expanded: "",
-                              type: this.errors.grade_level ? "is-danger" : "",
-                              message: this.errors.grade_level
-                                ? this.errors.grade_level[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c(
-                              "b-select",
-                              {
-                                attrs: {
-                                  expanded: "",
-                                  icon: "account",
-                                  placeholder: "Grade Level",
-                                  required: "",
-                                },
-                                model: {
-                                  value: _vm.fields.grade_level,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "grade_level", $$v)
-                                  },
-                                  expression: "fields.grade_level",
-                                },
-                              },
-                              _vm._l(_vm.gradeLevels, function (item, ix) {
-                                return _c(
-                                  "option",
-                                  {
-                                    key: "g" + ix,
-                                    domProps: { value: item.grade_level },
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                                " +
-                                        _vm._s(item.grade_level) +
-                                        "\n                                            "
-                                    ),
-                                  ]
-                                )
-                              }),
-                              0
-                            ),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Returnee (Balik-Aral)",
-                              expanded: "",
-                              type: this.errors.is_returnee ? "is-danger" : "",
-                              message: this.errors.is_returnee
-                                ? this.errors.is_returnee[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c(
-                              "b-select",
-                              {
-                                attrs: {
-                                  expanded: "",
-                                  required: "",
-                                  icon: "account",
-                                  placeholder: "Returnee (Balik-Aral)",
-                                },
-                                model: {
-                                  value: _vm.fields.is_returnee,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "is_returnee", $$v)
-                                  },
-                                  expression: "fields.is_returnee",
-                                },
-                              },
-                              [
-                                _c("option", { domProps: { value: 1 } }, [
-                                  _vm._v("YES"),
-                                ]),
-                                _vm._v(" "),
-                                _c("option", { domProps: { value: 0 } }, [
-                                  _vm._v("NO"),
-                                ]),
-                              ]
-                            ),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "PSA Birth Certificate No.",
-                              type: this.errors.psa_birth_no ? "is-danger" : "",
-                              message: this.errors.psa_birth_no
-                                ? this.errors.psa_birth_no[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c("b-input", {
-                              attrs: {
-                                icon: "account",
-                                placeholder: "PSA Certificate No.",
-                                type: "text",
-                              },
-                              model: {
-                                value: _vm.fields.psa_birth_no,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "psa_birth_no", $$v)
-                                },
-                                expression: "fields.psa_birth_no",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "LRN",
-                              type: this.errors.lrn ? "is-danger" : "",
-                              message: this.errors.lrn
-                                ? this.errors.lrn[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c("b-input", {
-                              attrs: {
-                                icon: "account",
-                                placeholder: "LRN",
-                                type: "text",
-                              },
-                              model: {
-                                value: _vm.fields.lrn,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "lrn", $$v)
-                                },
-                                expression: "fields.lrn",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Last Name",
-                              type: this.errors.lname ? "is-danger" : "",
-                              message: this.errors.lname
-                                ? this.errors.lname[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c("b-input", {
-                              attrs: {
-                                icon: "account",
-                                placeholder: "Last Name",
-                                type: "text",
-                                required: "",
-                              },
-                              model: {
-                                value: _vm.fields.lname,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "lname", $$v)
-                                },
-                                expression: "fields.lname",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "First Name",
-                              type: this.errors.fname ? "is-danger" : "",
-                              message: this.errors.fname
-                                ? this.errors.fname[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c("b-input", {
-                              attrs: {
-                                icon: "account",
-                                placeholder: "First Name",
-                                type: "text",
-                                required: "",
-                              },
-                              model: {
-                                value: _vm.fields.fname,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "fname", $$v)
-                                },
-                                expression: "fields.fname",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          { attrs: { label: "Middle Name" } },
-                          [
-                            _c("b-input", {
-                              attrs: {
-                                type: "text",
-                                placeholder: "Middle Name",
-                              },
-                              model: {
-                                value: _vm.fields.mname,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "mname", $$v)
-                                },
-                                expression: "fields.mname",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          { attrs: { label: "Extension (Jr, III, Sr.)" } },
-                          [
-                            _c("b-input", {
-                              attrs: {
-                                type: "text",
-                                placeholder: "Extension (Jr, III, Sr.)",
-                              },
-                              model: {
-                                value: _vm.fields.extension,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "extension", $$v)
-                                },
-                                expression: "fields.extension",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Sex",
-                              expanded: "",
-                              type: this.errors.sex ? "is-danger" : "",
-                              message: this.errors.sex
-                                ? this.errors.sex[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c(
-                              "b-select",
-                              {
-                                attrs: {
-                                  placeholder: "Sex",
-                                  icon: "account",
-                                  required: "",
-                                  expanded: "",
-                                },
-                                model: {
-                                  value: _vm.fields.sex,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "sex", $$v)
-                                  },
-                                  expression: "fields.sex",
-                                },
-                              },
-                              [
-                                _c("option", { attrs: { value: "MALE" } }, [
-                                  _vm._v("MALE"),
-                                ]),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "FEMALE" } }, [
-                                  _vm._v("FEMALE"),
-                                ]),
-                              ]
-                            ),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Birthdate",
-                              type: this.errors.birthdate ? "is-danger" : "",
-                              message: this.errors.birthdate
-                                ? this.errors.birthdate[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c("b-datepicker", {
-                              attrs: { placeholder: "Birthdate", required: "" },
-                              model: {
-                                value: _vm.fields.birthdate,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "birthdate", $$v)
-                                },
-                                expression: "fields.birthdate",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Birthplace",
-                              type: this.errors.birthplace ? "is-danger" : "",
-                              message: this.errors.birthplace
-                                ? this.errors.birthplace[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c("b-input", {
-                              attrs: {
-                                type: "text",
-                                placeholder: "Birthplace",
-                              },
-                              model: {
-                                value: _vm.fields.birthplace,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "birthplace", $$v)
-                                },
-                                expression: "fields.birthplace",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column is-2" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Age",
-                              type: this.errors.age ? "is-danger" : "",
-                              message: this.errors.age
-                                ? this.errors.age[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c("b-input", {
-                              attrs: {
-                                type: "number",
-                                max: "120",
-                                placeholder: "Age",
-                              },
-                              model: {
-                                value: _vm.fields.age,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "age", $$v)
-                                },
-                                expression: "fields.age",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Mother Tongue",
-                              type: this.errors.mother_tongue
-                                ? "is-danger"
-                                : "",
-                              message: this.errors.mother_tongue
-                                ? this.errors.mother_tongue[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c("b-input", {
-                              attrs: {
-                                type: "text",
-                                placeholder: "Mother Tongue",
-                              },
-                              model: {
-                                value: _vm.fields.mother_tongue,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "mother_tongue", $$v)
-                                },
-                                expression: "fields.mother_tongue",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Belong in Indigenous Peoples?",
-                              type: this.errors.is_indigenous
-                                ? "is-danger"
-                                : "",
-                              message: this.errors.is_indigenous
-                                ? this.errors.is_indigenous[0]
-                                : "",
-                              expanded: "",
-                            },
-                          },
-                          [
-                            _c(
-                              "b-select",
-                              {
-                                attrs: {
-                                  placeholder: "Belong in Indigenous Peoples?",
-                                  expanded: "",
-                                },
-                                model: {
-                                  value: _vm.fields.is_indigenous,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "is_indigenous", $$v)
-                                  },
-                                  expression: "fields.is_indigenous",
-                                },
-                              },
-                              [
-                                _c("option", { domProps: { value: 1 } }, [
-                                  _vm._v("YES"),
-                                ]),
-                                _vm._v(" "),
-                                _c("option", { domProps: { value: 0 } }, [
-                                  _vm._v("NO"),
-                                ]),
-                              ]
-                            ),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _vm.fields.is_indigenous == 1
-                      ? _c(
-                          "div",
-                          { staticClass: "column" },
-                          [
-                            _c(
-                              "b-field",
-                              {
-                                attrs: {
-                                  label: "If YES, Please specify",
-                                  type: this.errors.if_yes_indigenous
-                                    ? "is-danger"
-                                    : "",
-                                  message: this.errors.if_yes_indigenous
-                                    ? this.errors.if_yes_indigenous[0]
-                                    : "",
-                                },
-                              },
-                              [
-                                _c("b-input", {
-                                  attrs: {
-                                    type: "text",
-                                    placeholder: "If YES, Please specify",
-                                  },
-                                  model: {
-                                    value: _vm.fields.if_yes_indigenous,
-                                    callback: function ($$v) {
-                                      _vm.$set(
-                                        _vm.fields,
-                                        "if_yes_indigenous",
-                                        $$v
-                                      )
-                                    },
-                                    expression: "fields.if_yes_indigenous",
-                                  },
-                                }),
-                              ],
-                              1
-                            ),
-                          ],
-                          1
-                        )
-                      : _vm._e(),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Beneficiary of 4Ps?",
-                              type: this.errors.is_4ps ? "is-danger" : "",
-                              message: this.errors.is_4ps
-                                ? this.errors.is_4ps[0]
-                                : "",
-                              expanded: "",
-                            },
-                          },
-                          [
-                            _c(
-                              "b-select",
-                              {
-                                attrs: {
-                                  placeholder: "Beneficiary of 4Ps?",
-                                  expanded: "",
-                                },
-                                model: {
-                                  value: _vm.fields.is_4ps,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "is_4ps", $$v)
-                                  },
-                                  expression: "fields.is_4ps",
-                                },
-                              },
-                              [
-                                _c("option", { attrs: { value: "1" } }, [
-                                  _vm._v("YES"),
-                                ]),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "0" } }, [
-                                  _vm._v("NO"),
-                                ]),
-                              ]
-                            ),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _vm.fields.is_4ps == 1
-                      ? _c(
-                          "div",
-                          { staticClass: "column" },
-                          [
-                            _c(
-                              "b-field",
-                              {
-                                attrs: {
-                                  label:
-                                    "If YES, Please input 4Ps Household Id No.",
-                                  type: this.errors.household_4ps_id_no
-                                    ? "is-danger"
-                                    : "",
-                                  message: this.errors.household_4ps_id_no
-                                    ? this.errors.household_4ps_id_no[0]
-                                    : "",
-                                },
-                              },
-                              [
-                                _c("b-input", {
-                                  attrs: {
-                                    type: "text",
-                                    placeholder: "4Ps Household Id No.",
-                                  },
-                                  model: {
-                                    value: _vm.fields.household_4ps_id_no,
-                                    callback: function ($$v) {
-                                      _vm.$set(
-                                        _vm.fields,
-                                        "household_4ps_id_no",
-                                        $$v
-                                      )
-                                    },
-                                    expression: "fields.household_4ps_id_no",
-                                  },
-                                }),
-                              ],
-                              1
-                            ),
-                          ],
-                          1
-                        )
-                      : _vm._e(),
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Province",
-                              expanded: "",
-                              type: this.errors.current_province
-                                ? "is-danger"
-                                : "",
-                              message: this.errors.current_province
-                                ? this.errors.current_province[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c(
-                              "b-select",
-                              {
-                                attrs: {
-                                  expanded: "",
-                                  placeholder: "Province",
-                                },
-                                on: { input: _vm.loadCurrentCity },
-                                model: {
-                                  value: _vm.fields.current_province,
-                                  callback: function ($$v) {
-                                    _vm.$set(
-                                      _vm.fields,
-                                      "current_province",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "fields.current_province",
-                                },
-                              },
-                              _vm._l(
-                                _vm.current_provinces,
-                                function (item, index) {
-                                  return _c(
-                                    "option",
-                                    {
-                                      key: index,
-                                      domProps: { value: item.provCode },
-                                    },
-                                    [_vm._v(_vm._s(item.provDesc))]
-                                  )
-                                }
-                              ),
-                              0
-                            ),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "City/Municipality",
-                              expanded: "",
-                              type: this.errors.current_city ? "is-danger" : "",
-                              message: this.errors.current_city
-                                ? this.errors.current_city[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c(
-                              "b-select",
-                              {
-                                attrs: { expanded: "", placeholder: "City" },
-                                on: { input: _vm.loadCurrentBarangay },
-                                model: {
-                                  value: _vm.fields.current_city,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "current_city", $$v)
-                                  },
-                                  expression: "fields.current_city",
-                                },
-                              },
-                              _vm._l(
-                                _vm.current_cities,
-                                function (item, index) {
-                                  return _c(
-                                    "option",
-                                    {
-                                      key: index,
-                                      domProps: { value: item.citymunCode },
-                                    },
-                                    [_vm._v(_vm._s(item.citymunDesc))]
-                                  )
-                                }
-                              ),
-                              0
-                            ),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Barangay",
-                              expanded: "",
-                              type: this.errors.current_barangay
-                                ? "is-danger"
-                                : "",
-                              message: this.errors.current_barangay
-                                ? this.errors.current_barangay[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c(
-                              "b-select",
-                              {
-                                attrs: {
-                                  expanded: "",
-                                  placeholder: "Barangay",
-                                },
-                                model: {
-                                  value: _vm.fields.current_barangay,
-                                  callback: function ($$v) {
-                                    _vm.$set(
-                                      _vm.fields,
-                                      "current_barangay",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "fields.current_barangay",
-                                },
-                              },
-                              _vm._l(
-                                _vm.current_barangays,
-                                function (item, index) {
-                                  return _c(
-                                    "option",
-                                    {
-                                      key: index,
-                                      domProps: { value: item.brgyCode },
-                                    },
-                                    [_vm._v(_vm._s(item.brgyDesc))]
-                                  )
-                                }
-                              ),
-                              0
-                            ),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          { attrs: { label: "House #. Street" } },
-                          [
-                            _c("b-input", {
-                              attrs: {
-                                type: "text",
-                                placeholder: "House #. Street",
-                              },
-                              model: {
-                                value: _vm.fields.current_street,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "current_street", $$v)
-                                },
-                                expression: "fields.current_street",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Zip Code",
-                              type: this.errors.current_zipcode
-                                ? "is-danger"
-                                : "",
-                              message: this.errors.current_zipcode
-                                ? this.errors.current_zipcode[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c("b-input", {
-                              attrs: { type: "text", placeholder: "Zip Code" },
-                              model: {
-                                value: _vm.fields.current_zipcode,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "current_zipcode", $$v)
-                                },
-                                expression: "fields.current_zipcode",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(1),
-                  _vm._v(" "),
+              _c("div", { staticClass: "panel-body" }, [
+                _c("div", { staticClass: "divider" }, [_vm._v("ACCOUNT")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "columns" }, [
                   _c(
                     "div",
-                    { staticClass: "buttons mt-5" },
+                    { staticClass: "column" },
                     [
                       _c(
-                        "b-button",
+                        "b-field",
                         {
-                          staticClass: "is-info is-small",
-                          attrs: { "icon-left": "home" },
-                          on: { click: _vm.copyCurrentAddress },
+                          attrs: {
+                            label: "Username",
+                            type: _vm.errors.username ? "is-danger" : "",
+                            message: _vm.errors.username
+                              ? _vm.errors.username[0]
+                              : "",
+                          },
                         },
-                        [_vm._v("Same as current address")]
+                        [
+                          _c("b-input", {
+                            attrs: {
+                              type: "text",
+                              placeholder: "Username",
+                              icon: "account",
+                              required: "",
+                            },
+                            model: {
+                              value: _vm.fields.username,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.fields, "username", $$v)
+                              },
+                              expression: "fields.username",
+                            },
+                          }),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "columns" }, [
+                  _c(
+                    "div",
+                    { staticClass: "column" },
+                    [
+                      _c(
+                        "b-field",
+                        {
+                          attrs: {
+                            label: "Password",
+                            type: _vm.errors.password ? "is-danger" : "",
+                            message: _vm.errors.password
+                              ? _vm.errors.password[0]
+                              : "",
+                          },
+                        },
+                        [
+                          _c("b-input", {
+                            attrs: {
+                              type: "password",
+                              placeholder: "Password",
+                              icon: "lock",
+                              "password-reveal": "",
+                              required: "",
+                            },
+                            model: {
+                              value: _vm.fields.password,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.fields, "password", $$v)
+                              },
+                              expression: "fields.password",
+                            },
+                          }),
+                        ],
+                        1
                       ),
                     ],
                     1
                   ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Province",
-                              expanded: "",
-                              type: this.errors.permanent_province
-                                ? "is-danger"
-                                : "",
-                              message: this.errors.permanent_province
-                                ? this.errors.permanent_province[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c(
-                              "b-select",
-                              {
-                                attrs: {
-                                  expanded: "",
-                                  placeholder: "Province",
-                                },
-                                on: { input: _vm.loadPermanentCity },
-                                model: {
-                                  value: _vm.fields.permanent_province,
-                                  callback: function ($$v) {
-                                    _vm.$set(
-                                      _vm.fields,
-                                      "permanent_province",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "fields.permanent_province",
-                                },
-                              },
-                              _vm._l(
-                                _vm.permanent_provinces,
-                                function (item, index) {
-                                  return _c(
-                                    "option",
-                                    {
-                                      key: index,
-                                      domProps: { value: item.provCode },
-                                    },
-                                    [_vm._v(_vm._s(item.provDesc))]
-                                  )
-                                }
-                              ),
-                              0
-                            ),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "City/Municipality",
-                              expanded: "",
-                              type: this.errors.permanent_city
-                                ? "is-danger"
-                                : "",
-                              message: this.errors.permanent_city
-                                ? this.errors.permanent_city[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c(
-                              "b-select",
-                              {
-                                attrs: { expanded: "", placeholder: "City" },
-                                on: { input: _vm.loadPermanentBarangay },
-                                model: {
-                                  value: _vm.fields.permanent_city,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "permanent_city", $$v)
-                                  },
-                                  expression: "fields.permanent_city",
-                                },
-                              },
-                              _vm._l(
-                                _vm.permanent_cities,
-                                function (item, index) {
-                                  return _c(
-                                    "option",
-                                    {
-                                      key: index,
-                                      domProps: { value: item.citymunCode },
-                                    },
-                                    [_vm._v(_vm._s(item.citymunDesc))]
-                                  )
-                                }
-                              ),
-                              0
-                            ),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Barangay",
-                              expanded: "",
-                              type: this.errors.permanent_barangay
-                                ? "is-danger"
-                                : "",
-                              message: this.errors.permanent_barangay
-                                ? this.errors.permanent_barangay[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c(
-                              "b-select",
-                              {
-                                attrs: {
-                                  expanded: "",
-                                  placeholder: "Barangay",
-                                },
-                                model: {
-                                  value: _vm.fields.permanent_barangay,
-                                  callback: function ($$v) {
-                                    _vm.$set(
-                                      _vm.fields,
-                                      "permanent_barangay",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "fields.permanent_barangay",
-                                },
-                              },
-                              _vm._l(
-                                _vm.permanent_barangays,
-                                function (item, index) {
-                                  return _c(
-                                    "option",
-                                    {
-                                      key: index,
-                                      domProps: { value: item.brgyCode },
-                                    },
-                                    [_vm._v(_vm._s(item.brgyDesc))]
-                                  )
-                                }
-                              ),
-                              0
-                            ),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          { attrs: { label: "House #. Street" } },
-                          [
-                            _c("b-input", {
-                              attrs: {
-                                type: "text",
-                                placeholder: "House #. Street",
-                              },
-                              model: {
-                                value: _vm.fields.permanent_street,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "permanent_street", $$v)
-                                },
-                                expression: "fields.permanent_street",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Zip Code",
-                              type: this.errors.permanent_zipcode
-                                ? "is-danger"
-                                : "",
-                              message: this.errors.permanent_zipcode
-                                ? this.errors.permanent_zipcode[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c("b-input", {
-                              attrs: { type: "text", placeholder: "Zip Code" },
-                              model: {
-                                value: _vm.fields.permanent_zipcode,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "permanent_zipcode", $$v)
-                                },
-                                expression: "fields.permanent_zipcode",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "divider" }, [
-                    _vm._v("PARENTS/GUARDIANS INFORMATION"),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Father Last Name",
-                              type: this.errors.father_lname ? "is-danger" : "",
-                              message: this.errors.father_lname
-                                ? this.errors.father_lname[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c("b-input", {
-                              attrs: {
-                                icon: "account",
-                                placeholder: "Father Last Name",
-                                type: "text",
-                              },
-                              model: {
-                                value: _vm.fields.father_lname,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "father_lname", $$v)
-                                },
-                                expression: "fields.father_lname",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Father First Name",
-                              type: this.errors.father_fname ? "is-danger" : "",
-                              message: this.errors.father_fname
-                                ? this.errors.father_fname[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c("b-input", {
-                              attrs: {
-                                icon: "account",
-                                placeholder: "Father First Name",
-                                type: "text",
-                              },
-                              model: {
-                                value: _vm.fields.father_fname,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "father_fname", $$v)
-                                },
-                                expression: "fields.father_fname",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          { attrs: { label: "Father Middle Name" } },
-                          [
-                            _c("b-input", {
-                              attrs: {
-                                icon: "account",
-                                type: "text",
-                                placeholder: "Father Middle Name",
-                              },
-                              model: {
-                                value: _vm.fields.father_mname,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "father_mname", $$v)
-                                },
-                                expression: "fields.father_mname",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          { attrs: { label: "Father Extension" } },
-                          [
-                            _c("b-input", {
-                              attrs: {
-                                icon: "account",
-                                type: "text",
-                                placeholder: "Father Extension",
-                              },
-                              model: {
-                                value: _vm.fields.father_extension,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "father_extension", $$v)
-                                },
-                                expression: "fields.father_extension",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Father Contact No.",
-                              type: this.errors.father_contact_no
-                                ? "is-danger"
-                                : "",
-                              message: this.errors.father_contact_no
-                                ? this.errors.father_contact_no[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c("b-input", {
-                              attrs: {
-                                type: "tel",
-                                icon: "cellphone",
-                                pattern: "^(09|\\+639)\\d{9}$",
-                                placeholder: "Format: 09101112222",
-                              },
-                              model: {
-                                value: _vm.fields.father_contact_no,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "father_contact_no", $$v)
-                                },
-                                expression: "fields.father_contact_no",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("hr"),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Mother Maiden Last Name",
-                              type: this.errors.mother_maiden_lname
-                                ? "is-danger"
-                                : "",
-                              message: this.errors.mother_maiden_lname
-                                ? this.errors.mother_maiden_lname[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c("b-input", {
-                              attrs: {
-                                icon: "account",
-                                placeholder: "Mother Maiden Last Name",
-                                type: "text",
-                              },
-                              model: {
-                                value: _vm.fields.mother_maiden_lname,
-                                callback: function ($$v) {
-                                  _vm.$set(
-                                    _vm.fields,
-                                    "mother_maiden_lname",
-                                    $$v
-                                  )
-                                },
-                                expression: "fields.mother_maiden_lname",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Mother Maiden First Name",
-                              type: this.errors.mother_maiden_fname
-                                ? "is-danger"
-                                : "",
-                              message: this.errors.mother_maiden_fname
-                                ? this.errors.mother_maiden_fname[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c("b-input", {
-                              attrs: {
-                                icon: "account",
-                                placeholder: "Mother Maiden First Name",
-                                type: "text",
-                              },
-                              model: {
-                                value: _vm.fields.mother_maiden_fname,
-                                callback: function ($$v) {
-                                  _vm.$set(
-                                    _vm.fields,
-                                    "mother_maiden_fname",
-                                    $$v
-                                  )
-                                },
-                                expression: "fields.mother_maiden_fname",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Mother Maiden Middle Name",
-                              type: this.errors.mother_maiden_mname
-                                ? "is-danger"
-                                : "",
-                              message: this.errors.mother_maiden_mname
-                                ? this.errors.mother_maiden_mname[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c("b-input", {
-                              attrs: {
-                                type: "text",
-                                icon: "account",
-                                placeholder: "Mother Maiden Middle Name",
-                              },
-                              model: {
-                                value: _vm.fields.mother_maiden_mname,
-                                callback: function ($$v) {
-                                  _vm.$set(
-                                    _vm.fields,
-                                    "mother_maiden_mname",
-                                    $$v
-                                  )
-                                },
-                                expression: "fields.mother_maiden_mname",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          { attrs: { label: "Mother Maiden Contact No." } },
-                          [
-                            _c("b-input", {
-                              attrs: {
-                                type: "tel",
-                                pattern: "^(09|\\+639)\\d{9}$",
-                                placeholder: "Format: 09101112222",
-                              },
-                              model: {
-                                value: _vm.fields.mother_maiden_contact_no,
-                                callback: function ($$v) {
-                                  _vm.$set(
-                                    _vm.fields,
-                                    "mother_maiden_contact_no",
-                                    $$v
-                                  )
-                                },
-                                expression: "fields.mother_maiden_contact_no",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("hr"),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Guardian Last Name",
-                              type: this.errors.guardian_lname
-                                ? "is-danger"
-                                : "",
-                              message: this.errors.guardian_lname
-                                ? this.errors.guardian_lname[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c("b-input", {
-                              attrs: {
-                                icon: "account",
-                                placeholder: "Guardian Last Name",
-                                type: "text",
-                              },
-                              model: {
-                                value: _vm.fields.guardian_lname,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "guardian_lname", $$v)
-                                },
-                                expression: "fields.guardian_lname",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Guardian First Name",
-                              type: this.errors.guardian_fname
-                                ? "is-danger"
-                                : "",
-                              message: this.errors.guardian_fname
-                                ? this.errors.guardian_fname[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c("b-input", {
-                              attrs: {
-                                icon: "account",
-                                placeholder: "Guardian First Name",
-                                type: "text",
-                              },
-                              model: {
-                                value: _vm.fields.guardian_fname,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "guardian_fname", $$v)
-                                },
-                                expression: "fields.guardian_fname",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          { attrs: { label: "Guardian Middle Name" } },
-                          [
-                            _c("b-input", {
-                              attrs: {
-                                icon: "account",
-                                type: "text",
-                                placeholder: "Guardian Middle Name",
-                              },
-                              model: {
-                                value: _vm.fields.guardian_mname,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "guardian_mname", $$v)
-                                },
-                                expression: "fields.guardian_mname",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          { attrs: { label: "Guardian Extension" } },
-                          [
-                            _c("b-input", {
-                              attrs: {
-                                icon: "account",
-                                type: "text",
-                                placeholder: "Guardian Extension",
-                              },
-                              model: {
-                                value: _vm.fields.guardian_extension,
-                                callback: function ($$v) {
-                                  _vm.$set(
-                                    _vm.fields,
-                                    "guardian_extension",
-                                    $$v
-                                  )
-                                },
-                                expression: "fields.guardian_extension",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Guardian Contact No.",
-                              type: this.errors.guardian_contact_no
-                                ? "is-danger"
-                                : "",
-                              message: this.errors.guardian_contact_no
-                                ? this.errors.guardian_contact_no[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c("b-input", {
-                              attrs: {
-                                type: "text",
-                                icon: "cellphone",
-                                required: "",
-                                placeholder: "Guardian Contact No.",
-                              },
-                              model: {
-                                value: _vm.fields.guardian_contact_no,
-                                callback: function ($$v) {
-                                  _vm.$set(
-                                    _vm.fields,
-                                    "guardian_contact_no",
-                                    $$v
-                                  )
-                                },
-                                expression: "fields.guardian_contact_no",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "divider" }, [
-                    _vm._v(
-                      "RETURNING LEARNER (BALIK-ARAL) / TRANSFER / MOVE IN"
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Last Grade Level Completed",
-                              type: this.errors.last_grade_level_completed
-                                ? "is-danger"
-                                : "",
-                              message: this.errors.last_grade_level_completed
-                                ? this.errors.last_grade_level_completed[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c("b-input", {
-                              attrs: {
-                                icon: "account",
-                                type: "text",
-                                placeholder: "Last Grade Level Completed",
-                              },
-                              model: {
-                                value: _vm.fields.last_grade_level_completed,
-                                callback: function ($$v) {
-                                  _vm.$set(
-                                    _vm.fields,
-                                    "last_grade_level_completed",
-                                    $$v
-                                  )
-                                },
-                                expression: "fields.last_grade_level_completed",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Last School Year Completed",
-                              type: this.errors.last_school_year_completed
-                                ? "is-danger"
-                                : "",
-                              message: this.errors.last_school_year_completed
-                                ? this.errors.last_school_year_completed[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c("b-input", {
-                              attrs: {
-                                icon: "calendar",
-                                type: "text",
-                                placeholder: "Last School Year Completed",
-                              },
-                              model: {
-                                value: _vm.fields.last_school_year_completed,
-                                callback: function ($$v) {
-                                  _vm.$set(
-                                    _vm.fields,
-                                    "last_school_year_completed",
-                                    $$v
-                                  )
-                                },
-                                expression: "fields.last_school_year_completed",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Last School Attended",
-                              type: this.errors.last_school_attended
-                                ? "is-danger"
-                                : "",
-                              message: this.errors.last_school_attended
-                                ? this.errors.last_school_attended[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c("b-input", {
-                              attrs: {
-                                icon: "account",
-                                type: "text",
-                                placeholder: "Last School Attended",
-                              },
-                              model: {
-                                value: _vm.fields.last_school_attended,
-                                callback: function ($$v) {
-                                  _vm.$set(
-                                    _vm.fields,
-                                    "last_school_attended",
-                                    $$v
-                                  )
-                                },
-                                expression: "fields.last_school_attended",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "School Id",
-                              type: this.errors.last_schoold_id
-                                ? "is-danger"
-                                : "",
-                              message: this.errors.last_schoold_id
-                                ? this.errors.last_schoold_id[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c("b-input", {
-                              attrs: {
-                                icon: "account",
-                                type: "text",
-                                placeholder: "School Id",
-                              },
-                              model: {
-                                value: _vm.fields.last_schoold_id,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "last_schoold_id", $$v)
-                                },
-                                expression: "fields.last_schoold_id",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "divider" }, [
-                    _vm._v("FOR LEARNERS IN SENIOR HIGH SCHOOL"),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Semester",
-                              expanded: "",
-                              type: this.errors.semester_id ? "is-danger" : "",
-                              message: this.errors.semester_id
-                                ? this.errors.semester_id[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c(
-                              "b-select",
-                              {
-                                attrs: {
-                                  expanded: "",
-                                  icon: "account",
-                                  placeholder: "Semester",
-                                },
-                                model: {
-                                  value: _vm.fields.semester_id,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "semester_id", $$v)
-                                  },
-                                  expression: "fields.semester_id",
-                                },
-                              },
-                              _vm._l(_vm.semesters, function (item, ix) {
-                                return _c(
-                                  "option",
-                                  {
-                                    key: ix,
-                                    domProps: { value: item.semester_id },
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                                " +
-                                        _vm._s(item.semester) +
-                                        "\n                                            "
-                                    ),
-                                  ]
-                                )
-                              }),
-                              0
-                            ),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "School Id",
-                              type: this.errors.senior_high_school_id
-                                ? "is-danger"
-                                : "",
-                              message: this.errors.senior_high_school_id
-                                ? this.errors.senior_high_school_id[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c("b-input", {
-                              attrs: {
-                                icon: "account",
-                                type: "text",
-                                placeholder: "School Id",
-                              },
-                              model: {
-                                value: _vm.fields.senior_high_school_id,
-                                callback: function ($$v) {
-                                  _vm.$set(
-                                    _vm.fields,
-                                    "senior_high_school_id",
-                                    $$v
-                                  )
-                                },
-                                expression: "fields.senior_high_school_id",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Track",
-                              type: this.errors.track_id ? "is-danger" : "",
-                              message: this.errors.track_id
-                                ? this.errors.track_id[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c(
-                              "b-select",
-                              {
-                                attrs: {
-                                  expanded: "",
-                                  icon: "account",
-                                  placeholder: "Track",
-                                },
-                                on: { input: _vm.loadStrands },
-                                model: {
-                                  value: _vm.fields.track_id,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "track_id", $$v)
-                                  },
-                                  expression: "fields.track_id",
-                                },
-                              },
-                              _vm._l(_vm.tracks, function (item, ix) {
-                                return _c(
-                                  "option",
-                                  {
-                                    key: "track" + ix,
-                                    domProps: { value: item.track_id },
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                                " +
-                                        _vm._s(item.track) +
-                                        "\n                                            "
-                                    ),
-                                  ]
-                                )
-                              }),
-                              0
-                            ),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Strand",
-                              type: this.errors.strand_id ? "is-danger" : "",
-                              message: this.errors.strand_id
-                                ? this.errors.strand_id[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c(
-                              "b-select",
-                              {
-                                attrs: {
-                                  expanded: "",
-                                  icon: "account",
-                                  placeholder: "Strand",
-                                },
-                                model: {
-                                  value: _vm.fields.strand_id,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "strand_id", $$v)
-                                  },
-                                  expression: "fields.strand_id",
-                                },
-                              },
-                              _vm._l(_vm.strands, function (item, ix) {
-                                return _c(
-                                  "option",
-                                  {
-                                    key: "strand" + ix,
-                                    domProps: { value: item.strand_id },
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                                " +
-                                        _vm._s(item.strand) +
-                                        "\n                                            "
-                                    ),
-                                  ]
-                                )
-                              }),
-                              0
-                            ),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("hr"),
-                  _vm._v(" "),
-                  _c("p", { staticStyle: { "text-indent": "50px" } }, [
-                    _vm._v(
-                      "\n                                    I hereby certify that the above information given are true and correct to the best of my knowledge and I allow\n                                    Department of Education to use my child's details to create and/or update his/her learner profile in the Learner Information Sysmte.    \n                                    The information herein shall be treated as confidential in compliance with the Data Privacy Act of 2012.\n                                "
-                    ),
-                  ]),
-                  _vm._v(" "),
                   _c(
-                    "b-checkbox",
-                    {
-                      staticClass: "mt-2",
-                      attrs: { "true-value": 1, "false-value": 0 },
-                      model: {
-                        value: _vm.fields.accept_terms,
-                        callback: function ($$v) {
-                          _vm.$set(_vm.fields, "accept_terms", $$v)
-                        },
-                        expression: "fields.accept_terms",
-                      },
-                    },
+                    "div",
+                    { staticClass: "column" },
                     [
-                      _vm._v(
-                        "\n                                    Accept\n                                "
+                      _c(
+                        "b-field",
+                        { attrs: { label: "Re-type Password" } },
+                        [
+                          _c("b-input", {
+                            attrs: {
+                              type: "password",
+                              icon: "lock",
+                              placeholder: "Re-type Password",
+                              "password-reveal": "",
+                              required: "",
+                            },
+                            model: {
+                              value: _vm.fields.password_confirmation,
+                              callback: function ($$v) {
+                                _vm.$set(
+                                  _vm.fields,
+                                  "password_confirmation",
+                                  $$v
+                                )
+                              },
+                              expression: "fields.password_confirmation",
+                            },
+                          }),
+                        ],
+                        1
                       ),
-                    ]
+                    ],
+                    1
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "columns" }, [
+                  _c(
+                    "div",
+                    { staticClass: "column" },
+                    [
+                      _c(
+                        "b-field",
+                        {
+                          attrs: {
+                            label: "E-mail",
+                            type: _vm.errors.email ? "is-danger" : "",
+                            message: _vm.errors.email
+                              ? _vm.errors.email[0]
+                              : "",
+                          },
+                        },
+                        [
+                          _c("b-input", {
+                            attrs: {
+                              type: "email",
+                              placeholder: "E-mail",
+                              icon: "email",
+                              required: "",
+                            },
+                            model: {
+                              value: _vm.fields.email,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.fields, "email", $$v)
+                              },
+                              expression: "fields.email",
+                            },
+                          }),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
                   ),
                   _vm._v(" "),
-                  _c("hr"),
+                  _c(
+                    "div",
+                    { staticClass: "column" },
+                    [
+                      _c(
+                        "b-field",
+                        {
+                          attrs: {
+                            label: "Contact No.",
+                            type: _vm.errors.contact_no ? "is-danger" : "",
+                            message: _vm.errors.contact_no
+                              ? _vm.errors.contact_no[0]
+                              : "",
+                          },
+                        },
+                        [
+                          _c("b-input", {
+                            attrs: {
+                              type: "tel",
+                              pattern: "^(09|\\+639)\\d{9}$",
+                              placeholder: "Format: 09191112222",
+                              icon: "",
+                            },
+                            model: {
+                              value: _vm.fields.contact_no,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.fields, "contact_no", $$v)
+                              },
+                              expression: "fields.contact_no",
+                            },
+                          }),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "columns" }, [
+                  _c(
+                    "div",
+                    { staticClass: "column" },
+                    [
+                      _c(
+                        "b-field",
+                        {
+                          attrs: {
+                            label: "Last Name",
+                            type: _vm.errors.lname ? "is-danger" : "",
+                            message: _vm.errors.lname
+                              ? _vm.errors.lname[0]
+                              : "",
+                          },
+                        },
+                        [
+                          _c("b-input", {
+                            attrs: {
+                              icon: "account",
+                              placeholder: "Last Name",
+                              type: "text",
+                              required: "",
+                            },
+                            model: {
+                              value: _vm.fields.lname,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.fields, "lname", $$v)
+                              },
+                              expression: "fields.lname",
+                            },
+                          }),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "buttons is-right" }, [
-                    _c(
-                      "button",
-                      {
-                        class: _vm.btnClass,
-                        attrs: { disabled: !_vm.fields.accept_terms },
-                      },
-                      [_vm._v("Register")]
-                    ),
-                  ]),
-                ],
-                1
-              ),
+                  _c(
+                    "div",
+                    { staticClass: "column" },
+                    [
+                      _c(
+                        "b-field",
+                        {
+                          attrs: {
+                            label: "First Name",
+                            type: _vm.errors.fname ? "is-danger" : "",
+                            message: _vm.errors.fname
+                              ? _vm.errors.fname[0]
+                              : "",
+                          },
+                        },
+                        [
+                          _c("b-input", {
+                            attrs: {
+                              icon: "account",
+                              placeholder: "First Name",
+                              type: "text",
+                              required: "",
+                            },
+                            model: {
+                              value: _vm.fields.fname,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.fields, "fname", $$v)
+                              },
+                              expression: "fields.fname",
+                            },
+                          }),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "columns" }, [
+                  _c(
+                    "div",
+                    { staticClass: "column" },
+                    [
+                      _c(
+                        "b-field",
+                        { attrs: { label: "Middle Name" } },
+                        [
+                          _c("b-input", {
+                            attrs: { type: "text", placeholder: "Middle Name" },
+                            model: {
+                              value: _vm.fields.mname,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.fields, "mname", $$v)
+                              },
+                              expression: "fields.mname",
+                            },
+                          }),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "column" },
+                    [
+                      _c(
+                        "b-field",
+                        { attrs: { label: "Extension (Jr, III, Sr.)" } },
+                        [
+                          _c("b-input", {
+                            attrs: {
+                              type: "text",
+                              placeholder: "Extension (Jr, III, Sr.)",
+                            },
+                            model: {
+                              value: _vm.fields.suffix,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.fields, "suffix", $$v)
+                              },
+                              expression: "fields.suffix",
+                            },
+                          }),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "column" },
+                    [
+                      _c(
+                        "b-field",
+                        {
+                          attrs: {
+                            label: "Sex",
+                            expanded: "",
+                            type: _vm.errors.sex ? "is-danger" : "",
+                            message: _vm.errors.sex ? _vm.errors.sex[0] : "",
+                          },
+                        },
+                        [
+                          _c(
+                            "b-select",
+                            {
+                              attrs: {
+                                placeholder: "Sex",
+                                icon: "account",
+                                required: "",
+                                expanded: "",
+                              },
+                              model: {
+                                value: _vm.fields.sex,
+                                callback: function ($$v) {
+                                  _vm.$set(_vm.fields, "sex", $$v)
+                                },
+                                expression: "fields.sex",
+                              },
+                            },
+                            [
+                              _c("option", { attrs: { value: "MALE" } }, [
+                                _vm._v("MALE"),
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "FEMALE" } }, [
+                                _vm._v("FEMALE"),
+                              ]),
+                            ]
+                          ),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c("div", { staticClass: "buttons is-right" }, [
+                  _c(
+                    "button",
+                    { staticClass: "button is-primary is-outlined" },
+                    [
+                      _vm._v(
+                        "\n                                SUBMIT INFORMATION\n                                 \n                                "
+                      ),
+                      _c("b-icon", { attrs: { icon: "arrow-right" } }),
+                    ],
+                    1
+                  ),
+                ]),
+              ]),
             ]),
           ]
         ),
@@ -55487,24 +53078,7 @@ var render = function () {
     ]),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mb-2" }, [
-      _c("h2", [_c("span", [_vm._v("Current Address")])]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mb-2" }, [
-      _c("h2", [_c("span", [_vm._v("Permanent Address")])]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

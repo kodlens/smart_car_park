@@ -25,50 +25,18 @@ class User extends Authenticatable
         'email',
         'contact_no',
 
-        'lrn',
         'lname', 
         'fname', 
         'mname', 
         'suffix', 
         'sex',
-        'bdate',
-        'age',
-        'birthplace',
-        'mother_tongue',
+        
 
-        'is_indigenous',
-        'if_yes_indigenous',
-        'is_4ps',
-        'household_4ps_id_no',
-
-        'current_province', 'current_city', 
-        'current_barangay', 'current_street',
-        'current_zipcode',
-
-        'permanent_province', 'permanent_city', 
-        'permanent_barangay', 'permanent_street',
-        'permanent_zipcode',
-
-        'father_lname',
-        'father_fname',
-        'father_mname',
-        'father_contact_no',
-
-        'mother_maiden_lname',
-        'mother_maiden_fname',
-        'mother_maiden_mname',
-        'mother_maiden_contact_no',
-
-        'guardian_lname',
-        'guardian_fname',
-        'guardian_mname',
-        'guardian_contact_no',
+        'province', 'city', 
+        'barangay', 'street',
+        'zipcode',
 
         'role',
-
-        'semester_id',
-        'strand_id',
-        'track_id'
 
     ];
 
