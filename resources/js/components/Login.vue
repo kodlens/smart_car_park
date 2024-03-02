@@ -33,6 +33,12 @@
                                         <b-icon class="ml-2" icon="login"></b-icon>
                                     </button>
                             </div>
+
+                            <div class="mb-2">
+                                <h2><span>
+                                    <a href="/registration">Register Here</a>
+                                </span></h2>
+                            </div>
                         </div>
                     </div>
                     

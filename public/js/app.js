@@ -9177,6 +9177,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -52301,6 +52307,8 @@ var render = function () {
                       1
                     ),
                   ]),
+                  _vm._v(" "),
+                  _vm._m(1),
                 ],
                 1
               ),
@@ -52318,6 +52326,20 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "column" }, [
       _c("img", { staticClass: "logo", attrs: { src: "/img/login-logo.png" } }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mb-2" }, [
+      _c("h2", [
+        _c("span", [
+          _c("a", { attrs: { href: "/registration" } }, [
+            _vm._v("Register Here"),
+          ]),
+        ]),
+      ]),
     ])
   },
 ]
