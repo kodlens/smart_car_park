@@ -53,7 +53,7 @@
                                             </button>
                                             <button class="button is-warning mb-2"
                                                 v-if="(park.parkReservation.enter_time !== null) && (park.parkReservation.user_id == user.user_id)"
-                                                @click="displayQr(index)">
+                                                @click="openModalExit(index)">
                                                 Exit Parking Space
                                             </button>
                                         </div>
@@ -162,8 +162,47 @@
                         <button
                             @click="loadParkingSpaces"
                             class="button is-primary">
-                                done
+                                Done
                                 <b-icon icon="arrow-right" class="ml-2"></b-icon>    
+                        </button>
+                    </footer>
+                </div>
+        </b-modal>
+
+        <b-modal v-model="confirmExit" has-modal-card
+                 trap-focus
+                 :width="640"
+                 aria-role="dialog"
+                 aria-label="Modal"
+                 aria-modal>
+                <div class="modal-card">
+                    <header class="modal-card-head">
+                        <p class="modal-card-title has-text-weight-bold is-size-5">Confirmation</p>
+                        <button
+                            type="button"
+                            class="delete"
+                            @click="loadParkingSpaces"/>
+                    </header>
+
+                    <section class="modal-card-body">
+                        <div class="">
+                            <div class="columns">
+                                <div class="column">
+                                    Are you sure you want to exit park?
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <footer class="modal-card-foot">
+                        <button
+                            @click="confirmExit = false"
+                            class="button is-secondary">
+                            No
+                        </button>
+                        <button
+                            @click="exitParking"
+                            class="button is-primary">
+                                Yes   
                         </button>
                     </footer>
                 </div>
@@ -189,6 +228,7 @@ export default {
 
             modalReserveMe: false,
             modalQR: false,
+            confirmExit: false,
             errors: {},
             fields: {
                 date_time_reserve_from: currentDate,
@@ -223,6 +263,18 @@ export default {
         openModalReserveMe(row){
             this.fields.row = row
             this.modalReserveMe = true
+        },
+        openModalExit(row){
+            this.fields.row = this.parkingSpaces[row].parkReservation.park_reservation_id;
+            this.confirmExit = true
+        },
+        exitParking(){
+            axios.post('/exit-park/'+this.fields.row).then(
+                res=>{
+                    this.confirmExit = false;
+                    this.loadParkingSpaces();
+                }
+            )
         },
         computeAmount(){
             var a = new Date(this.fields.date_time_reserve_to);

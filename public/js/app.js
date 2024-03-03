@@ -7769,6 +7769,45 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     var currentDate = new Date();
@@ -7779,6 +7818,7 @@ __webpack_require__.r(__webpack_exports__);
       user: [],
       modalReserveMe: false,
       modalQR: false,
+      confirmExit: false,
       errors: {},
       fields: {
         date_time_reserve_from: currentDate,
@@ -7809,6 +7849,19 @@ __webpack_require__.r(__webpack_exports__);
     openModalReserveMe: function openModalReserveMe(row) {
       this.fields.row = row;
       this.modalReserveMe = true;
+    },
+    openModalExit: function openModalExit(row) {
+      this.fields.row = this.parkingSpaces[row].parkReservation.park_reservation_id;
+      this.confirmExit = true;
+    },
+    exitParking: function exitParking() {
+      var _this3 = this;
+
+      axios.post('/exit-park/' + this.fields.row).then(function (res) {
+        _this3.confirmExit = false;
+
+        _this3.loadParkingSpaces();
+      });
     },
     computeAmount: function computeAmount() {
       var a = new Date(this.fields.date_time_reserve_to);
@@ -49606,7 +49659,7 @@ var render = function () {
                                               "button is-warning mb-2",
                                             on: {
                                               click: function ($event) {
-                                                return _vm.displayQr(index)
+                                                return _vm.openModalExit(index)
                                               },
                                             },
                                           },
@@ -49951,7 +50004,7 @@ var render = function () {
                 },
                 [
                   _vm._v(
-                    "\n                            done\n                            "
+                    "\n                            Done\n                            "
                   ),
                   _c("b-icon", {
                     staticClass: "ml-2",
@@ -49959,6 +50012,87 @@ var render = function () {
                   }),
                 ],
                 1
+              ),
+            ]),
+          ]),
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          attrs: {
+            "has-modal-card": "",
+            "trap-focus": "",
+            width: 640,
+            "aria-role": "dialog",
+            "aria-label": "Modal",
+            "aria-modal": "",
+          },
+          model: {
+            value: _vm.confirmExit,
+            callback: function ($$v) {
+              _vm.confirmExit = $$v
+            },
+            expression: "confirmExit",
+          },
+        },
+        [
+          _c("div", { staticClass: "modal-card" }, [
+            _c("header", { staticClass: "modal-card-head" }, [
+              _c(
+                "p",
+                {
+                  staticClass:
+                    "modal-card-title has-text-weight-bold is-size-5",
+                },
+                [_vm._v("Confirmation")]
+              ),
+              _vm._v(" "),
+              _c("button", {
+                staticClass: "delete",
+                attrs: { type: "button" },
+                on: { click: _vm.loadParkingSpaces },
+              }),
+            ]),
+            _vm._v(" "),
+            _c("section", { staticClass: "modal-card-body" }, [
+              _c("div", {}, [
+                _c("div", { staticClass: "columns" }, [
+                  _c("div", { staticClass: "column" }, [
+                    _vm._v(
+                      "\n                                Are you sure you want to exit park?\n                            "
+                    ),
+                  ]),
+                ]),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("footer", { staticClass: "modal-card-foot" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "button is-secondary",
+                  on: {
+                    click: function ($event) {
+                      _vm.confirmExit = false
+                    },
+                  },
+                },
+                [_vm._v("\n                        No\n                    ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "button is-primary",
+                  on: { click: _vm.exitParking },
+                },
+                [
+                  _vm._v(
+                    "\n                            Yes   \n                    "
+                  ),
+                ]
               ),
             ]),
           ]),

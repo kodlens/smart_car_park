@@ -117,5 +117,5 @@ Route::middleware(['auth', 'scanner'])->group(function(){
 });
 
 
-
+Route::post('/exit-park/{id}',[App\Http\Controllers\Scanner\ScannerHomeController::class,'exitPark']);
 Route::get('/test', [App\Http\Controllers\TestController::class, 'Test']);
