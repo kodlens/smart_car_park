@@ -8,23 +8,23 @@ use App\Models\ParkReservation;
 use Curl;
 use Auth;
 use DateTime;
-
+use App\Models\ParkPrice;
 
 class PaymongoController extends Controller
 {
 
 
     public function pay(Request $req){
-        
+
         //add fetch from db
-        $price = 20;
+        $price = ParkPrice::first();
 
         $port = request()->getPort();
         $hostWithPort = request()->getScheme() . '://'. request()->getHost() . ($port ? ':' . $port : '');
         //$fullUrl = request()->getScheme() . '://' . request()->getHost() . ':' . request()->getPort();
         $user = Auth::user();
         $hrs = round($req->hours);
-        $amount = ($hrs * $price)*100; 
+        $amount = ($hrs * $price->park_price)*100; 
         $parkName = "Parking Space No:".$req->park+1;
         $user_id = $req->user_id;
         $data = [
