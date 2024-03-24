@@ -20,11 +20,11 @@
                                 </b-field>
                             </div>
 
-                            <div class="column">
+                            <!-- <div class="column">
                                 <div class="buttons is-right mt-3">
                                     <b-button @click="openModal" icon-left="plus" class="is-primary is-small">NEW</b-button>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         
 
@@ -50,12 +50,12 @@
                                 {{ props.row.parking_fee_id }}
                             </b-table-column> -->
 
-                            <b-table-column field="parking_hour" centered label="Parking Hour" sortable v-slot="props">
-                                {{ props.row.parking_hour }}
+                            <b-table-column field="id" centered label="Id" sortable v-slot="props">
+                                {{ props.row.id }}
                             </b-table-column>
 
-                            <b-table-column field="lname" label="Parking Price" centered sortable v-slot="props">
-                                {{ props.row.parking_price }}
+                            <b-table-column field="park_price" label="Parking Price" centered sortable v-slot="props">
+                                {{ props.row.park_price }}
                             </b-table-column>
 
                             <b-table-column label="OPTIONS" v-slot="props">
@@ -64,12 +64,7 @@
                                         <b-button class="button is-small mr-1" 
                                             tag="a" 
                                             icon-right="pencil" 
-                                            @click="getData(props.row.parking_fee_id)"></b-button>
-                                    </b-tooltip>
-                                    <b-tooltip label="Delete" type="is-danger">
-                                        <b-button class="button is-small mr-1" 
-                                            icon-right="delete" 
-                                            @click="confirmDelete(props.row.parking_fee_id)"></b-button>
+                                            @click="getData(props.row.id)"></b-button>
                                     </b-tooltip>
                               
                                 </div>
@@ -120,24 +115,11 @@
                             <div class="columns">
                                 <div class="column">
                                     <b-field label="Parking Hour" label-position="on-border"
-                                             :type="this.errors.parking_hour ? 'is-danger':''"
-                                             :message="this.errors.parking_hour ? this.errors.parking_hour[0] : ''">
-                                        <b-numberinput v-model="fields.parking_hour"
+                                             :type="errors.park_price ? 'is-danger':''"
+                                             :message="errors.park_price ? errors.park_price[0] : ''">
+                                        <b-numberinput v-model="fields.park_price"
                                             :controls="false"
                                             placeholder="Parking Hour" required>
-                                        </b-numberinput>
-                                    </b-field>
-                                </div>
-                            </div>
-
-                            <div class="columns">
-                                <div class="column">
-                                    <b-field label="Parking Price" label-position="on-border"
-                                             :type="this.errors.parking_price ? 'is-danger':''"
-                                             :message="this.errors.parking_price ? this.errors.parking_price[0] : ''">
-                                        <b-numberinput v-model="fields.parking_price"
-                                            :controls="false"
-                                            placeholder="Parking Price" required>
                                         </b-numberinput>
                                     </b-field>
                                 </div>

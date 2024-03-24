@@ -8404,24 +8404,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -50738,25 +50720,6 @@ var render = function () {
                     ],
                     1
                   ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "column" }, [
-                    _c(
-                      "div",
-                      { staticClass: "buttons is-right mt-3" },
-                      [
-                        _c(
-                          "b-button",
-                          {
-                            staticClass: "is-primary is-small",
-                            attrs: { "icon-left": "plus" },
-                            on: { click: _vm.openModal },
-                          },
-                          [_vm._v("NEW")]
-                        ),
-                      ],
-                      1
-                    ),
-                  ]),
                 ]),
                 _vm._v(" "),
                 _c(
@@ -50782,9 +50745,9 @@ var render = function () {
                   [
                     _c("b-table-column", {
                       attrs: {
-                        field: "parking_hour",
+                        field: "id",
                         centered: "",
-                        label: "Parking Hour",
+                        label: "Id",
                         sortable: "",
                       },
                       scopedSlots: _vm._u([
@@ -50794,7 +50757,7 @@ var render = function () {
                             return [
                               _vm._v(
                                 "\n                                " +
-                                  _vm._s(props.row.parking_hour) +
+                                  _vm._s(props.row.id) +
                                   "\n                            "
                               ),
                             ]
@@ -50805,7 +50768,7 @@ var render = function () {
                     _vm._v(" "),
                     _c("b-table-column", {
                       attrs: {
-                        field: "lname",
+                        field: "park_price",
                         label: "Parking Price",
                         centered: "",
                         sortable: "",
@@ -50817,7 +50780,7 @@ var render = function () {
                             return [
                               _vm._v(
                                 "\n                                " +
-                                  _vm._s(props.row.parking_price) +
+                                  _vm._s(props.row.park_price) +
                                   "\n                            "
                               ),
                             ]
@@ -50854,33 +50817,7 @@ var render = function () {
                                         },
                                         on: {
                                           click: function ($event) {
-                                            return _vm.getData(
-                                              props.row.parking_fee_id
-                                            )
-                                          },
-                                        },
-                                      }),
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-tooltip",
-                                    {
-                                      attrs: {
-                                        label: "Delete",
-                                        type: "is-danger",
-                                      },
-                                    },
-                                    [
-                                      _c("b-button", {
-                                        staticClass: "button is-small mr-1",
-                                        attrs: { "icon-right": "delete" },
-                                        on: {
-                                          click: function ($event) {
-                                            return _vm.confirmDelete(
-                                              props.row.parking_fee_id
-                                            )
+                                            return _vm.getData(props.row.id)
                                           },
                                         },
                                       }),
@@ -51024,11 +50961,9 @@ var render = function () {
                               attrs: {
                                 label: "Parking Hour",
                                 "label-position": "on-border",
-                                type: this.errors.parking_hour
-                                  ? "is-danger"
-                                  : "",
-                                message: this.errors.parking_hour
-                                  ? this.errors.parking_hour[0]
+                                type: _vm.errors.park_price ? "is-danger" : "",
+                                message: _vm.errors.park_price
+                                  ? _vm.errors.park_price[0]
                                   : "",
                               },
                             },
@@ -51040,53 +50975,11 @@ var render = function () {
                                   required: "",
                                 },
                                 model: {
-                                  value: _vm.fields.parking_hour,
+                                  value: _vm.fields.park_price,
                                   callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "parking_hour", $$v)
+                                    _vm.$set(_vm.fields, "park_price", $$v)
                                   },
-                                  expression: "fields.parking_hour",
-                                },
-                              }),
-                            ],
-                            1
-                          ),
-                        ],
-                        1
-                      ),
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "columns" }, [
-                      _c(
-                        "div",
-                        { staticClass: "column" },
-                        [
-                          _c(
-                            "b-field",
-                            {
-                              attrs: {
-                                label: "Parking Price",
-                                "label-position": "on-border",
-                                type: this.errors.parking_price
-                                  ? "is-danger"
-                                  : "",
-                                message: this.errors.parking_price
-                                  ? this.errors.parking_price[0]
-                                  : "",
-                              },
-                            },
-                            [
-                              _c("b-numberinput", {
-                                attrs: {
-                                  controls: false,
-                                  placeholder: "Parking Price",
-                                  required: "",
-                                },
-                                model: {
-                                  value: _vm.fields.parking_price,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "parking_price", $$v)
-                                  },
-                                  expression: "fields.parking_price",
+                                  expression: "fields.park_price",
                                 },
                               }),
                             ],

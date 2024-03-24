@@ -51,9 +51,9 @@
                         Parking Fees
                     </b-navbar-item>
 
-                    <b-navbar-item href="/#">
+                    <!-- <b-navbar-item href="/#">
                         Item 2
-                    </b-navbar-item>
+                    </b-navbar-item> -->
       
                 </b-navbar-dropdown>
 
