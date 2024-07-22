@@ -4,12 +4,26 @@
 
 //declaration for servo
 Servo gate;
+static const uint8_t D0   = 16;
+static const uint8_t D1   = 5;
+static const uint8_t D2   = 4;
+static const uint8_t D3   = 0;
+static const uint8_t D4   = 2;
+static const uint8_t D5   = 14;
+static const uint8_t D6   = 12;
+static const uint8_t D7   = 13;
+static const uint8_t D8   = 15;
+static const uint8_t RX   = 3;
+static const uint8_t TX   = 1;
+
 
 //output for servo
 int servoPin = D4;
+//int servoPin = 2;
 
 //output for IR
 int IR = D1;
+//int IR = 5;
 String parkId = "";
 int msg = 0;
 
@@ -88,7 +102,6 @@ void loop() {
     isToExecuteToPark = true;
     msg = 1;
     gate.write(180); //open gate
-    client.flush();
   }//end if
 
   if (request.indexOf("/exit") != -1)  
