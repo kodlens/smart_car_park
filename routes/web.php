@@ -119,3 +119,9 @@ Route::middleware(['auth', 'scanner'])->group(function(){
 
 Route::post('/exit-park/{id}',[App\Http\Controllers\Scanner\ScannerHomeController::class,'exitPark']);
 Route::get('/test', [App\Http\Controllers\TestController::class, 'Test']);
+
+
+//  ------------------------API SERVO------------------------------------
+
+Route::get('/enter/{ip}', [App\Http\Controllers\ParkController::class, 'enter']);
+Route::get('/exit/{ip}', [App\Http\Controllers\ParkController::class, 'exit']);
