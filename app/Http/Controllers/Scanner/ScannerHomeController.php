@@ -18,19 +18,26 @@ class ScannerHomeController extends Controller
     }
 
     public function decodeQr($qr){  
+        //return $qr;
+
         $reservation = ParkReservation::with('park')->where('qr_ref', $qr)->first();
         $esp8266IpAddress = $reservation->park->device_ip;
 
-        return $reservation;
-        
-        if($reservation && !$reservation->enter_time){
+        if($reservation && $reservation->enter_time != null){
             //$response = Http::get("https://native-awake-ewe.ngrok-free.app/enter/$esp8266IpAddress");
             // enter the vehicle on device
-            Http::get("http://".$esp8266IpAddress."/enter");
+           
+            $res = Http::get("http://".$esp8266IpAddress."/enter");
             ParkReservation::where('park_reservation_id',$reservation->park_reservation_id)
-            ->update([
-                'enter_time'=> Carbon::now(),
-            ]);
+                ->update([
+                    'enter_time'=> Carbon::now(),
+                ]);
+
+            Park::where('park_id',$reservation->park_id)
+                ->update([
+                    'is_occupied' => 1,
+                ]);
+
             return response()->json([
                 'status' => 'updated'
             ],200);

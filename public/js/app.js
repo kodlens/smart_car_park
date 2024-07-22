@@ -9983,6 +9983,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -9999,6 +10004,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   methods: {
     onInit: function onInit(promise) {
       promise["catch"](console.error).then(this.resetValidationState);
+      this.turnCameraOn();
     },
     resetValidationState: function resetValidationState() {
       this.isValid = undefined;
@@ -10011,31 +10017,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                //console.log(content);
-                _this.result = content.split(';');
+                console.log(content); // pretend it's taking really long
 
-                _this.turnCameraOff(); // pretend it's taking really long
+                _this.isProcessing = true;
+                _context.next = 4;
+                return _this.timeout(1000);
 
-
-                _this.isProcessing = true; //await this.timeout(3000);
+              case 4:
+                //this.result = content.split(';');
+                _this.turnCameraOff();
 
                 axios.post('/decode-qr/' + content).then(function (res) {
-                  _this.alertCustom();
+                  console.log('QR Process...'); // some more delay, so users have time to read the message
+
+                  if (res.data.status === 'updated') {
+                    console.log('Process done...', res.data);
+                    _this.isProcessing = false;
+
+                    _this.turnCameraOn(); //this.alertCustom()
+
+                  }
                 })["catch"](function (err) {
+                  _this.turnCameraOn();
+
                   _this.isProcessing = false;
                   _this.data = {};
                 });
                 _this.isProcessing = false;
                 _this.isValid = false; //this.isValid = content.startsWith('http') //this will return boolean value
-                // some more delay, so users have time to read the message
-
-                _context.next = 8;
-                return _this.timeout(2000);
 
               case 8:
-                _this.turnCameraOff();
-
-              case 9:
               case "end":
                 return _context.stop();
             }
@@ -10056,7 +10067,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     alertCustom: function alertCustom() {
       var dialog = this.$buefy.dialog.alert({
-        title: 'Message',
+        title: 'Success',
         message: 'QR Successfully Scanned!',
         confirmText: 'Cool!'
       }); // Close the dialog after 3 seconds (3000 milliseconds)

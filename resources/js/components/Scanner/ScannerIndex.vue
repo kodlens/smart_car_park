@@ -26,6 +26,11 @@
                                 Processing...
                             </div>
                         </qrcode-stream>
+
+                        <!-- <b-loading :is-full-page="false" 
+                            v-model="isProcessing" 
+                            :can-cancel="false"></b-loading> -->
+
                     </div>
 
 
@@ -73,6 +78,8 @@ export default {
             promise
                 .catch(console.error)
                 .then(this.resetValidationState)
+
+            this.turnCameraOn()
         },
 
         resetValidationState() {
@@ -80,34 +87,36 @@ export default {
         },
 
         async onDecode(content) {
-            //console.log(content);
-            this.result = content.split(';');
-
-            this.turnCameraOff();
-
-
+            console.log(content);
             // pretend it's taking really long
             this.isProcessing = true;
-            //await this.timeout(3000);
+            await this.timeout(1000);
+            //this.result = content.split(';');
 
+            this.turnCameraOff();
+            
             axios.post('/decode-qr/' + content).then(res => {
-                this.alertCustom()
+                console.log('QR Process...')
+                 // some more delay, so users have time to read the message
+                if(res.data.status === 'updated'){
+                    console.log('Process done...', res.data)
+
+                    this.isProcessing = false;
+                    this.turnCameraOn()
+                    //this.alertCustom()
+                }
             }).catch(err => {
+                this.turnCameraOn()
                 this.isProcessing = false;
                 this.data = {};
             })
-
-
-
 
             this.isProcessing = false;
             this.isValid = false;
 
             //this.isValid = content.startsWith('http') //this will return boolean value
 
-            // some more delay, so users have time to read the message
-            await this.timeout(2000);
-            this.turnCameraOff();
+           
         },
 
         turnCameraOn() {
@@ -126,7 +135,7 @@ export default {
 
         alertCustom() {
             let dialog = this.$buefy.dialog.alert({
-                title: 'Message',
+                title: 'Success',
                 message: 'QR Successfully Scanned!',
                 confirmText: 'Cool!'
             })
