@@ -34,6 +34,7 @@ class ScannerHomeController extends Controller
             ParkReservation::where('park_reservation_id',$reservation->park_reservation_id)
                 ->update([
                     'enter_time'=> Carbon::now(),
+                    'remarks'=> 'RESERVE',
                 ]);
 
             Park::where('park_id',$reservation->park_id)

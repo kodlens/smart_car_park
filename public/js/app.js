@@ -7594,6 +7594,89 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+var _methods;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7817,6 +7900,7 @@ __webpack_require__.r(__webpack_exports__);
       reports: [],
       user: [],
       modalReserveMe: false,
+      modalExtendTime: false,
       modalQR: false,
       confirmExit: false,
       errors: {},
@@ -7825,12 +7909,17 @@ __webpack_require__.r(__webpack_exports__);
         date_time_reserve_to: new Date(currentDate.getTime() + 1 * 60 * 60 * 1000),
         // Add 1 hour
         hr: 1,
-        amount: 20
+        amount: 20,
+        reservation_id: 0,
+        extend_hr: 1,
+        extend_from: null,
+        extend_to: null,
+        extend_amount: 20
       },
       qr: null
     };
   },
-  methods: {
+  methods: (_methods = {
     loadParkingSpaces: function loadParkingSpaces() {
       var _this = this;
 
@@ -7866,16 +7955,35 @@ __webpack_require__.r(__webpack_exports__);
     computeAmount: function computeAmount() {
       var a = new Date(this.fields.date_time_reserve_to);
       var b = new Date(this.fields.date_time_reserve_from);
-      var hours = Math.abs(b - a) / 36e5; //this.fields.amount = this.fields.hr * 20
+      var hours = this.roundNum(Math.abs(b - a) / 36e5); //this.fields.amount = this.fields.hr * 20
 
       this.fields.hr = hours;
-      this.fields.amount = hours * 20;
-    },
-    displayQr: function displayQr(index) {
-      this.qr = this.parkingSpaces[index].parkReservation.qr_ref;
-      this.modalQR = true;
+      this.fields.amount = this.roundNum(hours * 20);
     }
-  },
+  }, _defineProperty(_methods, "computeAmount", function computeAmount() {
+    var a = new Date(this.fields.extend_from);
+    var b = new Date(this.fields.extend_to);
+    var hours = this.roundNum(Math.abs(b - a) / 36e5); //this.fields.amount = this.fields.hr * 20
+
+    this.fields.extend_hr = hours;
+    this.fields.extend_amount = this.roundNum(hours * 20);
+  }), _defineProperty(_methods, "roundNum", function roundNum(num) {
+    return Math.round((num + Number.EPSILON) * 100) / 100;
+  }), _defineProperty(_methods, "displayQr", function displayQr(index) {
+    this.qr = this.parkingSpaces[index].parkReservation.qr_ref;
+    this.modalQR = true;
+  }), _defineProperty(_methods, "extendParkingTime", function extendParkingTime(id) {
+    var _this4 = this;
+
+    this.reservation_id = 0;
+    axios.get('/get-my-reservation/' + id).then(function (res) {
+      _this4.fields.reservation_id = id;
+      _this4.fields.extend_from = new Date(res.data.end_time); //add 1 hour from expire time date
+
+      _this4.fields.extend_to = new Date(_this4.fields.extend_from + 1 * 60 * 60 * 1000);
+      _this4.modalExtendTime = true; //console.log(res.data)
+    })["catch"](function (err) {});
+  }), _methods),
   computed: {
     qrCode: function qrCode() {
       return this.parkReserved.qr_ref;
@@ -29135,7 +29243,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.welcome-container[data-v-e0ca07d2]{\r\n    height: 100vh;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.park-container[data-v-e0ca07d2]{\r\n    border-top: 2px solid #000; /* Set the top border */\r\n    border-left: 2px solid #000; /* Set the left border */\r\n    border-bottom: 2px solid #000; /* Set the bottom border */\r\n    border-right: none; /* No border on the right */\r\n    margin-bottom: 10px;\r\n    height: 220px;\r\n    min-width: 300px;\n}\n.occupied[data-v-e0ca07d2]{\r\n    color: red;\r\n    font-weight: bolder;\n}\n.available[data-v-e0ca07d2]{\r\n    color: green;\r\n    font-weight: bolder;\n}\n.qr[data-v-e0ca07d2]{\r\n    display: flex;\r\n    justify-content: center;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.welcome-container[data-v-e0ca07d2]{\r\n    height: 100vh;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.park-container[data-v-e0ca07d2]{\r\n    border-top: 2px solid #000; /* Set the top border */\r\n    border-left: 2px solid #000; /* Set the left border */\r\n    border-bottom: 2px solid #000; /* Set the bottom border */\r\n    border-right: none; /* No border on the right */\r\n    margin-bottom: 10px;\r\n    /*height: 220px; */\r\n    min-width: 300px;\n}\n.occupied[data-v-e0ca07d2]{\r\n    color: red;\r\n    font-weight: bolder;\n}\n.available[data-v-e0ca07d2]{\r\n    color: green;\r\n    font-weight: bolder;\n}\n.qr[data-v-e0ca07d2]{\r\n    display: flex;\r\n    justify-content: center;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -49611,7 +49719,7 @@ var render = function () {
                                 1
                               ),
                             ])
-                          : _c("div", [
+                          : _c("div", {}, [
                               _c("div", { staticClass: "mb-2 occupied" }, [
                                 _vm._v("OCCUPIED"),
                               ]),
@@ -49637,6 +49745,31 @@ var render = function () {
                                           [
                                             _vm._v(
                                               "\n                                            Enter Parking Space\n                                        "
+                                            ),
+                                          ]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    park.parkReservation.enter_time == null &&
+                                    park.parkReservation.user_id ==
+                                      _vm.user.user_id
+                                      ? _c(
+                                          "button",
+                                          {
+                                            staticClass:
+                                              "button is-warning mb-2",
+                                            on: {
+                                              click: function ($event) {
+                                                return _vm.extendParkingTime(
+                                                  park.parkReservation
+                                                    .park_reservation_id
+                                                )
+                                              },
+                                            },
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                            Extend Parking Time\n                                        "
                                             ),
                                           ]
                                         )
@@ -49898,6 +50031,277 @@ var render = function () {
                               _vm.$set(
                                 _vm.fields,
                                 "date_time_reserve_to",
+                                $event.target.value
+                              )
+                            },
+                          },
+                        }),
+                      ],
+                      1
+                    ),
+                  ]),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("footer", { staticClass: "modal-card-foot" }, [
+                _c(
+                  "button",
+                  { staticClass: "button is-primary" },
+                  [
+                    _vm._v(
+                      "\n                            PAY\n                            "
+                    ),
+                    _c("b-icon", {
+                      staticClass: "ml-2",
+                      attrs: { icon: "arrow-right" },
+                    }),
+                  ],
+                  1
+                ),
+              ]),
+            ]),
+          ]),
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          attrs: {
+            "has-modal-card": "",
+            "trap-focus": "",
+            width: 640,
+            "aria-role": "dialog",
+            "aria-label": "Modal",
+            "aria-modal": "",
+          },
+          model: {
+            value: _vm.modalExtendTime,
+            callback: function ($$v) {
+              _vm.modalExtendTime = $$v
+            },
+            expression: "modalExtendTime",
+          },
+        },
+        [
+          _c("form", { attrs: { action: "/paymongo/pay-extend" } }, [
+            _c("div", { staticClass: "modal-card" }, [
+              _c("header", { staticClass: "modal-card-head" }, [
+                _c(
+                  "p",
+                  {
+                    staticClass:
+                      "modal-card-title has-text-weight-bold is-size-5",
+                  },
+                  [_vm._v("EXTEND TIME")]
+                ),
+                _vm._v(" "),
+                _c("button", {
+                  staticClass: "delete",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function ($event) {
+                      _vm.modalExtendTime = false
+                    },
+                  },
+                }),
+              ]),
+              _vm._v(" "),
+              _c("section", { staticClass: "modal-card-body" }, [
+                _c("div", {}, [
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c("p", [
+                          _vm._v("PARKING FEE: ₱" + _vm._s(_vm.fields.amount)),
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.fields.row,
+                              expression: "fields.row",
+                            },
+                          ],
+                          attrs: { type: "hidden", name: "park" },
+                          domProps: { value: _vm.fields.row },
+                          on: {
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.fields, "row", $event.target.value)
+                            },
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.user.user_id,
+                              expression: "user.user_id",
+                            },
+                          ],
+                          attrs: { type: "hidden", name: "user_id" },
+                          domProps: { value: _vm.user.user_id },
+                          on: {
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.user, "user_id", $event.target.value)
+                            },
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "b-field",
+                          { attrs: { label: "Extend From" } },
+                          [
+                            _c("b-datetimepicker", {
+                              attrs: {
+                                disabled: "",
+                                editable: "",
+                                name: "date_time_reserve_from",
+                                placeholder: "Date and Time Reservation",
+                              },
+                              on: { input: _vm.computeAmount },
+                              model: {
+                                value: _vm.fields.extend_from,
+                                callback: function ($$v) {
+                                  _vm.$set(_vm.fields, "extend_from", $$v)
+                                },
+                                expression: "fields.extend_from",
+                              },
+                            }),
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "b-field",
+                          { attrs: { label: "Extend To" } },
+                          [
+                            _c("b-datetimepicker", {
+                              attrs: {
+                                "min-datetime": _vm.fields.extend_from,
+                                editable: "",
+                                name: "date_time_reserve_to",
+                                placeholder: "Date and Time Reservation",
+                              },
+                              on: { input: _vm.computeAmount },
+                              model: {
+                                value: _vm.fields.extend_to,
+                                callback: function ($$v) {
+                                  _vm.$set(_vm.fields, "extend_to", $$v)
+                                },
+                                expression: "fields.extend_to",
+                              },
+                            }),
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "b-field",
+                          { attrs: { label: "No. of Hours" } },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                type: "text",
+                                name: "hours",
+                                readonly: "",
+                                placeholder: "1",
+                                min: 1,
+                              },
+                              on: { input: _vm.computeAmount },
+                              model: {
+                                value: _vm.fields.extend_hr,
+                                callback: function ($$v) {
+                                  _vm.$set(_vm.fields, "extend_hr", $$v)
+                                },
+                                expression: "fields.extend_hr",
+                              },
+                            }),
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.fields.extend_from,
+                              expression: "fields.extend_from",
+                            },
+                          ],
+                          attrs: { type: "hidden", name: "start" },
+                          domProps: { value: _vm.fields.extend_from },
+                          on: {
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.fields,
+                                "extend_from",
+                                $event.target.value
+                              )
+                            },
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.fields.extend_to,
+                              expression: "fields.extend_to",
+                            },
+                          ],
+                          attrs: { type: "hidden", name: "end" },
+                          domProps: { value: _vm.fields.extend_to },
+                          on: {
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.fields,
+                                "extend_to",
+                                $event.target.value
+                              )
+                            },
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.fields.reservation_id,
+                              expression: "fields.reservation_id",
+                            },
+                          ],
+                          attrs: { type: "hidden", name: "reservation_id" },
+                          domProps: { value: _vm.fields.reservation_id },
+                          on: {
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.fields,
+                                "reservation_id",
                                 $event.target.value
                               )
                             },

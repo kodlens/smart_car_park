@@ -28,5 +28,10 @@ class MyReservationController extends Controller
         return $data;
     }
 
+    public function getMyReservation($id){
+        return ParkReservation::find($id);
+        //return $id;
+    }
+
 
 }

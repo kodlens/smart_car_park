@@ -39,7 +39,7 @@
                                                 size="is-small" label="RESERVE ME"></b-button>
                                         </div>
                                     </div>
-                                    <div v-else>
+                                    <div class="" v-else>
                                         <div class="mb-2 occupied">OCCUPIED</div>
                                         <div>
                                             <img src="/img/car.png" style="width: 250px;" alt="">
@@ -50,6 +50,12 @@
                                                 @click="displayQr(index)"
                                                 v-if="(park.parkReservation.enter_time == null) && (park.parkReservation.user_id == user.user_id)">
                                                 Enter Parking Space
+                                            </button>
+
+                                            <button class="button is-warning mb-2"
+                                                @click="extendParkingTime(park.parkReservation.park_reservation_id)"
+                                                v-if="(park.parkReservation.enter_time == null) && (park.parkReservation.user_id == user.user_id)">
+                                                Extend Parking Time
                                             </button>
                                             <button class="button is-warning mb-2"
                                                 v-if="(park.parkReservation.enter_time !== null) && (park.parkReservation.user_id == user.user_id)"
@@ -113,6 +119,79 @@
 
                                     <input type="hidden" name="start" v-model="fields.date_time_reserve_from">
                                     <input type="hidden" name="end" v-model="fields.date_time_reserve_to">
+
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <footer class="modal-card-foot">
+                        <button
+                            class="button is-primary">
+                                PAY
+                                <b-icon icon="arrow-right" class="ml-2"></b-icon>    
+                        </button>
+                    </footer>
+                </div>
+            </form><!--close form-->
+        </b-modal>
+        <!--close modal-->
+
+
+
+        <!--modal extend time-->
+        <b-modal v-model="modalExtendTime" has-modal-card
+                 trap-focus
+                 :width="640"
+                 aria-role="dialog"
+                 aria-label="Modal"
+                 aria-modal>
+
+            <form action="/paymongo/pay-extend">
+                <div class="modal-card">
+                    <header class="modal-card-head">
+                        <p class="modal-card-title has-text-weight-bold is-size-5">EXTEND TIME</p>
+                        <button
+                            type="button"
+                            class="delete"
+                            @click="modalExtendTime = false"/>
+                    </header>
+
+                    <section class="modal-card-body">
+                        <div class="">
+                            <div class="columns">
+                                <div class="column">
+                                   <!-- <p>To make reservation for this parking area, a payment must be made.</p>-->
+                                    <p>PARKING FEE: &#8369;{{ fields.amount }}</p> 
+
+                                    <input type="hidden" name="park" v-model="fields.row">
+                                    <input type="hidden" name="user_id" v-model="user.user_id">
+
+                                    <b-field label="Extend From">
+                                        <b-datetimepicker 
+                                            v-model="fields.extend_from" 
+                                            disabled
+                                            editable 
+                                            name="date_time_reserve_from" 
+                                            @input="computeAmount" placeholder="Date and Time Reservation"></b-datetimepicker>
+                                    </b-field>
+
+                                    <b-field label="Extend To">
+                                        <b-datetimepicker v-model="fields.extend_to" 
+                                            :min-datetime="fields.extend_from"
+                                            editable name="date_time_reserve_to" 
+                                            @input="computeAmount" 
+                                            placeholder="Date and Time Reservation"></b-datetimepicker>
+                                    </b-field>
+
+                                    <b-field label="No. of Hours">
+                                        <b-input type="text" v-model="fields.extend_hr" name="hours" 
+                                            @input="computeAmount" readonly placeholder="1" :min="1" />
+                                    </b-field>
+
+                                    <input type="hidden" name="start" v-model="fields.extend_from">
+                                    <input type="hidden" name="end" v-model="fields.extend_to">
+                                    <input type="hidden" name="reservation_id" v-model="fields.reservation_id">
 
                                    
                                 </div>
@@ -227,6 +306,7 @@ export default {
             user: [],
 
             modalReserveMe: false,
+            modalExtendTime: false,
             modalQR: false,
             confirmExit: false,
             errors: {},
@@ -235,7 +315,13 @@ export default {
                 date_time_reserve_to: new Date(currentDate.getTime() + (1 * 60 * 60 * 1000)), // Add 1 hour
 
                 hr:1,
-                amount:20
+                amount:20,
+
+                reservation_id: 0,
+                extend_hr: 1,
+                extend_from: null,
+                extend_to: null,
+                extend_amount: 20
             },
             qr: null
 		}
@@ -279,15 +365,48 @@ export default {
         computeAmount(){
             var a = new Date(this.fields.date_time_reserve_to);
             var b = new Date(this.fields.date_time_reserve_from);
-            var hours = Math.abs(b - a) / 36e5;
+            var hours = this.roundNum(Math.abs(b - a) / 36e5);
 
             //this.fields.amount = this.fields.hr * 20
             this.fields.hr = hours
-            this.fields.amount = hours * 20
+            this.fields.amount = this.roundNum(hours * 20)
         },
+
+        computeAmount(){
+            var a = new Date(this.fields.extend_from);
+            var b = new Date(this.fields.extend_to);
+            var hours = this.roundNum(Math.abs(b - a) / 36e5);
+
+            //this.fields.amount = this.fields.hr * 20
+            this.fields.extend_hr = hours
+            this.fields.extend_amount = this.roundNum(hours * 20)
+        },
+
+        roundNum(num){
+           return Math.round((num + Number.EPSILON) * 100) / 100;
+        },
+
         displayQr(index){
             this.qr = this.parkingSpaces[index].parkReservation.qr_ref;
             this.modalQR = true;
+        },
+
+        // this will extend parking time
+        extendParkingTime(id){
+            this.reservation_id = 0;
+            axios.get('/get-my-reservation/' + id).then(res=>{
+                this.fields.reservation_id = id;
+                this.fields.extend_from = new Date(res.data.end_time);
+
+                //add 1 hour from expire time date
+                this.fields.extend_to = new Date(this.fields.extend_from + (1 * 60 * 60 * 1000))
+
+                this.modalExtendTime = true
+                //console.log(res.data)
+            }).catch(err=>{
+            
+            })
+            
         }
         
         
@@ -327,7 +446,7 @@ export default {
     border-bottom: 2px solid #000; /* Set the bottom border */
     border-right: none; /* No border on the right */
     margin-bottom: 10px;
-    height: 220px;
+    /*height: 220px; */
     min-width: 300px;
 }
 

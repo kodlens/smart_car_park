@@ -9,7 +9,7 @@ class ParkReservation extends Model
 {
     use HasFactory;
     protected $table = 'park_reservations';
-    protected $primaryKey = 'parking_reservation_id';
+    protected $primaryKey = 'park_reservation_id';
 
     protected $fillable = [
         'hour',
@@ -20,7 +20,8 @@ class ParkReservation extends Model
         'end_time',
         'enter_time',
         'exit_time',
-        'qr_ref'
+        'qr_ref',
+        'remarks'
     ];
 
     public function user(){
