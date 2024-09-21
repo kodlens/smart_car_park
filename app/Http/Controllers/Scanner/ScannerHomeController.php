@@ -19,34 +19,46 @@ class ScannerHomeController extends Controller
 
     public function decodeQr($qr){  
 
-        $reservation = ParkReservation::with('park')->where('qr_ref', $qr)->first();
-        $esp8266IpAddress = $reservation->park->device_ip;
+        try {
+            $reservation = ParkReservation::with('park')->where('qr_ref', $qr)->first();
+            $esp8266IpAddress = $reservation->park->device_ip;
+    
+            //return $reservation;
+    
+            //return $esp8266IpAddress;
+    
+           // return $reservation;
+            if($reservation && $reservation->enter_time == null){
+                // return $reservation->park_reservation_id;
+                //$response = Http::get("https://native-awake-ewe.ngrok-free.app/enter/$esp8266IpAddress");
+                // enter the vehicle on device
+               
+                $res = Http::get("http://".$esp8266IpAddress."/enter");
+                //return $res;
+    
+                ParkReservation::where('park_reservation_id',$reservation->park_reservation_id)
+                    ->update([
+                        'enter_time'=> Carbon::now(),
+                        'remarks'=> 'RESERVE',
+                    ]);
+    
+                Park::where('park_id',$reservation->park_id)
+                    ->update([
+                        'is_occupied' => 1,
+                    ]);
+    
+                return response()->json([
+                    'status' => 'updated'
+                ],200);
+    
+    
+            }
 
-       // return $reservation;
-        if($reservation && $reservation->enter_time != null){
-            //return 'test';
-            //$response = Http::get("https://native-awake-ewe.ngrok-free.app/enter/$esp8266IpAddress");
-            // enter the vehicle on device
-           
-            $res = Http::get("http://".$esp8266IpAddress."/enter");
-            //return $res;
-
-            ParkReservation::where('park_reservation_id',$reservation->park_reservation_id)
-                ->update([
-                    'enter_time'=> Carbon::now(),
-                    'remarks'=> 'RESERVE',
-                ]);
-
-            Park::where('park_id',$reservation->park_id)
-                ->update([
-                    'is_occupied' => 1,
-                ]);
+        }catch(Exception $err){
 
             return response()->json([
-                'status' => 'updated'
-            ],200);
-
-
+                'error' => $err->getMessage()
+            ],500);
         }
     }
     public function exitPark($id){
