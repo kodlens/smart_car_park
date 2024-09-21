@@ -10150,11 +10150,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                   _this.isProcessing = false;
                   _this.data = {};
-                });
-                _this.isProcessing = false;
-                _this.isValid = false; //this.isValid = content.startsWith('http') //this will return boolean value
 
-              case 8:
+                  _this.$buefy.toast.open({
+                    duration: 5000,
+                    message: "".concat(err.response.data.error),
+                    position: 'is-bottom',
+                    type: 'is-danger'
+                  });
+                }); // this.isProcessing = false;
+                //this.isValid = false;
+                //this.isValid = content.startsWith('http') //this will return boolean value
+
+              case 6:
               case "end":
                 return _context.stop();
             }

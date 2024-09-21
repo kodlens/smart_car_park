@@ -109,10 +109,17 @@ export default {
                 this.turnCameraOn()
                 this.isProcessing = false;
                 this.data = {};
+                this.$buefy.toast.open({
+                    duration: 5000,
+                    message: `${err.response.data.error}`,
+                    position: 'is-bottom',
+                    type: 'is-danger'
+                })
+
             })
 
-            this.isProcessing = false;
-            this.isValid = false;
+           // this.isProcessing = false;
+            //this.isValid = false;
 
             //this.isValid = content.startsWith('http') //this will return boolean value
 

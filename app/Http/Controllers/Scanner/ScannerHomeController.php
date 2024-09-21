@@ -54,13 +54,14 @@ class ScannerHomeController extends Controller
     
             }
 
-        }catch(Exception $err){
+        }catch(\Exception $err){
 
             return response()->json([
                 'error' => $err->getMessage()
             ],500);
         }
     }
+    
     public function exitPark($id){
         $reservation = ParkReservation::with('park')->where('park_reservation_id', $id)->latest()->first();
         $esp8266IpAddress = $reservation->park->device_ip;
