@@ -57,9 +57,25 @@
       
                 </b-navbar-dropdown>
 
+              
+
+
                 <b-navbar-item href="/users">
                     Users
                 </b-navbar-item>
+
+                <b-navbar-dropdown label="Reports">
+
+                    <b-navbar-item href="/sales-report">
+                        Sales Report
+                    </b-navbar-item>
+
+                    <!-- <b-navbar-item href="/#">
+                        Item 2
+                    </b-navbar-item> -->
+      
+                </b-navbar-dropdown>
+                
                 <b-navbar-item tag="div">
                     @auth()
                         <div class="buttons">
@@ -74,6 +90,8 @@
                         </div>
                     @endauth
                 </b-navbar-item>
+
+               
                 
             </template>
         </b-navbar>
