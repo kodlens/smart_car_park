@@ -100,7 +100,14 @@ export default {
                  // some more delay, so users have time to read the message
                 if(res.data.status === 'updated'){
                     console.log('Process done...', res.data)
-
+                    if(res.data.status === 'updated'){
+                         this.$buefy.toast.open({
+                            duration: 5000,
+                            message: `Scanning success.`,
+                            position: 'is-bottom',
+                            type: 'is-success'
+                        })
+                    }
                     this.isProcessing = false;
                     this.turnCameraOn()
                     //this.alertCustom()

@@ -359,6 +359,14 @@ export default {
                 res=>{
                     this.confirmExit = false;
                     this.loadParkingSpaces();
+                    if(res.data.status === 'updated'){
+                         this.$buefy.toast.open({
+                            duration: 5000,
+                            message: `Thank you. You may exit your vehicle now.`,
+                            position: 'is-bottom',
+                            type: 'is-success'
+                        })
+                    }
                 }
             )
         },

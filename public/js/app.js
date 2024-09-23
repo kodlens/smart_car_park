@@ -7950,6 +7950,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this3.confirmExit = false;
 
         _this3.loadParkingSpaces();
+
+        if (res.data.status === 'updated') {
+          _this3.$buefy.toast.open({
+            duration: 5000,
+            message: "Thank you. You may exit your vehicle now.",
+            position: 'is-bottom',
+            type: 'is-success'
+          });
+        }
       });
     },
     computeAmount: function computeAmount() {
@@ -10140,6 +10149,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                   if (res.data.status === 'updated') {
                     console.log('Process done...', res.data);
+
+                    if (res.data.status === 'updated') {
+                      _this.$buefy.toast.open({
+                        duration: 5000,
+                        message: "Scanning success.",
+                        position: 'is-bottom',
+                        type: 'is-success'
+                      });
+                    }
+
                     _this.isProcessing = false;
 
                     _this.turnCameraOn(); //this.alertCustom()

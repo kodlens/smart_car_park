@@ -32,11 +32,12 @@ class ScannerHomeController extends Controller
                 // return $reservation->park_reservation_id;
                 //$response = Http::get("https://native-awake-ewe.ngrok-free.app/enter/$esp8266IpAddress");
                 // enter the vehicle on device
-               
+                
+                //comment for debugging purpose
                 $res = Http::get("http://".$esp8266IpAddress."/enter");
-                //return $res;
+
     
-                ParkReservation::where('park_reservation_id',$reservation->park_reservation_id)
+                ParkReservation::where('park_reservation_id', $reservation->park_reservation_id)
                     ->update([
                         'enter_time'=> Carbon::now(),
                         'remarks'=> 'RESERVE',
@@ -72,11 +73,14 @@ class ScannerHomeController extends Controller
                 'exit_time'=> Carbon::now(),
             ]);
             Park::where('park_id',$reservation->park_id)
-            ->update([
-                'is_occupied' => 0,
-            ]);
+                ->update([
+                    'is_occupied' => 0,
+                ]);
             //exit the vehicle on device
+            
+            //comment for debugging
             Http::get("http://".$esp8266IpAddress."/exit");
+
             return response()->json([
                 'status' => 'updated'
             ],200);
