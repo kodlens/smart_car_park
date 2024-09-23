@@ -49776,9 +49776,8 @@ var render = function () {
                                         )
                                       : _vm._e(),
                                     _vm._v(" "),
-                                    park.parkReservation.enter_time == null &&
                                     park.parkReservation.user_id ==
-                                      _vm.user.user_id
+                                    _vm.user.user_id
                                       ? _c(
                                           "button",
                                           {

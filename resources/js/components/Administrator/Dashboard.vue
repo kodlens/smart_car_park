@@ -54,7 +54,7 @@
 
                                             <button class="button is-warning mb-2"
                                                 @click="extendParkingTime(park.parkReservation.park_reservation_id)"
-                                                v-if="(park.parkReservation.enter_time == null) && (park.parkReservation.user_id == user.user_id)">
+                                                v-if="(park.parkReservation.user_id == user.user_id)">
                                                 Extend Parking Time
                                             </button>
                                             <button class="button is-warning mb-2"
