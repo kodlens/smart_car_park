@@ -173,20 +173,20 @@
                                             disabled
                                             editable 
                                             name="date_time_reserve_from" 
-                                            @input="computeAmount" placeholder="Date and Time Reservation"></b-datetimepicker>
+                                            @input="computeAmountExtend" placeholder="Date and Time Reservation"></b-datetimepicker>
                                     </b-field>
 
                                     <b-field label="Extend To">
                                         <b-datetimepicker v-model="fields.extend_to" 
                                             :min-datetime="fields.extend_from"
                                             editable name="date_time_reserve_to" 
-                                            @input="computeAmount" 
+                                            @input="computeAmountExtend" 
                                             placeholder="Date and Time Reservation"></b-datetimepicker>
                                     </b-field>
 
                                     <b-field label="No. of Hours">
                                         <b-input type="text" v-model="fields.extend_hr" name="hours" 
-                                            @input="computeAmount" readonly placeholder="1" :min="1" />
+                                            @input="computeAmountExtend" readonly placeholder="1" :min="1" />
                                     </b-field>
 
                                     <input type="hidden" name="start" v-model="fields.extend_from">
@@ -380,7 +380,7 @@ export default {
             this.fields.amount = this.roundNum(hours * 20)
         },
 
-        computeAmount(){
+        computeAmountExtend(){
             var a = new Date(this.fields.extend_from);
             var b = new Date(this.fields.extend_to);
             var hours = this.roundNum(Math.abs(b - a) / 36e5);

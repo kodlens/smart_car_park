@@ -67,6 +67,10 @@ Route::middleware(['auth', 'admin'])->group(function(){
 
     Route::post('/user-reset-password/{userid}', [App\Http\Controllers\Administrator\UserController::class, 'resetPassword']);
 
+
+    Route::get('/monthly-sales-report', [App\Http\Controllers\Report\MonthlySalesReportController::class, 'index']);
+    Route::get('/load-monthly-sales-report', [App\Http\Controllers\Report\MonthlySalesReportController::class, 'loadMonthlySalesReport']);
+
 });
 
 // -----------------------ADMINSITRATOR-------------------------------------------

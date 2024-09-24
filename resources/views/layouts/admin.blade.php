@@ -66,8 +66,8 @@
 
                 <b-navbar-dropdown label="Reports">
 
-                    <b-navbar-item href="/sales-report">
-                        Sales Report
+                    <b-navbar-item href="/monthly-sales-report">
+                        Monthly Sales Report
                     </b-navbar-item>
 
                     <!-- <b-navbar-item href="/#">

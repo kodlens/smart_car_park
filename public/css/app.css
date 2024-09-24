@@ -42502,3 +42502,19 @@ html, body, button {
   font-family: "Roboto Condensed", sans-serif;
   font-family: "Roboto Mono", monospace;
 }
+
+.flex-1 {
+  flex: 1;
+}
+
+flex {
+  display: flex;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.item-center {
+  align-items: center;
+}
