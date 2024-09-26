@@ -17,3 +17,13 @@ GCASH, Bank Payments etc... depending on the payment gateway. The payment gatewa
 Open git bash and run this command
 
     git pull
+
+
+There are updates on the structure of database so we need to refresh all database structure
+and this action will delete all data on the database and will re populate with newer data.
+
+    php artisan migrate:refresh --seed
+
+
+## Update Notes
+- Dashboard Graph
