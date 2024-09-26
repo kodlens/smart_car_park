@@ -17,8 +17,10 @@ class CreateParkSalesTable extends Migration
             $table->id();
             $table->string('remarks')->nullable();
             $table->double('price')->default(0);
-            $table->date('transaction_date')->default(0);
+            $table->date('transaction_date')->nullable();
             $table->unsignedBigInteger('park_reservation_id')->default(0);
+            $table->unsignedBigInteger('user_id')->default(0);
+            $table->unsignedBigInteger('park_id')->default(0);
             $table->timestamps();
         });
     }

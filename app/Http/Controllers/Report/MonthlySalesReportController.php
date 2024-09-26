@@ -15,7 +15,7 @@ class MonthlySalesReportController extends Controller
     public function loadMonthlySalesReport(Request $req){
         $month = date('m', strtotime($req->inputdate));
 
-        $sales = ParkReservation::whereMonth('start_time', $month)
+        $sales = ParkSale::whereMonth('start_time', $month)
             ->get();
 
         return $sales;

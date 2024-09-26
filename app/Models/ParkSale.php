@@ -11,6 +11,8 @@ class ParkSale extends Model
         'remarks', 
         'price', 
         'transaction_date', 
-        'park_reservation_id'
+        'park_reservation_id',
+        'user_id',
+        'park_id'
     ];
 }

@@ -9,6 +9,9 @@ use Curl;
 use Auth;
 use DateTime;
 use App\Models\ParkPrice;
+use App\Models\ParkSale;
+
+
 
 class PaymongoController extends Controller
 {
@@ -114,7 +117,7 @@ class PaymongoController extends Controller
                 'is_occupied' => 1,
             ]);
 
-        ParkReservation::create([
+        $parkReservation = ParkReservation::create([
             'park_id' => $park_id,
             'user_id' => $user_id,
             'hour'    => $hour,
@@ -122,6 +125,15 @@ class PaymongoController extends Controller
             'start_time' => $start_time,
             'end_time'  => $end_time,
             'qr_ref' => $qr
+        ]);
+
+        ParkSale::create([
+            'remarks' => 'reservation fee',
+            'user_id' => $user_id,
+            'park_id' => $park_id,
+            'park_reservation_id' => $parkReservation->park_reservation_id,
+            'price'   => $price/100,
+            'transaction_date' => date('Y-m-d')
         ]);
         
         return redirect('/home');
@@ -233,10 +245,23 @@ class PaymongoController extends Controller
             ->update([
                 'is_occupied' => 1,
             ]);
+        
+        $parkReservation = ParkReservation::find($reservation_id);
+        $parkReservation->end_time = $end_time;
+        $parkReservation->save();
 
-        ParkReservation::where('park_reservation_id', $reservation_id)
-            ->update([
-                'end_time'  => $end_time
+        // $parkReservation = ParkReservation::where('park_reservation_id', $reservation_id)
+        //     ->update([
+        //         'end_time'  => $end_time
+        // ]);
+
+        ParkSale::create([
+            'remarks' => 'extension fee',
+            'user_id' => $user_id,
+            'park_id' => $park_id,
+            'park_reservation_id' => $parkReservation->park_reservation_id,
+            'price'   => $price/100,
+            'transaction_date' => date('Y-m-d')
         ]);
         
         return redirect('/home');
