@@ -8008,10 +8008,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Park/ParkIndex.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Park/ParkIndex.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/ParkDevice/ParkDeviceIndex.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/ParkDevice/ParkDeviceIndex.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -8182,20 +8182,46 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       data: [],
       total: 0,
       loading: false,
-      sortField: 'parking_fee_id',
+      sortField: 'park_id',
       sortOrder: 'desc',
       page: 1,
       perPage: 10,
       defaultSortDirection: 'asc',
       global_id: 0,
       search: {
-        parking_hour: ''
+        search: ''
       },
       isModalCreate: false,
       fields: {
@@ -8212,9 +8238,9 @@ __webpack_require__.r(__webpack_exports__);
     loadAsyncData: function loadAsyncData() {
       var _this = this;
 
-      var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "park=".concat(this.search.parking_hour), "perpage=".concat(this.perPage), "page=".concat(this.page)].join('&');
+      var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "search=".concat(this.search.search), "perpage=".concat(this.perPage), "page=".concat(this.page)].join('&');
       this.loading = true;
-      axios.get("/get-parking-fees?".concat(params)).then(function (_ref) {
+      axios.get("/get-park-devices?".concat(params)).then(function (_ref) {
         var data = _ref.data;
         _this.data = [];
         var currentTotal = data.total;
@@ -8262,7 +8288,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.global_id > 0) {
         //update
-        axios.put('/parking-fees/' + this.global_id, this.fields).then(function (res) {
+        axios.put('/park-devices/' + this.global_id, this.fields).then(function (res) {
           if (res.data.status === 'updated') {
             _this2.$buefy.dialog.alert({
               title: 'UPDATED!',
@@ -8285,7 +8311,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       } else {
         //INSERT HERE
-        axios.post('/parking-fees', this.fields).then(function (res) {
+        axios.post('/park-devices', this.fields).then(function (res) {
           if (res.data.status === 'saved') {
             _this2.$buefy.dialog.alert({
               title: 'SAVED!',
@@ -8329,7 +8355,7 @@ __webpack_require__.r(__webpack_exports__);
     deleteSubmit: function deleteSubmit(dataId) {
       var _this4 = this;
 
-      axios["delete"]('/users/' + dataId).then(function (res) {
+      axios["delete"]('/park-devices/' + dataId).then(function (res) {
         _this4.loadAsyncData();
 
         _this4.clearFields();
@@ -8341,8 +8367,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     clearFields: function clearFields() {
       this.global_id = 0;
-      this.fields.parking_hour = null;
-      this.fields.parking_price = null;
+      this.fields.name = null;
+      this.fields.device_ip = null;
+      this.fields.is_occupied = 0;
     },
     //update code here
     getData: function getData(data_id) {
@@ -8352,7 +8379,7 @@ __webpack_require__.r(__webpack_exports__);
       this.global_id = data_id;
       this.isModalCreate = true; //nested axios for getting the address 1 by 1 or request by request
 
-      axios.get('/parking-fees/' + data_id).then(function (res) {
+      axios.get('/park-devices/' + data_id).then(function (res) {
         _this5.fields = res.data;
       });
     }
@@ -29487,10 +29514,10 @@ ___CSS_LOADER_EXPORT___.push([module.id, "\n.welcome-container[data-v-e0ca07d2]{
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Park/ParkIndex.vue?vue&type=style&index=0&id=64842e10&scoped=true&lang=css&":
-/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Park/ParkIndex.vue?vue&type=style&index=0&id=64842e10&scoped=true&lang=css& ***!
-  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/ParkDevice/ParkDeviceIndex.vue?vue&type=style&index=0&id=951087e0&scoped=true&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/ParkDevice/ParkDeviceIndex.vue?vue&type=style&index=0&id=951087e0&scoped=true&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -29504,7 +29531,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.table-wrapper[data-v-64842e10]{\n    border: 1px solid gray;\n    padding: 15px;\n}\n.table > tbody > tr[data-v-64842e10] {\n    /* background-color: blue; */\n    transition: background-color 0.5s ease;\n}\n.table > tbody > tr[data-v-64842e10]:hover {\n    background-color: #EAF6FF;\n}\n.table-header[data-v-64842e10]{\n    background-color: #009FFD;\n    padding: 15px;\n    color: white;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.table-wrapper[data-v-951087e0]{\n    border: 1px solid gray;\n    padding: 15px;\n}\n.table > tbody > tr[data-v-951087e0] {\n    /* background-color: blue; */\n    transition: background-color 0.5s ease;\n}\n.table > tbody > tr[data-v-951087e0]:hover {\n    background-color: #EAF6FF;\n}\n.table-header[data-v-951087e0]{\n    background-color: #009FFD;\n    padding: 15px;\n    color: white;\n}\n.yes[data-v-951087e0] {\n    font-weight: bold;\n    background-color: green;\n    font-size: 10px;\n    padding: 5px 10px;\n    color:white;\n}\n.no[data-v-951087e0] {\n    font-weight: bold;\n    background-color: red;\n    font-size: 10px;\n    padding: 5px 10px;\n    color:white;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -48088,10 +48115,10 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Park/ParkIndex.vue?vue&type=style&index=0&id=64842e10&scoped=true&lang=css&":
-/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Park/ParkIndex.vue?vue&type=style&index=0&id=64842e10&scoped=true&lang=css& ***!
-  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/ParkDevice/ParkDeviceIndex.vue?vue&type=style&index=0&id=951087e0&scoped=true&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/ParkDevice/ParkDeviceIndex.vue?vue&type=style&index=0&id=951087e0&scoped=true&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -48101,7 +48128,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ParkIndex_vue_vue_type_style_index_0_id_64842e10_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ParkIndex.vue?vue&type=style&index=0&id=64842e10&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Park/ParkIndex.vue?vue&type=style&index=0&id=64842e10&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ParkDeviceIndex_vue_vue_type_style_index_0_id_951087e0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ParkDeviceIndex.vue?vue&type=style&index=0&id=951087e0&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/ParkDevice/ParkDeviceIndex.vue?vue&type=style&index=0&id=951087e0&scoped=true&lang=css&");
 
             
 
@@ -48110,11 +48137,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ParkIndex_vue_vue_type_style_index_0_id_64842e10_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ParkDeviceIndex_vue_vue_type_style_index_0_id_951087e0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ParkIndex_vue_vue_type_style_index_0_id_64842e10_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ParkDeviceIndex_vue_vue_type_style_index_0_id_951087e0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -48798,10 +48825,10 @@ component.options.__file = "resources/js/components/Administrator/Dashboard.vue"
 
 /***/ }),
 
-/***/ "./resources/js/components/Administrator/Park/ParkIndex.vue":
-/*!******************************************************************!*\
-  !*** ./resources/js/components/Administrator/Park/ParkIndex.vue ***!
-  \******************************************************************/
+/***/ "./resources/js/components/Administrator/ParkDevice/ParkDeviceIndex.vue":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/Administrator/ParkDevice/ParkDeviceIndex.vue ***!
+  \******************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -48809,9 +48836,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _ParkIndex_vue_vue_type_template_id_64842e10_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ParkIndex.vue?vue&type=template&id=64842e10&scoped=true& */ "./resources/js/components/Administrator/Park/ParkIndex.vue?vue&type=template&id=64842e10&scoped=true&");
-/* harmony import */ var _ParkIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ParkIndex.vue?vue&type=script&lang=js& */ "./resources/js/components/Administrator/Park/ParkIndex.vue?vue&type=script&lang=js&");
-/* harmony import */ var _ParkIndex_vue_vue_type_style_index_0_id_64842e10_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ParkIndex.vue?vue&type=style&index=0&id=64842e10&scoped=true&lang=css& */ "./resources/js/components/Administrator/Park/ParkIndex.vue?vue&type=style&index=0&id=64842e10&scoped=true&lang=css&");
+/* harmony import */ var _ParkDeviceIndex_vue_vue_type_template_id_951087e0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ParkDeviceIndex.vue?vue&type=template&id=951087e0&scoped=true& */ "./resources/js/components/Administrator/ParkDevice/ParkDeviceIndex.vue?vue&type=template&id=951087e0&scoped=true&");
+/* harmony import */ var _ParkDeviceIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ParkDeviceIndex.vue?vue&type=script&lang=js& */ "./resources/js/components/Administrator/ParkDevice/ParkDeviceIndex.vue?vue&type=script&lang=js&");
+/* harmony import */ var _ParkDeviceIndex_vue_vue_type_style_index_0_id_951087e0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ParkDeviceIndex.vue?vue&type=style&index=0&id=951087e0&scoped=true&lang=css& */ "./resources/js/components/Administrator/ParkDevice/ParkDeviceIndex.vue?vue&type=style&index=0&id=951087e0&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -48822,19 +48849,19 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _ParkIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ParkIndex_vue_vue_type_template_id_64842e10_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _ParkIndex_vue_vue_type_template_id_64842e10_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _ParkDeviceIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ParkDeviceIndex_vue_vue_type_template_id_951087e0_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ParkDeviceIndex_vue_vue_type_template_id_951087e0_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  "64842e10",
+  "951087e0",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/Administrator/Park/ParkIndex.vue"
+component.options.__file = "resources/js/components/Administrator/ParkDevice/ParkDeviceIndex.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
@@ -49460,10 +49487,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/Administrator/Park/ParkIndex.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************************!*\
-  !*** ./resources/js/components/Administrator/Park/ParkIndex.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************************/
+/***/ "./resources/js/components/Administrator/ParkDevice/ParkDeviceIndex.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************!*\
+  !*** ./resources/js/components/Administrator/ParkDevice/ParkDeviceIndex.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -49471,8 +49498,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ParkIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ParkIndex.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Park/ParkIndex.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ParkIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ParkDeviceIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ParkDeviceIndex.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/ParkDevice/ParkDeviceIndex.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ParkDeviceIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -49710,15 +49737,15 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/Administrator/Park/ParkIndex.vue?vue&type=style&index=0&id=64842e10&scoped=true&lang=css&":
-/*!***************************************************************************************************************************!*\
-  !*** ./resources/js/components/Administrator/Park/ParkIndex.vue?vue&type=style&index=0&id=64842e10&scoped=true&lang=css& ***!
-  \***************************************************************************************************************************/
+/***/ "./resources/js/components/Administrator/ParkDevice/ParkDeviceIndex.vue?vue&type=style&index=0&id=951087e0&scoped=true&lang=css&":
+/*!***************************************************************************************************************************************!*\
+  !*** ./resources/js/components/Administrator/ParkDevice/ParkDeviceIndex.vue?vue&type=style&index=0&id=951087e0&scoped=true&lang=css& ***!
+  \***************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ParkIndex_vue_vue_type_style_index_0_id_64842e10_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ParkIndex.vue?vue&type=style&index=0&id=64842e10&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Park/ParkIndex.vue?vue&type=style&index=0&id=64842e10&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ParkDeviceIndex_vue_vue_type_style_index_0_id_951087e0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ParkDeviceIndex.vue?vue&type=style&index=0&id=951087e0&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/ParkDevice/ParkDeviceIndex.vue?vue&type=style&index=0&id=951087e0&scoped=true&lang=css&");
 
 
 /***/ }),
@@ -49883,19 +49910,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/Administrator/Park/ParkIndex.vue?vue&type=template&id=64842e10&scoped=true&":
-/*!*************************************************************************************************************!*\
-  !*** ./resources/js/components/Administrator/Park/ParkIndex.vue?vue&type=template&id=64842e10&scoped=true& ***!
-  \*************************************************************************************************************/
+/***/ "./resources/js/components/Administrator/ParkDevice/ParkDeviceIndex.vue?vue&type=template&id=951087e0&scoped=true&":
+/*!*************************************************************************************************************************!*\
+  !*** ./resources/js/components/Administrator/ParkDevice/ParkDeviceIndex.vue?vue&type=template&id=951087e0&scoped=true& ***!
+  \*************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ParkIndex_vue_vue_type_template_id_64842e10_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ParkIndex_vue_vue_type_template_id_64842e10_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ParkDeviceIndex_vue_vue_type_template_id_951087e0_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ParkDeviceIndex_vue_vue_type_template_id_951087e0_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ParkIndex_vue_vue_type_template_id_64842e10_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ParkIndex.vue?vue&type=template&id=64842e10&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Park/ParkIndex.vue?vue&type=template&id=64842e10&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ParkDeviceIndex_vue_vue_type_template_id_951087e0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ParkDeviceIndex.vue?vue&type=template&id=951087e0&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/ParkDevice/ParkDeviceIndex.vue?vue&type=template&id=951087e0&scoped=true&");
 
 
 /***/ }),
@@ -51036,10 +51063,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Park/ParkIndex.vue?vue&type=template&id=64842e10&scoped=true&":
-/*!****************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Park/ParkIndex.vue?vue&type=template&id=64842e10&scoped=true& ***!
-  \****************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/ParkDevice/ParkDeviceIndex.vue?vue&type=template&id=951087e0&scoped=true&":
+/*!****************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/ParkDevice/ParkDeviceIndex.vue?vue&type=template&id=951087e0&scoped=true& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -51068,7 +51095,7 @@ var render = function () {
                     staticClass:
                       "has-text-weight-bold subtitle is-4 table-header",
                   },
-                  [_vm._v("PARKING FEES")]
+                  [_vm._v("PARK DEVICES")]
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "columns" }, [
@@ -51086,10 +51113,7 @@ var render = function () {
                         },
                         [
                           _c("b-input", {
-                            attrs: {
-                              type: "text",
-                              placeholder: "Search Lastname",
-                            },
+                            attrs: { type: "text", placeholder: "Search..." },
                             nativeOn: {
                               keyup: function ($event) {
                                 if (
@@ -51108,11 +51132,11 @@ var render = function () {
                               },
                             },
                             model: {
-                              value: _vm.search.parking_hour,
+                              value: _vm.search.search,
                               callback: function ($$v) {
-                                _vm.$set(_vm.search, "parking_hour", $$v)
+                                _vm.$set(_vm.search, "search", $$v)
                               },
-                              expression: "search.parking_hour",
+                              expression: "search.search",
                             },
                           }),
                           _vm._v(" "),
@@ -51192,9 +51216,9 @@ var render = function () {
                   [
                     _c("b-table-column", {
                       attrs: {
-                        field: "parking_hour",
+                        field: "park_id",
                         centered: "",
-                        label: "Parking Hour",
+                        label: "Id",
                         sortable: "",
                       },
                       scopedSlots: _vm._u([
@@ -51204,7 +51228,7 @@ var render = function () {
                             return [
                               _vm._v(
                                 "\n                            " +
-                                  _vm._s(props.row.parking_hour) +
+                                  _vm._s(props.row.park_id) +
                                   "\n                        "
                               ),
                             ]
@@ -51215,9 +51239,8 @@ var render = function () {
                     _vm._v(" "),
                     _c("b-table-column", {
                       attrs: {
-                        field: "lname",
-                        label: "Parking Price",
-                        centered: "",
+                        field: "name",
+                        label: "Device Name",
                         sortable: "",
                       },
                       scopedSlots: _vm._u([
@@ -51227,9 +51250,51 @@ var render = function () {
                             return [
                               _vm._v(
                                 "\n                            " +
-                                  _vm._s(props.row.parking_price) +
+                                  _vm._s(props.row.name) +
                                   "\n                        "
                               ),
+                            ]
+                          },
+                        },
+                      ]),
+                    }),
+                    _vm._v(" "),
+                    _c("b-table-column", {
+                      attrs: { field: "device_ip", label: "IP", sortable: "" },
+                      scopedSlots: _vm._u([
+                        {
+                          key: "default",
+                          fn: function (props) {
+                            return [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(props.row.device_ip) +
+                                  "\n                        "
+                              ),
+                            ]
+                          },
+                        },
+                      ]),
+                    }),
+                    _vm._v(" "),
+                    _c("b-table-column", {
+                      attrs: {
+                        field: "occupied",
+                        label: "Occupied",
+                        sortable: "",
+                      },
+                      scopedSlots: _vm._u([
+                        {
+                          key: "default",
+                          fn: function (props) {
+                            return [
+                              props.row.is_occupied === 1
+                                ? _c("span", { staticClass: "yes" }, [
+                                    _vm._v("YES"),
+                                  ])
+                                : _c("span", { staticClass: "no" }, [
+                                    _vm._v("NO"),
+                                  ]),
                             ]
                           },
                         },
@@ -51265,7 +51330,7 @@ var render = function () {
                                         on: {
                                           click: function ($event) {
                                             return _vm.getData(
-                                              props.row.parking_fee_id
+                                              props.row.park_id
                                             )
                                           },
                                         },
@@ -51289,7 +51354,7 @@ var render = function () {
                                         on: {
                                           click: function ($event) {
                                             return _vm.confirmDelete(
-                                              props.row.parking_fee_id
+                                              props.row.park_id
                                             )
                                           },
                                         },
@@ -51407,7 +51472,7 @@ var render = function () {
                       staticClass:
                         "modal-card-title has-text-weight-bold is-size-6",
                     },
-                    [_vm._v("PARKING INFORMATION")]
+                    [_vm._v("PARK DEVICE INFORMATION")]
                   ),
                   _vm._v(" "),
                   _c("button", {
@@ -51432,29 +51497,26 @@ var render = function () {
                             "b-field",
                             {
                               attrs: {
-                                label: "Parking Hour",
+                                label: "Device Name",
                                 "label-position": "on-border",
-                                type: this.errors.parking_hour
-                                  ? "is-danger"
-                                  : "",
-                                message: this.errors.parking_hour
-                                  ? this.errors.parking_hour[0]
+                                type: _vm.errors.name ? "is-danger" : "",
+                                message: _vm.errors.name
+                                  ? _vm.errors.name[0]
                                   : "",
                               },
                             },
                             [
-                              _c("b-numberinput", {
+                              _c("b-input", {
                                 attrs: {
-                                  controls: false,
-                                  placeholder: "Parking Hour",
+                                  placeholder: "Device Name",
                                   required: "",
                                 },
                                 model: {
-                                  value: _vm.fields.parking_hour,
+                                  value: _vm.fields.name,
                                   callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "parking_hour", $$v)
+                                    _vm.$set(_vm.fields, "name", $$v)
                                   },
-                                  expression: "fields.parking_hour",
+                                  expression: "fields.name",
                                 },
                               }),
                             ],
@@ -51474,29 +51536,61 @@ var render = function () {
                             "b-field",
                             {
                               attrs: {
-                                label: "Parking Price",
+                                label: "Device IP",
                                 "label-position": "on-border",
-                                type: this.errors.parking_price
-                                  ? "is-danger"
-                                  : "",
-                                message: this.errors.parking_price
-                                  ? this.errors.parking_price[0]
+                                type: _vm.errors.device_ip ? "is-danger" : "",
+                                message: _vm.errors.device_ip
+                                  ? _vm.errors.device_ip[0]
                                   : "",
                               },
                             },
                             [
-                              _c("b-numberinput", {
+                              _c("b-input", {
                                 attrs: {
-                                  controls: false,
-                                  placeholder: "Parking Price",
+                                  placeholder: "Device IP",
                                   required: "",
                                 },
                                 model: {
-                                  value: _vm.fields.parking_price,
+                                  value: _vm.fields.device_ip,
                                   callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "parking_price", $$v)
+                                    _vm.$set(_vm.fields, "device_ip", $$v)
                                   },
-                                  expression: "fields.parking_price",
+                                  expression: "fields.device_ip",
+                                },
+                              }),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "columns" }, [
+                      _c(
+                        "div",
+                        { staticClass: "column" },
+                        [
+                          _c(
+                            "b-field",
+                            {
+                              attrs: {
+                                label: "Occupied",
+                                type: _vm.errors.is_occupied ? "is-danger" : "",
+                                message: _vm.errors.is_occupied
+                                  ? _vm.errors.is_occupied[0]
+                                  : "",
+                              },
+                            },
+                            [
+                              _c("b-checkbox", {
+                                attrs: { "true-value": 1, "false-value": 0 },
+                                model: {
+                                  value: _vm.fields.is_occupied,
+                                  callback: function ($$v) {
+                                    _vm.$set(_vm.fields, "is_occupied", $$v)
+                                  },
+                                  expression: "fields.is_occupied",
                                 },
                               }),
                             ],
@@ -79004,7 +79098,7 @@ Vue.compile = compileToFunctions;
 
 var map = {
 	"./components/Administrator/Dashboard.vue": "./resources/js/components/Administrator/Dashboard.vue",
-	"./components/Administrator/Park/ParkIndex.vue": "./resources/js/components/Administrator/Park/ParkIndex.vue",
+	"./components/Administrator/ParkDevice/ParkDeviceIndex.vue": "./resources/js/components/Administrator/ParkDevice/ParkDeviceIndex.vue",
 	"./components/Administrator/ParkingFee/ParkingFee.vue": "./resources/js/components/Administrator/ParkingFee/ParkingFee.vue",
 	"./components/Administrator/User/UsersPage.vue": "./resources/js/components/Administrator/User/UsersPage.vue",
 	"./components/ExampleComponent.vue": "./resources/js/components/ExampleComponent.vue",

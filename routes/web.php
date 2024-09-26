@@ -58,6 +58,8 @@ Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'inde
 Route::middleware(['auth', 'admin'])->group(function(){
 
     // Route::get('/load-reports', [App\Http\Controllers\Administrator\AdminHomeController::class, 'loadReports']);
+    Route::resource('/park-devices', App\Http\Controllers\Administrator\ParkController::class);
+    Route::get('/get-park-devices', [App\Http\Controllers\Administrator\ParkController::class, 'getData']);
 
     Route::resource('/parking-fees', App\Http\Controllers\Administrator\ParkingFeeController::class);
     Route::get('/get-parking-fees', [App\Http\Controllers\Administrator\ParkingFeeController::class, 'getData']);

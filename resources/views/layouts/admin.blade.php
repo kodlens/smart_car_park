@@ -46,11 +46,13 @@
                 </b-navbar-item>
 
                 <b-navbar-dropdown label="Settings">
+                    <b-navbar-item href="/park-devices">
+                        Parking Devices
+                    </b-navbar-item>
 
                     <b-navbar-item href="/parking-fees">
                         Parking Fees
                     </b-navbar-item>
-
                     <!-- <b-navbar-item href="/#">
                         Item 2
                     </b-navbar-item> -->
