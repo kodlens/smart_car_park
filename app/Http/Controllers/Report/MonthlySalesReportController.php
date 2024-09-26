@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Report;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\ParkReservation;
+use App\Models\ParkSale;
 
 class MonthlySalesReportController extends Controller
 {
@@ -15,7 +15,7 @@ class MonthlySalesReportController extends Controller
     public function loadMonthlySalesReport(Request $req){
         $month = date('m', strtotime($req->inputdate));
 
-        $sales = ParkSale::whereMonth('start_time', $month)
+        $sales = ParkSale::whereMonth('transaction_date', $month)
             ->get();
 
         return $sales;
