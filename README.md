@@ -1,7 +1,7 @@
-# smart_car_park
-    update smart car park
-
-
+# SMART CAR PARK
+This is application use Web and a hardware called ESP8266. This project is a car park
+which you can make reservation on a specific park. This will also cater online payment such as
+GCASH, and depends on the Gateway. The payment gateway used in this application is PAYMONGO.
 
 
 ## For chart js
