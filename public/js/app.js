@@ -10030,6 +10030,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -54307,7 +54309,18 @@ var render = function () {
             _vm._l(_vm.monthlySales, function (item, index) {
               return _c("tr", { key: index }, [
                 _c("td", [
-                  _vm._v(_vm._s(new Date(item.start_time).toLocaleString())),
+                  _vm._v(
+                    _vm._s(
+                      new Date(item.transaction_date).toLocaleDateString(
+                        "en-US",
+                        { year: "numeric", month: "short", day: "numeric" }
+                      )
+                    )
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(" " + _vm._s(item.remarks.toUpperCase()) + " "),
                 ]),
                 _vm._v(" "),
                 _c("td", [_vm._v(" " + _vm._s(item.price) + " ")]),
@@ -54315,9 +54328,11 @@ var render = function () {
             }),
             _vm._v(" "),
             _c("tr", [
-              _c("td", [_vm._v("TOTAL:")]),
+              _c("td", { attrs: { colspan: "2" } }, [_vm._v("TOTAL:")]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(_vm.totalSales))]),
+              _c("td", { staticStyle: { "font-weight": "bold" } }, [
+                _vm._v(_vm._s(_vm.totalSales)),
+              ]),
             ]),
           ],
           2
@@ -54333,6 +54348,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("th", [_vm._v("Date")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Remarks")]),
       _vm._v(" "),
       _c("th", [_vm._v("Sale")]),
     ])

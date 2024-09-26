@@ -34,16 +34,18 @@
                 <table class="table">
                     <tr>
                         <th>Date</th>
+                        <th>Remarks</th>
                         <th>Sale</th>
                     </tr>
                     <tr v-for="(item, index) in monthlySales" :key="index">
-                        <td>{{ new Date(item.start_time).toLocaleString() }}</td>
+                        <td>{{ new Date(item.transaction_date).toLocaleDateString('en-US', { year: "numeric", month: "short", day: "numeric" }) }}</td>
+                        <td> {{ item.remarks.toUpperCase() }} </td>
                         <td> {{ item.price }} </td>
                     </tr>
 
                     <tr>
-                        <td>TOTAL:</td>
-                        <td>{{totalSales}}</td>
+                        <td colspan="2">TOTAL:</td>
+                        <td style="font-weight: bold;">{{totalSales}}</td>
                     </tr>
                    
                 </table>
