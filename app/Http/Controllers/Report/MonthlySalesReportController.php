@@ -9,7 +9,7 @@ use App\Models\ParkReservation;
 class MonthlySalesReportController extends Controller
 {
     public function index(){
-        return view('reports.sales-report');
+        return view('reports.monthly-sales-report');
     }
 
     public function loadMonthlySalesReport(Request $req){

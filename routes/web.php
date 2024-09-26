@@ -71,6 +71,9 @@ Route::middleware(['auth', 'admin'])->group(function(){
     Route::get('/monthly-sales-report', [App\Http\Controllers\Report\MonthlySalesReportController::class, 'index']);
     Route::get('/load-monthly-sales-report', [App\Http\Controllers\Report\MonthlySalesReportController::class, 'loadMonthlySalesReport']);
 
+    Route::get('/weekly-sales-report', [App\Http\Controllers\Report\WeeklySalesReportController::class, 'index']);
+    Route::get('/load-weekly-sales-report', [App\Http\Controllers\Report\WeeklySalesReportController::class, 'loadWeeklySalesReport']);
+
 });
 
 // -----------------------ADMINSITRATOR-------------------------------------------

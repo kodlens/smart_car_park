@@ -69,7 +69,9 @@
                     <b-navbar-item href="/monthly-sales-report">
                         Monthly Sales Report
                     </b-navbar-item>
-
+                    <b-navbar-item href="/weekly-sales-report">
+                        Weekly Sales Report
+                    </b-navbar-item>
                     <!-- <b-navbar-item href="/#">
                         Item 2
                     </b-navbar-item> -->
