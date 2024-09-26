@@ -15,4 +15,5 @@ GCASH, Bank Payments etc... depending on the payment gateway. The payment gatewa
 
 ## Update instruction
 Open git bash and run this command
-    ```git pull
+
+    git pull
