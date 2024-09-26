@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             ParkSeeder::class,
-            ParkPriceSeeder::class
+            ParkPriceSeeder::class,
+            ParkSaleSeeder::class
         ]);
     }
 }
