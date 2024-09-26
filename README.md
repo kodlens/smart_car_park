@@ -1,6 +1,6 @@
 # SMART CAR PARK
-This is application used Web and a hardware called ESP8266. This project is a car park
-which you can make reservation on a specific park. This will also cater online payment such as
+This is application used Web and a hardware called ESP8266. This project is a car parking application
+which you can make reservation on a specific car parking area. This will also cater online payment such as
 GCASH, Bank Payments etc... depending on the payment gateway. The payment gateway used in this application is PAYMONGO.
 
 
@@ -27,3 +27,5 @@ and this action will delete all data on the database and will re populate with n
 
 ## Update Notes
 - Dashboard Graph
+- Reports (Monthly and Weekly reports)
+- Dynamically adding and editing Park Module (ESP8266 Device)
