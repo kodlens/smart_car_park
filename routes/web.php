@@ -50,7 +50,7 @@ Route::get('/load-barangays', [App\Http\Controllers\AddressController::class, 'l
 
 Route::get('/load-parking-spaces', [App\Http\Controllers\ParkingSpacesController::class, 'loadParkingSpaces']);
 Route::get('/load-parking-reservation', [App\Http\Controllers\ParkReservationController::class, 'loadParkReservation']);
-Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index']);
+Route::get('/dashboard', [App\Http\Controllers\Administrator\DashboardController::class, 'index']);
 
 
 

@@ -1,476 +1,101 @@
 <template>
-    <div>
-        <div class="welcome-container">
-
-            <!-- <div class="logo-wrapper">
-                <img src="/img/tc_division.png" class="division-logo" alt="Division Logo">
-                <img src="/img/tcnhs_logo.png" class="tcnhs-logo" alt="TCNHS Logo">
-            </div>
-           
-            <div class="loader-3">
-                <div class="circle"></div>
-                <div class="circle"></div>
-                <div class="circle"></div>
-                <div class="circle"></div>
-                <div class="circle"></div>
-            </div>-->
-
-            <div class="columns">
-                <div class="column is-6">
-                    <div class="buttons">
-                        <b-button label="Search" 
-                            @click="loadParkingSpaces"
-                            type="is-info" icon-right="magnify"></b-button>
-                    </div>
-                    <div class="report-text" v-for="(park, index) in parkingSpaces" :key="index">
-                        <div class="park-container">
-                            <div class="p-4">
-                                <div>
-                                    <div class="has-text-weight-bold is-size-6">
-                                        {{ park.name }}
-                                    </div>
-                                    <!-- {{ loadParkReservation(park.par_id) }} -->
-
-                                    <div v-if="park.is_occupied === 0">
-                                        <div class="available">AVAILABLE</div>
-                                        <div>
-                                            <b-button class="is-link"
-                                                @click="openModalReserveMe(index)"
-                                                size="is-small" label="RESERVE ME"></b-button>
-                                        </div>
-                                    </div>
-                                    <div class="" v-else>
-                                        <div class="mb-2 occupied">OCCUPIED</div>
-                                        <div>
-                                            <img src="/img/car.png" style="width: 250px;" alt="">
-                                        </div>
-
-                                        <div class="mb-2" v-if="park.parkReservation">
-                                            <button class="button is-success mb-2"
-                                                @click="displayQr(index)"
-                                                v-if="(park.parkReservation.enter_time == null) && (park.parkReservation.user_id == user.user_id)">
-                                                Enter Parking Space
-                                            </button>
-
-                                            <button class="button is-warning mb-2"
-                                                @click="extendParkingTime(park.parkReservation.park_reservation_id)"
-                                                v-if="(park.parkReservation.user_id == user.user_id)">
-                                                Extend Parking Time
-                                            </button>
-                                            <button class="button is-warning mb-2"
-                                                v-if="(park.parkReservation.enter_time !== null) && (park.parkReservation.user_id == user.user_id)"
-                                                @click="openModalExit(index)">
-                                                Exit Parking Space
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> 
-                    </div> 
-                </div>
-            </div>
- 
-        </div> <!--welcome container-->
-
-
-        <!--modal reserve-->
-        <b-modal v-model="modalReserveMe" has-modal-card
-                 trap-focus
-                 :width="640"
-                 aria-role="dialog"
-                 aria-label="Modal"
-                 aria-modal>
-
-            <form action="/paymongo/pay">
-                <div class="modal-card">
-                    <header class="modal-card-head">
-                        <p class="modal-card-title has-text-weight-bold is-size-5">RESERVE ME</p>
-                        <button
-                            type="button"
-                            class="delete"
-                            @click="modalReserveMe = false"/>
-                    </header>
-
-                    <section class="modal-card-body">
-                        <div class="">
-                            <div class="columns">
-                                <div class="column">
-                                   <!-- <p>To make reservation for this parking area, a payment must be made.</p>-->
-                                    <p>PARKING FEE: &#8369;{{ fields.amount }}</p> 
-
-                                    <input type="hidden" name="park" v-model="fields.row">
-                                    <input type="hidden" name="user_id" v-model="user.user_id">
-
-                                    <b-field label="Reservation From">
-                                        <b-datetimepicker v-model="fields.date_time_reserve_from" editable name="date_time_reserve_from" 
-                                            @input="computeAmount" placeholder="Date and Time Reservation"></b-datetimepicker>
-                                    </b-field>
-
-                                    <b-field label="Reservation To">
-                                        <b-datetimepicker v-model="fields.date_time_reserve_to" editable name="date_time_reserve_to" 
-                                            @input="computeAmount" placeholder="Date and Time Reservation"></b-datetimepicker>
-                                    </b-field>
-
-                                    <b-field label="No. of Hours">
-                                        <b-input type="text" v-model="fields.hr" name="hours" 
-                                            @input="computeAmount" readonly placeholder="1" :min="1" />
-                                    </b-field>
-
-                                    <input type="hidden" name="start" v-model="fields.date_time_reserve_from">
-                                    <input type="hidden" name="end" v-model="fields.date_time_reserve_to">
-
-                                   
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <footer class="modal-card-foot">
-                        <button
-                            class="button is-primary">
-                                PAY
-                                <b-icon icon="arrow-right" class="ml-2"></b-icon>    
-                        </button>
-                    </footer>
-                </div>
-            </form><!--close form-->
-        </b-modal>
-        <!--close modal-->
-
-
-
-        <!--modal extend time-->
-        <b-modal v-model="modalExtendTime" has-modal-card
-                 trap-focus
-                 :width="640"
-                 aria-role="dialog"
-                 aria-label="Modal"
-                 aria-modal>
-
-            <form action="/paymongo/pay-extend">
-                <div class="modal-card">
-                    <header class="modal-card-head">
-                        <p class="modal-card-title has-text-weight-bold is-size-5">EXTEND TIME</p>
-                        <button
-                            type="button"
-                            class="delete"
-                            @click="modalExtendTime = false"/>
-                    </header>
-
-                    <section class="modal-card-body">
-                        <div class="">
-                            <div class="columns">
-                                <div class="column">
-                                   <!-- <p>To make reservation for this parking area, a payment must be made.</p>-->
-                                    <p>PARKING FEE: &#8369;{{ fields.amount }}</p> 
-
-                                    <input type="hidden" name="park" v-model="fields.row">
-                                    <input type="hidden" name="user_id" v-model="user.user_id">
-
-                                    <b-field label="Extend From">
-                                        <b-datetimepicker 
-                                            v-model="fields.extend_from" 
-                                            disabled
-                                            editable 
-                                            name="date_time_reserve_from" 
-                                            @input="computeAmountExtend" placeholder="Date and Time Reservation"></b-datetimepicker>
-                                    </b-field>
-
-                                    <b-field label="Extend To">
-                                        <b-datetimepicker v-model="fields.extend_to" 
-                                            :min-datetime="fields.extend_from"
-                                            editable name="date_time_reserve_to" 
-                                            @input="computeAmountExtend" 
-                                            placeholder="Date and Time Reservation"></b-datetimepicker>
-                                    </b-field>
-
-                                    <b-field label="No. of Hours">
-                                        <b-input type="text" v-model="fields.extend_hr" name="hours" 
-                                            @input="computeAmountExtend" readonly placeholder="1" :min="1" />
-                                    </b-field>
-
-                                    <input type="hidden" name="start" v-model="fields.extend_from">
-                                    <input type="hidden" name="end" v-model="fields.extend_to">
-                                    <input type="hidden" name="reservation_id" v-model="fields.reservation_id">
-
-                                   
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <footer class="modal-card-foot">
-                        <button
-                            class="button is-primary">
-                                PAY
-                                <b-icon icon="arrow-right" class="ml-2"></b-icon>    
-                        </button>
-                    </footer>
-                </div>
-            </form><!--close form-->
-        </b-modal>
-        <!--close modal-->
-
-        <b-modal v-model="modalQR" has-modal-card
-                 trap-focus
-                 :width="640"
-                 aria-role="dialog"
-                 aria-label="Modal"
-                 aria-modal>
-                <div class="modal-card">
-                    <header class="modal-card-head">
-                        <p class="modal-card-title has-text-weight-bold is-size-5">RESERVATION QR</p>
-                        <button
-                            type="button"
-                            class="delete"
-                            @click="loadParkingSpaces"/>
-                    </header>
-
-                    <section class="modal-card-body">
-                        <div class="">
-                            <div class="columns">
-                                <div class="column">
-                                    <div class="qr">
-                                        <qrcode :value="qr" :options="{ width: 400 }"></qrcode>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <footer class="modal-card-foot">
-                        <button
-                            @click="loadParkingSpaces"
-                            class="button is-primary">
-                                Done
-                                <b-icon icon="arrow-right" class="ml-2"></b-icon>    
-                        </button>
-                    </footer>
-                </div>
-        </b-modal>
-
-        <b-modal v-model="confirmExit" has-modal-card
-                 trap-focus
-                 :width="640"
-                 aria-role="dialog"
-                 aria-label="Modal"
-                 aria-modal>
-                <div class="modal-card">
-                    <header class="modal-card-head">
-                        <p class="modal-card-title has-text-weight-bold is-size-5">Confirmation</p>
-                        <button
-                            type="button"
-                            class="delete"
-                            @click="loadParkingSpaces"/>
-                    </header>
-
-                    <section class="modal-card-body">
-                        <div class="">
-                            <div class="columns">
-                                <div class="column">
-                                    Are you sure you want to exit park?
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <footer class="modal-card-foot">
-                        <button
-                            @click="confirmExit = false"
-                            class="button is-secondary">
-                            No
-                        </button>
-                        <button
-                            @click="exitParking"
-                            class="button is-primary">
-                                Yes   
-                        </button>
-                    </footer>
-                </div>
-        </b-modal>
-
-
-    </div>
+  <LineChartGenerator
+    :chart-options="chartOptions"
+    :chart-data="chartData"
+    :chart-id="chartId"
+    :dataset-id-key="datasetIdKey"
+    :plugins="plugins"
+    :css-classes="cssClasses"
+    :styles="styles"
+    :width="width"
+    :height="height"
+  />
 </template>
 
 <script>
+import { Line as LineChartGenerator } from 'vue-chartjs/legacy'
+
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  LineElement,
+  LinearScale,
+  CategoryScale,
+  PointElement
+} from 'chart.js'
+
+ChartJS.register(
+  Title,
+  Tooltip,
+  Legend,
+  LineElement,
+  LinearScale,
+  CategoryScale,
+  PointElement
+)
+
 export default {
-
- 
-	data(){
-
-        const currentDate = new Date();
-    
-		return{
-            info: {},
-            parkingSpaces: [],
-            reports: [],
-            user: [],
-
-            modalReserveMe: false,
-            modalExtendTime: false,
-            modalQR: false,
-            confirmExit: false,
-            errors: {},
-            fields: {
-                date_time_reserve_from: currentDate,
-                date_time_reserve_to: new Date(currentDate.getTime() + (1 * 60 * 60 * 1000)), // Add 1 hour
-
-                hr:1,
-                amount:20,
-
-                reservation_id: 0,
-                extend_hr: 1,
-                extend_from: null,
-                extend_to: null,
-                extend_amount: 20
-            },
-            qr: null
-		}
-	},
-
-	methods:{
-        loadParkingSpaces(){
-            axios.get('/load-parking-spaces').then(res=>{
-                this.parkingSpaces = res.data
-                this.modalQR = false
-                
-            }).catch(err=>{
-            
-            })
-        },
-        loadProfile(){
-            axios.get('/load-profile').then(res=>{
-                this.user = res.data;
-                
-            }).catch(err=>{
-            
-            })
-        },
-
-        openModalReserveMe(row){
-            this.fields.row = row
-            this.modalReserveMe = true
-        },
-        openModalExit(row){
-            this.fields.row = this.parkingSpaces[row].parkReservation.park_reservation_id;
-            this.confirmExit = true
-        },
-        exitParking(){
-            axios.post('/exit-park/'+this.fields.row).then(
-                res=>{
-                    this.confirmExit = false;
-                    this.loadParkingSpaces();
-                    if(res.data.status === 'updated'){
-                         this.$buefy.toast.open({
-                            duration: 5000,
-                            message: `Thank you. You may exit your vehicle now.`,
-                            position: 'is-bottom',
-                            type: 'is-success'
-                        })
-                    }
-                }
-            )
-        },
-        computeAmount(){
-            var a = new Date(this.fields.date_time_reserve_to);
-            var b = new Date(this.fields.date_time_reserve_from);
-            var hours = this.roundNum(Math.abs(b - a) / 36e5);
-
-            //this.fields.amount = this.fields.hr * 20
-            this.fields.hr = hours
-            this.fields.amount = this.roundNum(hours * 20)
-        },
-
-        computeAmountExtend(){
-            var a = new Date(this.fields.extend_from);
-            var b = new Date(this.fields.extend_to);
-            var hours = this.roundNum(Math.abs(b - a) / 36e5);
-
-            //this.fields.amount = this.fields.hr * 20
-            this.fields.extend_hr = hours
-            this.fields.extend_amount = this.roundNum(hours * 20)
-        },
-
-        roundNum(num){
-           return Math.round((num + Number.EPSILON) * 100) / 100;
-        },
-
-        displayQr(index){
-            this.qr = this.parkingSpaces[index].parkReservation.qr_ref;
-            this.modalQR = true;
-        },
-
-        // this will extend parking time
-        extendParkingTime(id){
-            this.reservation_id = 0;
-            axios.get('/get-my-reservation/' + id).then(res=>{
-                this.fields.reservation_id = id;
-                this.fields.extend_from = new Date(res.data.end_time);
-
-                //add 1 hour from expire time date
-                this.fields.extend_to = new Date(this.fields.extend_from + (1 * 60 * 60 * 1000))
-
-                this.modalExtendTime = true
-                //console.log(res.data)
-            }).catch(err=>{
-            
-            })
-            
-        }
-        
-        
-	},
-    computed:{
-        qrCode(){
-            return this.parkReserved.qr_ref;
-        }
+  name: 'LineChart',
+  components: {
+    LineChartGenerator
+  },
+  props: {
+    chartId: {
+      type: String,
+      default: 'line-chart'
     },
-
-    mounted() {
-    
-    this.loadParkingSpaces();
-    this.fields;
-    this.loadProfile();
+    datasetIdKey: {
+      type: String,
+      default: 'label'
+    },
+    width: {
+      type: Number,
+      default: 400
+    },
+    height: {
+      type: Number,
+      default: 400
+    },
+    cssClasses: {
+      default: '',
+      type: String
+    },
+    styles: {
+      type: Object,
+      default: () => {}
+    },
+    plugins: {
+      type: Array,
+      default: () => []
     }
+  },
+  data() {
+    return {
+      chartData: {
+        labels: [
+          'January',
+          'February',
+          'March',
+          'April',
+          'May',
+          'June',
+          'July'
+        ],
+        datasets: [
+          {
+            label: 'Data One',
+            backgroundColor: '#f87979',
+            data: [40, 39, 10, 40, 39, 80, 40]
+          }
+        ]
+      },
+      chartOptions: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    }
+  }
 }
 </script>
-<!-- 
-<style scoped src="../../../css/admin-home.css">
-</style> -->
-
-<style scoped>
-.welcome-container{
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
- 
-}
-
-
-.park-container{
-    border-top: 2px solid #000; /* Set the top border */
-    border-left: 2px solid #000; /* Set the left border */
-    border-bottom: 2px solid #000; /* Set the bottom border */
-    border-right: none; /* No border on the right */
-    margin-bottom: 10px;
-    /*height: 220px; */
-    min-width: 300px;
-}
-
-
-.occupied{
-    color: red;
-    font-weight: bolder;
-
-}
-.available{
-    color: green;
-    font-weight: bolder;
-}
-.qr{
-    display: flex;
-    justify-content: center;
-}
-
-</style>
