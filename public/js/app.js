@@ -8182,7 +8182,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -51204,9 +51203,9 @@ var render = function () {
                           fn: function (props) {
                             return [
                               _vm._v(
-                                "\n                                " +
+                                "\n                            " +
                                   _vm._s(props.row.parking_hour) +
-                                  "\n                            "
+                                  "\n                        "
                               ),
                             ]
                           },
@@ -51227,9 +51226,9 @@ var render = function () {
                           fn: function (props) {
                             return [
                               _vm._v(
-                                "\n                                " +
+                                "\n                            " +
                                   _vm._s(props.row.parking_price) +
-                                  "\n                            "
+                                  "\n                        "
                               ),
                             ]
                           },
@@ -51516,7 +51515,7 @@ var render = function () {
                     { staticClass: "button is-primary has-text-weight-bold" },
                     [
                       _vm._v(
-                        "\n                            Save\n                            "
+                        "\n                        Save\n                        "
                       ),
                       _c("b-icon", {
                         staticClass: "ml-4",

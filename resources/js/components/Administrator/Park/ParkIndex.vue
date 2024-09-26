@@ -33,7 +33,6 @@
                             :data="data"
                             :loading="loading"
                             paginated
-                            
                             backend-pagination
                             :total="total"
                             :per-page="perPage"
@@ -45,7 +44,7 @@
                             backend-sorting
                             :default-sort-direction="defaultSortDirection"
                             @sort="onSort">
-<!-- 
+                            <!-- 
                             <b-table-column field="parking_fee_id" label="ID" sortable v-slot="props">
                                 {{ props.row.parking_fee_id }}
                             </b-table-column> -->
