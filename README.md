@@ -11,3 +11,8 @@ GCASH, Bank Payments etc... depending on the payment gateway. The payment gatewa
 
 ## For VUE Version
      "vue": "^2.7.16",
+
+
+## Update instruction
+Open git bash and run this command
+    git pull
