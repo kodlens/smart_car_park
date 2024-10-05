@@ -105,8 +105,6 @@ class SMSNotif extends Command
 
         if ($exit) {
             foreach ($exit as $user) {
-                //$msg = 'Reminders Mr/Mrs. ' . $user->user->lname . ': \nYour ' . $user->hour . ' hr(s) Park Reservation at ' . $user->park->name . ' will start 10 minutes from now. Thank You!';
-                
                 $data = [
                     'lname' => $user->user->lname,
                     'name' => $user->user->lname . ', ' . $user->user->fname,
