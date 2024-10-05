@@ -33,15 +33,15 @@
                             <div class="columns">
                                 <div class="column">
                                     <b-field label="Last Name"
-                                        :type="this.errors.lname ? 'is-danger':''"
-                                        :message="this.errors.lname ? this.errors.lname[0] : ''">
+                                        :type="errors.lname ? 'is-danger':''"
+                                        :message="errors.lname ? errors.lname[0] : ''">
                                         <b-input type="text" v-model="user.lname" placeholder="Last Name"></b-input>
                                     </b-field>
                                 </div>
                                 <div class="column">
                                     <b-field label="First Name"
-                                        :type="this.errors.fname ? 'is-danger':''"
-                                        :message="this.errors.fname ? this.errors.fname[0] : ''">
+                                        :type="errors.fname ? 'is-danger':''"
+                                        :message="errors.fname ? errors.fname[0] : ''">
                                         <b-input type="text" v-model="user.fname" placeholder="First Name"></b-input>
                                     </b-field>
                                 </div>
@@ -61,20 +61,28 @@
                                 </div>
                             </div>
 
+                            <div class="columns">
+                                <div class="column">
+                                    <b-field label="Contact No.">
+                                        <b-input type="text" v-model="user.contact_no" placeholder="Contact No."></b-input>
+                                    </b-field>
+                                </div>
+                            </div>
+
 
                             <div class="columns">
                                 <div class="column">
                                     <b-field label="Email"
-                                        :type="this.errors.email ? 'is-danger':''"
-                                        :message="this.errors.email ? this.errors.email[0] : ''">
+                                        :type="errors.email ? 'is-danger':''"
+                                        :message="errors.email ? errors.email[0] : ''">
                                         <b-input type="text" v-model="user.email" placeholder="Email"></b-input>
                                     </b-field>
                                 </div>
 
                                 <div class="column">
                                     <b-field label="Sex" expanded
-                                        :type="this.errors.sex ? 'is-danger':''"
-                                        :message="this.errors.sex ? this.errors.sex[0] : ''">
+                                        :type="errors.sex ? 'is-danger':''"
+                                        :message="errors.sex ? errors.sex[0] : ''">
                                         <b-select v-model="user.sex"
                                             expanded placeholder="Sex">
                                             <option value="MALE">MALE</option>
@@ -103,10 +111,17 @@
 <script>
 
 export default{
+
     data(){
         return {
             user: {
-                qr_code: null
+                lname: '',
+                fname: '',
+                mname: '',
+                sex: '',
+                email: '',
+                contact_no: '',
+
             },
             errors: {},
         }

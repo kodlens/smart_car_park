@@ -29,3 +29,8 @@ and this action will delete all data on the database and will re populate with n
 - Dashboard Graph
 - Reports (Monthly and Weekly reports)
 - Dynamically adding and editing Park Module (ESP8266 Device)
+
+## For SMS
+We use semaphore for the SMS gateway and used the task schedule of laravel. To run the schedule
+
+    php artisan schedule:work

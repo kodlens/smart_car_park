@@ -10687,11 +10687,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       user: {
-        qr_code: null
+        lname: '',
+        fname: '',
+        mname: '',
+        sex: '',
+        email: '',
+        contact_no: ''
       },
       errors: {}
     };
@@ -55152,10 +55165,8 @@ var render = function () {
                       {
                         attrs: {
                           label: "Last Name",
-                          type: this.errors.lname ? "is-danger" : "",
-                          message: this.errors.lname
-                            ? this.errors.lname[0]
-                            : "",
+                          type: _vm.errors.lname ? "is-danger" : "",
+                          message: _vm.errors.lname ? _vm.errors.lname[0] : "",
                         },
                       },
                       [
@@ -55185,10 +55196,8 @@ var render = function () {
                       {
                         attrs: {
                           label: "First Name",
-                          type: this.errors.fname ? "is-danger" : "",
-                          message: this.errors.fname
-                            ? this.errors.fname[0]
-                            : "",
+                          type: _vm.errors.fname ? "is-danger" : "",
+                          message: _vm.errors.fname ? _vm.errors.fname[0] : "",
                         },
                       },
                       [
@@ -55269,13 +55278,38 @@ var render = function () {
                   [
                     _c(
                       "b-field",
+                      { attrs: { label: "Contact No." } },
+                      [
+                        _c("b-input", {
+                          attrs: { type: "text", placeholder: "Contact No." },
+                          model: {
+                            value: _vm.user.contact_no,
+                            callback: function ($$v) {
+                              _vm.$set(_vm.user, "contact_no", $$v)
+                            },
+                            expression: "user.contact_no",
+                          },
+                        }),
+                      ],
+                      1
+                    ),
+                  ],
+                  1
+                ),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "columns" }, [
+                _c(
+                  "div",
+                  { staticClass: "column" },
+                  [
+                    _c(
+                      "b-field",
                       {
                         attrs: {
                           label: "Email",
-                          type: this.errors.email ? "is-danger" : "",
-                          message: this.errors.email
-                            ? this.errors.email[0]
-                            : "",
+                          type: _vm.errors.email ? "is-danger" : "",
+                          message: _vm.errors.email ? _vm.errors.email[0] : "",
                         },
                       },
                       [
@@ -55306,8 +55340,8 @@ var render = function () {
                         attrs: {
                           label: "Sex",
                           expanded: "",
-                          type: this.errors.sex ? "is-danger" : "",
-                          message: this.errors.sex ? this.errors.sex[0] : "",
+                          type: _vm.errors.sex ? "is-danger" : "",
+                          message: _vm.errors.sex ? _vm.errors.sex[0] : "",
                         },
                       },
                       [
