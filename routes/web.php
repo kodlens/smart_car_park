@@ -141,3 +141,28 @@ Route::get('/test', [App\Http\Controllers\TestController::class, 'Test']);
 
 Route::get('/enter/{ip}', [App\Http\Controllers\ParkController::class, 'enter']);
 Route::get('/exit/{ip}', [App\Http\Controllers\ParkController::class, 'exit']);
+
+
+
+use App\Mail\EntranceMailNotif;
+use Illuminate\Support\Facades\Mail;
+use App\Models\SmsLog;
+use App\Models\ParkReservation;
+use Illuminate\Support\Carbon;
+
+Route::get('/test-mail', function(){
+
+    
+    $settings = \DB::table('settings')->get();
+    $notifBeforeEntrance = $settings->firstWhere('setting_name', 'notif_before_entrance');
+    $notifPriorExit = $settings->firstWhere('setting_name', 'notif_prior_exit');
+
+    $beforeEnter = Carbon::now()->addMinutes((int)$notifBeforeEntrance->setting_value);
+    $errorEnter = Carbon::now()->addMinutes(((int)$notifBeforeEntrance->setting_value) + 1);
+    $enter = ParkReservation::whereBetween('start_time', [$beforeEnter, $errorEnter])
+        ->with('user')->with('park')->get();
+
+    return $enter;
+
+});
+

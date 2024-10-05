@@ -5,6 +5,11 @@ use App\Models\ParkReservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
+use App\Mail\EntranceMailNotif;
+use App\Mail\ExitMailNotif;
+use Illuminate\Support\Facades\Mail;
+
+
 use App\Models\SmsLog;
 
 use Illuminate\Console\Command;
@@ -42,17 +47,88 @@ class SMSNotif extends Command
      */
     public function handle()
     {
-        //
-        // if(env('SEMAPHORE_SERVICE') == 1){
-        //     $this->semaphoreSMS();
-        // }
+        if(env('SEMAPHORE_SERVICE') == 1){
+            $this->semaphoreSMS();
+        }
 
-        // if(env('SEMYSMS_SERVICE') == 1){
-        //     $this->semySMS();
-        // }
+        if(env('SEMYSMS_SERVICE') == 1){
+            $this->semySMS();
+        }
 
-        $this->mySemySMS();
+        if(env('EMAIL_NOTIF') == 1){
+            $this->emailNotif();
+        }
         
+    }
+
+    public function emailNotif(){
+        
+        $settings = \DB::table('settings')->get();
+        $notifBeforeEntrance = $settings->firstWhere('setting_name', 'notif_before_entrance');
+        $notifPriorExit = $settings->firstWhere('setting_name', 'notif_prior_exit');
+
+        $beforeEnter = Carbon::now()->addMinutes((int)$notifBeforeEntrance->setting_value);
+        $errorEnter = Carbon::now()->addMinutes(((int)$notifBeforeEntrance->setting_value) + 1);
+        $enter = ParkReservation::whereBetween('start_time', [$beforeEnter, $errorEnter])->with('user')->with('park')->get();
+
+        $beforeExit = Carbon::now()->addMinutes((int)$notifPriorExit->setting_value);
+        $errorExit = Carbon::now()->addMinutes(((int)$notifPriorExit->setting_value) + 1);
+        $exit = ParkReservation::whereBetween('end_time', [$beforeExit, $errorExit])->with('user')->with('park')->get();
+        
+        if ($enter) {
+            foreach ($enter as $user) {
+                //$msg = 'Reminders Mr/Mrs. ' . $user->user->lname . ': \nYour ' . $user->hour . ' hr(s) Park Reservation at ' . $user->park->name . ' will start 10 minutes from now. Thank You!';
+                
+                $data = [
+                    'lname' => $user->user->lname,
+                    'name' => $user->user->lname . ', ' . $user->user->fname,
+                    'hour' => $user->hour,
+                    'park_name' => $user->park->name,
+                    'no_mins' => $notifBeforeEntrance->setting_value
+                    
+                ];
+
+                Mail::to($user->user->email)->send(new EntranceMailNotif($data));
+
+                SmsLog::create([
+                    'contact_no' => $user->user->contact_no,
+                    'email' => $user->user->email,
+                    'remarks' => 'ENTRANCE/EMAIL',
+                    'recipient' => $user->user->lname . ', ' . $user->user->fname,
+                    'msg' => 'Message is on email template',
+
+                ]);
+
+            } //end foreach
+        }
+
+
+        if ($exit) {
+            foreach ($exit as $user) {
+                //$msg = 'Reminders Mr/Mrs. ' . $user->user->lname . ': \nYour ' . $user->hour . ' hr(s) Park Reservation at ' . $user->park->name . ' will start 10 minutes from now. Thank You!';
+                
+                $data = [
+                    'lname' => $user->user->lname,
+                    'name' => $user->user->lname . ', ' . $user->user->fname,
+                    'hour' => $user->hour,
+                    'park_name' => $user->park->name,
+                    'no_mins' => $notifPriorExit->setting_value
+                ];
+
+                Mail::to($user->user->email)->send(new ExitMailNotif($data));
+
+                SmsLog::create([
+                    'contact_no' => $user->user->contact_no,
+                    'email' => $user->user->email,
+                    'remarks' => 'EXIT/EMAIL',
+                    'recipient' => $user->user->lname . ', ' . $user->user->fname,
+                    'msg' => 'Message is on email template',
+
+                ]);
+
+            } //end foreach
+        }
+
     }
 
     public function semaphoreSMS(){
@@ -188,7 +264,7 @@ class SMSNotif extends Command
 
         
         if ($exit) {
-            
+
             foreach ($exit as $user) {
                 $msg = 'Reminders Mr/Mrs. ' . $user->user->lname . ': \nYour ' . $user->hour . ' hr(s) Park Reservation at ' . $user->park->name . ' will end 30 minutes from now. Thank You!';
                 $contact = $user->user->contact_no;

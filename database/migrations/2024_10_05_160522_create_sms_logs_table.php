@@ -16,6 +16,7 @@ class CreateSmsLogsTable extends Migration
         Schema::create('sms_logs', function (Blueprint $table) {
             $table->id();
             $table->string('contact_no')->nullable();
+            $table->string('email')->nullable();
             $table->string('remarks')->nullable();
             $table->string('recipient')->nullable();
             $table->text('msg')->nullable();
