@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Appointment;
 
+use App\Models\ParkPrice;
+
 
 class Kernel extends ConsoleKernel
 {
@@ -33,6 +35,16 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('sms:send')->everyMinute();
+
+        // $schedule->call(function () {
+        //     Log::info('Scheduled task is running...');
+
+        //     ParkPrice::create([
+        //         'park_price'=> 100
+        //     ]);
+
+        // })->everyMinute();
+
         // $schedule->command('inspire')->hourly();
         // $schedule->call(function () {
         //     // DB::table('test')->insert([
