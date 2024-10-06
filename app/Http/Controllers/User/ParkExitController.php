@@ -28,19 +28,39 @@ class ParkExitController extends Controller
             // Get the current time
             $currentTime = Carbon::now();
             // Calculate the difference in hours
-            $minutesExcess = $currentTime->diffInMinutes($endTime, true); // `false` indicates we want a negative difference if the current time is before the end time
+            $minutesExcess = $currentTime->diffInMinutes($endTime, false); // `false` indicates we want a negative difference if the current time is before the end time
             $hoursExcess = $minutesExcess / 60;
 
-            if ($hoursExcess > 0) {
-                $roundedHours = ceil($hoursExcess);  // Round up to the nearest whole number
-                $fines = $roundedHours * $parkPrice;
             
+            $roundedHours = ceil($hoursExcess);
+
+            if ($minutesExcess < 0) {
+                  // Round up to the nearest whole number
+                $fines = $roundedHours * $parkPrice;
                 // Display the result (you can format this message as needed)
                 //return "The current time is {$roundedHours} hours past the scheduled end time. A fine of {$fines} pesos must be paid before exiting.";
                 return response()->json([
                     'status' => 'penalty'
                 ], 200);
+            }else{
+                $currentTime = Carbon::now();
+                $reservation->exit_time = $currentTime;
+                $reservation->save();
+
+                Park::where('park_id',$park_id)
+                    ->update([
+                        'is_occupied' => 0,
+                    ]);
+                    //exit the vehicle on device
                 
+
+                if(env('ESP_DEBUG') == 0){
+                    Http::get("http://".$esp8266IpAddress."/exit");
+                }
+        
+                return response()->json([
+                    'status' => 'updated'
+                ], 200);
             }
         }
         return response()->json([
