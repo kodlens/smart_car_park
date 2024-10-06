@@ -121,7 +121,16 @@ Route::middleware(['auth'])->group(function(){
     
     Route::post('/exit-park',[App\Http\Controllers\ParkReservationController::class,'exitPark']);
     Route::post('/enter-park',[App\Http\Controllers\ParkReservationController::class,'enterPark']);
-    
+
+
+
+    /**THIS WILL HANDLE THE EXIT, CHECK IF TIME EXCESS */
+    Route::post('/exit-park/{id}',[App\Http\Controllers\User\ParkExitController::class,'exitPark']);
+
+    Route::get('/paymongo/exit-park/{id}',[App\Http\Controllers\User\ParkExitController::class,'paymongoExitPark']);
+    Route::get('/paymongo/exit-success',[App\Http\Controllers\User\ParkExitController::class,'exitSuccess']);
+    Route::get('/paymongo/exit-cancel',[App\Http\Controllers\User\ParkExitController::class,'exitCancelIndex']);
+        
 });
 
 
@@ -133,8 +142,7 @@ Route::middleware(['auth', 'scanner'])->group(function(){
 });
 
 
-Route::post('/exit-park/{id}',[App\Http\Controllers\Scanner\ScannerHomeController::class,'exitPark']);
-Route::get('/test', [App\Http\Controllers\TestController::class, 'Test']);
+//Route::get('/test', [App\Http\Controllers\TestController::class, 'Test']);
 
 
 //  ------------------------API SERVO------------------------------------

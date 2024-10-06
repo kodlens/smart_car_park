@@ -340,6 +340,7 @@ export default {
             qr: null,
 
             excessMsg: '',
+            isTImeExcess: false,
 		}
 	},
 
@@ -384,8 +385,10 @@ export default {
                 const fines = (roundedHours * parkPrice);
                 if (hoursExcess > 0) {
                     this.excessMsg = `The current time is ${roundedHours} hours past the scheduled end time. A fine of ${fines} pesos must paid before exiting.`;
+                    this.isTImeExcess = true
                 }else{
                     this.excessMsg = ''
+                    this.isTImeExcess = false
                 }
 
             }
@@ -395,7 +398,10 @@ export default {
             this.confirmExit = true
         },
         exitParking(){
+
             this.btnClassPrimary['is-loading'] = true
+
+
             axios.post('/exit-park/'+this.fields.row).then(
                 res=>{
                     this.confirmExit = false;
@@ -403,12 +409,16 @@ export default {
 
                     this.loadParkingSpaces();
                     if(res.data.status === 'updated'){
-                         this.$buefy.toast.open({
+                            this.$buefy.toast.open({
                             duration: 5000,
                             message: `Thank you. You may exit your vehicle now.`,
                             position: 'is-bottom',
                             type: 'is-success'
                         })
+                    }
+
+                    if(res.data.status === 'penalty'){
+                        window.location = '/paymongo/exit-park/' + this.fields.row
                     }
                 }
             )

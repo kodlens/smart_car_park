@@ -10492,7 +10492,8 @@ __webpack_require__.r(__webpack_exports__);
         extend_amount: 20
       },
       qr: null,
-      excessMsg: ''
+      excessMsg: '',
+      isTImeExcess: false
     };
   },
   methods: {
@@ -10532,8 +10533,10 @@ __webpack_require__.r(__webpack_exports__);
 
         if (hoursExcess > 0) {
           this.excessMsg = "The current time is ".concat(roundedHours, " hours past the scheduled end time. A fine of ").concat(fines, " pesos must paid before exiting.");
+          this.isTImeExcess = true;
         } else {
           this.excessMsg = '';
+          this.isTImeExcess = false;
         }
       }
 
@@ -10557,6 +10560,10 @@ __webpack_require__.r(__webpack_exports__);
             position: 'is-bottom',
             type: 'is-success'
           });
+        }
+
+        if (res.data.status === 'penalty') {
+          window.location = '/paymongo/exit-park/' + _this3.fields.row;
         }
       });
     },
