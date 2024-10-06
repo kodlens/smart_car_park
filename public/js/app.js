@@ -10453,10 +10453,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    propsParkPrice: {
+      type: Object,
+      "default": function _default() {}
+    }
+  },
   data: function data() {
     var currentDate = new Date();
     return {
+      btnClassPrimary: {
+        'button': true,
+        'is-primary': true,
+        'is-loading': false
+      },
       info: {},
       parkingSpaces: [],
       reports: [],
@@ -10478,7 +10491,8 @@ __webpack_require__.r(__webpack_exports__);
         extend_to: null,
         extend_amount: 20
       },
-      qr: null
+      qr: null,
+      excessMsg: ''
     };
   },
   methods: {
@@ -10502,14 +10516,37 @@ __webpack_require__.r(__webpack_exports__);
       this.modalReserveMe = true;
     },
     openModalExit: function openModalExit(row) {
+      var parkPrice = this.propsParkPrice.park_price;
+      this.fields.row = this.parkingSpaces[row].parkReservation.park_reservation_id;
+      var parkReservationId = this.parkingSpaces[row].parkReservation.park_reservation_id;
+
+      if (this.parkingSpaces[row].parkReservation.end_time) {
+        var endTime = this.parkingSpaces[row].parkReservation.end_time;
+        var endDate = new Date(endTime.replace(/-/g, '/')); // JavaScript expects date in the format 'YYYY/MM/DD'
+
+        var currentDate = new Date();
+        var timeDifference = currentDate - endDate;
+        var hoursExcess = timeDifference / (1000 * 60 * 60);
+        var roundedHours = Math.ceil(hoursExcess);
+        var fines = roundedHours * parkPrice;
+
+        if (hoursExcess > 0) {
+          this.excessMsg = "The current time is ".concat(roundedHours, " hours past the scheduled end time. A fine of ").concat(fines, " pesos must paid before exiting.");
+        } else {
+          this.excessMsg = '';
+        }
+      }
+
       this.fields.row = this.parkingSpaces[row].parkReservation.park_reservation_id;
       this.confirmExit = true;
     },
     exitParking: function exitParking() {
       var _this3 = this;
 
+      this.btnClassPrimary['is-loading'] = true;
       axios.post('/exit-park/' + this.fields.row).then(function (res) {
         _this3.confirmExit = false;
+        _this3.btnClassPrimary['is-loading'] = false;
 
         _this3.loadParkingSpaces();
 
@@ -10529,7 +10566,8 @@ __webpack_require__.r(__webpack_exports__);
       var hours = this.roundNum(Math.abs(b - a) / 36e5); //this.fields.amount = this.fields.hr * 20
 
       this.fields.hr = hours;
-      this.fields.amount = this.roundNum(hours * 20);
+      var parkPrice = this.propsParkPrice.park_price;
+      this.fields.amount = this.roundNum(hours * parkPrice);
     },
     computeAmountExtend: function computeAmountExtend() {
       var a = new Date(this.fields.extend_from);
@@ -10537,7 +10575,8 @@ __webpack_require__.r(__webpack_exports__);
       var hours = this.roundNum(Math.abs(b - a) / 36e5); //this.fields.amount = this.fields.hr * 20
 
       this.fields.extend_hr = hours;
-      this.fields.extend_amount = this.roundNum(hours * 20);
+      var parkPrice = this.propsParkPrice.park_price;
+      this.fields.extend_amount = this.roundNum(hours * parkPrice);
     },
     roundNum: function roundNum(num) {
       return Math.round((num + Number.EPSILON) * 100) / 100;
@@ -55062,7 +55101,11 @@ var render = function () {
               _c("button", {
                 staticClass: "delete",
                 attrs: { type: "button" },
-                on: { click: _vm.loadParkingSpaces },
+                on: {
+                  click: function ($event) {
+                    _vm.confirmExit = false
+                  },
+                },
               }),
             ]),
             _vm._v(" "),
@@ -55070,9 +55113,15 @@ var render = function () {
               _c("div", {}, [
                 _c("div", { staticClass: "columns" }, [
                   _c("div", { staticClass: "column" }, [
-                    _vm._v(
-                      "\n                                Are you sure you want to exit park?\n                            "
+                    _c(
+                      "div",
+                      {
+                        staticStyle: { color: "red", "margin-bottom": "10px" },
+                      },
+                      [_vm._v(_vm._s(_vm.excessMsg))]
                     ),
+                    _vm._v(" "),
+                    _c("div", [_vm._v("Are you sure you want to exit park?")]),
                   ]),
                 ]),
               ]),
@@ -55094,10 +55143,7 @@ var render = function () {
               _vm._v(" "),
               _c(
                 "button",
-                {
-                  staticClass: "button is-primary",
-                  on: { click: _vm.exitParking },
-                },
+                { class: _vm.btnClassPrimary, on: { click: _vm.exitParking } },
                 [
                   _vm._v(
                     "\n                            Yes   \n                    "

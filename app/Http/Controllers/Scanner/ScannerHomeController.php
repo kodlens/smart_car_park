@@ -9,6 +9,7 @@ use App\Models\ParkReservation;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
+use App\Models\ParkPrice;
 
 class ScannerHomeController extends Controller
 {
@@ -64,22 +65,46 @@ class ScannerHomeController extends Controller
     }
     
     public function exitPark($id){
-        $reservation = ParkReservation::with('park')->where('park_reservation_id', $id)->latest()->first();
+
+        $reservation = ParkReservation::with('park')->find($id);
+        $parkPrice = ParkPrice::first()->park_price;
+    
         $esp8266IpAddress = $reservation->park->device_ip;
+
         if($reservation && $reservation->enter_time){
             //$response = Http::get("https://native-awake-ewe.ngrok-free.app/exit/$esp8266IpAddress");
-            ParkReservation::where('park_reservation_id',$reservation->park_reservation_id)
-            ->update([
-                'exit_time'=> Carbon::now(),
-            ]);
-            Park::where('park_id',$reservation->park_id)
-                ->update([
-                    'is_occupied' => 0,
-                ]);
+            $endTime = Carbon::parse($reservation->end_time); // Convert end_time to a Carbon instance
+            // Get the current time
+            $currentTime = Carbon::now();
+            // Calculate the difference in hours
+            $minutesExcess = $currentTime->diffInMinutes($endTime, true); // `false` indicates we want a negative difference if the current time is before the end time
+            $hoursExcess = $minutesExcess / 60;
+
+            if ($hoursExcess > 0) {
+                $roundedHours = ceil($hoursExcess);  // Round up to the nearest whole number
+
+                $fines = $roundedHours * $parkPrice;
+            
+                // Display the result (you can format this message as needed)
+                //return "The current time is {$roundedHours} hours past the scheduled end time. A fine of {$fines} pesos must be paid before exiting.";
+            
+            }
+
+           
+            $reservation->exit_time = $currentTime;
+            $reservation->save();
+            
+
+            // Park::where('park_id',$reservation->park_id)
+            //     ->update([
+            //         'is_occupied' => 0,
+            //     ]);
             //exit the vehicle on device
             
             //comment for debugging
-            Http::get("http://".$esp8266IpAddress."/exit");
+            if(env('ESP_DEBUG') == 0){
+                Http::get("http://".$esp8266IpAddress."/exit");
+            }
 
             return response()->json([
                 'status' => 'updated'

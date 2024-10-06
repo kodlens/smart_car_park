@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-    <home-page></home-page>
+    <home-page :props-park-price=@json($parkPrice)></home-page>
 @endsection

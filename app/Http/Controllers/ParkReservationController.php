@@ -11,6 +11,8 @@ class ParkReservationController extends Controller
 {
     public function loadParkReservation(){
         $id = Auth::user()->user_id;
+    
+
         $park = ParkReservation::where('user_id',$id)
         ->whereNull('exit_time')
         ->get();

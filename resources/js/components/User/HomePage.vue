@@ -260,14 +260,16 @@
                         <button
                             type="button"
                             class="delete"
-                            @click="loadParkingSpaces"/>
+                            @click="confirmExit = false"/>
                     </header>
 
                     <section class="modal-card-body">
                         <div class="">
                             <div class="columns">
                                 <div class="column">
-                                    Are you sure you want to exit park?
+                                    <div style="color:red; margin-bottom: 10px;">{{excessMsg}}</div>
+                                    <div>Are you sure you want to exit park?</div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -280,7 +282,7 @@
                         </button>
                         <button
                             @click="exitParking"
-                            class="button is-primary">
+                            :class="btnClassPrimary">
                                 Yes   
                         </button>
                     </footer>
@@ -294,12 +296,24 @@
 <script>
 export default {
 
+    props: {
+        propsParkPrice: {
+            type: Object,
+            default: ()=> {}
+        }
+    },
+
  
 	data(){
 
         const currentDate = new Date();
     
 		return{
+            btnClassPrimary: {
+                'button': true,
+                'is-primary': true,
+                'is-loading': false
+            },
             info: {},
             parkingSpaces: [],
             reports: [],
@@ -323,7 +337,9 @@ export default {
                 extend_to: null,
                 extend_amount: 20
             },
-            qr: null
+            qr: null,
+
+            excessMsg: '',
 		}
 	},
 
@@ -351,13 +367,40 @@ export default {
             this.modalReserveMe = true
         },
         openModalExit(row){
+            const parkPrice = this.propsParkPrice.park_price;
+            this.fields.row = this.parkingSpaces[row].parkReservation.park_reservation_id;
+            const parkReservationId = this.parkingSpaces[row].parkReservation.park_reservation_id;
+
+
+            if(this.parkingSpaces[row].parkReservation.end_time){
+                
+                const endTime  = this.parkingSpaces[row].parkReservation.end_time;
+                const endDate = new Date(endTime.replace(/-/g, '/')); // JavaScript expects date in the format 'YYYY/MM/DD'
+                const currentDate = new Date();
+                const timeDifference = currentDate - endDate;
+                const hoursExcess = timeDifference / (1000 * 60 * 60);
+
+                const roundedHours = Math.ceil(hoursExcess);
+                const fines = (roundedHours * parkPrice);
+                if (hoursExcess > 0) {
+                    this.excessMsg = `The current time is ${roundedHours} hours past the scheduled end time. A fine of ${fines} pesos must paid before exiting.`;
+                }else{
+                    this.excessMsg = ''
+                }
+
+            }
+            
+
             this.fields.row = this.parkingSpaces[row].parkReservation.park_reservation_id;
             this.confirmExit = true
         },
         exitParking(){
+            this.btnClassPrimary['is-loading'] = true
             axios.post('/exit-park/'+this.fields.row).then(
                 res=>{
                     this.confirmExit = false;
+                    this.btnClassPrimary['is-loading'] = false
+
                     this.loadParkingSpaces();
                     if(res.data.status === 'updated'){
                          this.$buefy.toast.open({
@@ -377,7 +420,8 @@ export default {
 
             //this.fields.amount = this.fields.hr * 20
             this.fields.hr = hours
-            this.fields.amount = this.roundNum(hours * 20)
+            const parkPrice = this.propsParkPrice.park_price
+            this.fields.amount = this.roundNum(hours * parkPrice)
         },
 
         computeAmountExtend(){
@@ -387,7 +431,9 @@ export default {
 
             //this.fields.amount = this.fields.hr * 20
             this.fields.extend_hr = hours
-            this.fields.extend_amount = this.roundNum(hours * 20)
+            const parkPrice = this.propsParkPrice.park_price
+
+            this.fields.extend_amount = this.roundNum(hours * parkPrice)
         },
 
         roundNum(num){
