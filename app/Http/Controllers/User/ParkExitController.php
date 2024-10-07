@@ -11,6 +11,7 @@ use Auth;
 use Curl;
 use App\Models\Park;
 use App\Models\ParkSale;
+use Illuminate\Support\Facades\Http;
 
 
 class ParkExitController extends Controller
