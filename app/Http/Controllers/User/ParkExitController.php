@@ -48,7 +48,7 @@ class ParkExitController extends Controller
                 $reservation->exit_time = $currentTime;
                 $reservation->save();
 
-                Park::where('park_id',$park_id)
+                Park::where('park_id',$reservation->park->park_id)
                     ->update([
                         'is_occupied' => 0,
                     ]);
