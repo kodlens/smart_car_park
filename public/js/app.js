@@ -11371,7 +11371,7 @@ __webpack_require__.r(__webpack_exports__);
       defaultSortDirection: 'asc',
       global_id: 0,
       search: {
-        qrref: ''
+        remarks: ''
       },
       isModalCreate: false,
       fields: {},
@@ -11385,7 +11385,7 @@ __webpack_require__.r(__webpack_exports__);
     loadAsyncData: function loadAsyncData() {
       var _this = this;
 
-      var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "qrref=".concat(this.search.qrref), "perpage=".concat(this.perPage), "page=".concat(this.page)].join('&');
+      var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "search=".concat(this.search.remarks), "perpage=".concat(this.perPage), "page=".concat(this.page)].join('&');
       this.loading = true;
       axios.get("/get-payment-histories?".concat(params)).then(function (_ref) {
         var data = _ref.data;
@@ -56524,11 +56524,11 @@ var render = function () {
                             },
                           },
                           model: {
-                            value: _vm.search.qrref,
+                            value: _vm.search.remarks,
                             callback: function ($$v) {
-                              _vm.$set(_vm.search, "qrref", $$v)
+                              _vm.$set(_vm.search, "remarks", $$v)
                             },
-                            expression: "search.qrref",
+                            expression: "search.remarks",
                           },
                         }),
                         _vm._v(" "),

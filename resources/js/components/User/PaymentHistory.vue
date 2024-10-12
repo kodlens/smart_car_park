@@ -11,7 +11,7 @@
                             <div class="column">
                                 <b-field label="Search" label-position="on-border">
                                     <b-input type="text"
-                                        v-model="search.qrref" placeholder="Search"
+                                        v-model="search.remarks" placeholder="Search"
                                         @keyup.native.enter="loadAsyncData"/>
                                     <p class="control">
                                         <b-tooltip label="Search" type="is-success">
@@ -124,7 +124,7 @@ export default{
             global_id : 0,
 
             search: {
-                qrref: '',
+                remarks: '',
             },
 
             isModalCreate: false,
@@ -145,7 +145,7 @@ export default{
         loadAsyncData() {
             const params = [
                 `sort_by=${this.sortField}.${this.sortOrder}`,
-                `qrref=${this.search.qrref}`,
+                `search=${this.search.remarks}`,
                 `perpage=${this.perPage}`,
                 `page=${this.page}`
             ].join('&')
