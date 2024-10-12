@@ -15,4 +15,13 @@ class ParkSale extends Model
         'user_id',
         'park_id'
     ];
+
+
+    public function reservation_park(){
+        return $this->hasOne(ParkSale::class, 'park_reservation_id', 'park_reservation_id');
+    }
+
+    public function user(){
+        return $this->hasOne(User::class, 'user_id', 'user_id');
+    }
 }

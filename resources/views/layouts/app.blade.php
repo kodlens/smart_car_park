@@ -64,6 +64,10 @@
                         My Reservations
                     </b-navbar-item>
 
+                    <b-navbar-item href="/payment-histories">
+                        Payment History
+                    </b-navbar-item>
+
                     <b-navbar-item href="/my-profile">
                         My Profile
                     </b-navbar-item>

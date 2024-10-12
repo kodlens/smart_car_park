@@ -185,11 +185,10 @@ class ParkExitController extends Controller
         $data->exit_time = $currentTime;
         $data->save();
 
-        Park::where('park_id',$park_id)
-            ->update([
-                'is_occupied' => 0,
-            ]);
-            //exit the vehicle on device
+        $park = Park::find($park_id);
+        $park->is_occupied = 0;
+        $park->save();
+        //exit the vehicle on device
 
         ParkSale::create([
             'remarks' => 'penalty',
@@ -203,7 +202,7 @@ class ParkExitController extends Controller
         //return $response;
             //comment for debugging
         if(env('ESP_DEBUG') == 0){
-            Http::get("http://".$esp8266IpAddress."/exit");
+            Http::get("http://".$park->device_ip."/exit");
         }
 
         return redirect('/home');

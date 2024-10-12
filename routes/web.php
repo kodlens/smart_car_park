@@ -93,6 +93,10 @@ Route::middleware(['auth', 'user'])->group(function(){
     Route::resource('/my-reservations', App\Http\Controllers\User\MyReservationController::class);
     Route::get('/get-my-reservations', [App\Http\Controllers\User\MyReservationController::class, 'getData']);
 
+    Route::resource('/payment-histories', App\Http\Controllers\User\PaymentHistoryController::class);
+    Route::get('/get-payment-histories', [App\Http\Controllers\User\PaymentHistoryController::class, 'getData']);
+
+
     Route::get('/get-my-reservation/{id}', [App\Http\Controllers\User\MyReservationController::class, 'getMyReservation']);
   
 
