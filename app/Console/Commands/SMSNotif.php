@@ -51,9 +51,9 @@ class SMSNotif extends Command
             $this->semaphoreSMS();
         }
 
-        if(env('SEMYSMS_SERVICE') == 1){
-            $this->semySMS();
-        }
+        // if(env('SEMYSMS_SERVICE') == 1){
+        //     $this->semySMS();
+        // }
 
         if(env('EMAIL_NOTIF') == 1){
             $this->emailNotif();
