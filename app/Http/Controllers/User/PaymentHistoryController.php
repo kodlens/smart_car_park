@@ -26,7 +26,5 @@ class PaymentHistoryController extends Controller
 
         return $data;
     }
-
-
-
+    
 }

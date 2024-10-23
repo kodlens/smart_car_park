@@ -149,7 +149,7 @@ class SMSNotif extends Command
                     'apikey' => $apiKey,
                     'number' => $user->user->contact_no,
                     'message' =>  $msg,
-                    'sendername' => 'SEMAPHORE'
+                    'sendername' => 'CARSYS'
                 );
                 // curl_setopt($ch, CURLOPT_URL, 'https://semaphore.co/api/v4/priority');
                 curl_setopt($ch, CURLOPT_URL, 'https://semaphore.co/api/v4/messages');
@@ -165,10 +165,9 @@ class SMSNotif extends Command
 
                 SmsLog::create([
                     'contact_no' => $user->user->contact_no,
-                    'remarks' => 'ENTRANCE',
+                    'remarks' => 'ENTRANCE/SMS',
                     'recipient' => $user->user->lname . ', ' . $user->user->fname,
                     'msg' => $msg,
-
                 ]);
 
             } //end foreach
@@ -184,7 +183,7 @@ class SMSNotif extends Command
                     'apikey' => $apiKey,
                     'number' => $user->user->contact_no,
                     'message' => $msg,
-                    'sendername' => 'SEMAPHORE'
+                    'sendername' => 'CARSYS'
                 );
                 return $parameters;
                 //curl_setopt($ch, CURLOPT_URL, 'https://semaphore.co/api/v4/priority');
@@ -201,10 +200,9 @@ class SMSNotif extends Command
 
                 SmsLog::create([
                     'contact_no' => $user->user->contact_no,
-                    'remarks' => 'EXIT',
+                    'remarks' => 'EXIT/SMS',
                     'recipient' => $user->user->lname . ', ' . $user->user->fname,
                     'msg' => $msg,
-
                 ]);
             } //end foreach
         }
