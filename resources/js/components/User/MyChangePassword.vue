@@ -83,8 +83,8 @@ export default{
 
         submit(){
             this.errors = {}
-            axios.put('/my-change-password', this.fields).then(res=>{
-                if(res.data.status === 'updated'){
+            axios.post('/my-change-password', this.fields).then(res=>{
+                if(res.data.status === 'changed'){
                     this.$buefy.dialog.alert({
                         title: 'Password Changed!',
                         message: 'Password successfully change.',

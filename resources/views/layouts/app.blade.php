@@ -72,7 +72,7 @@
                         My Profile
                     </b-navbar-item>
 
-                    <b-navbar-item href="/change-password">
+                    <b-navbar-item href="/my-change-password">
                         Change Password
                     </b-navbar-item>
 

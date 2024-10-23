@@ -103,7 +103,8 @@ Route::middleware(['auth', 'user'])->group(function(){
     Route::get('/load-profile', [App\Http\Controllers\User\MyProfileController::class, 'loadProfile']);
 
 
-    Route::get('/change-password', [App\Http\Controllers\User\MyChangePasswordController::class, 'index']);
+    Route::get('/my-change-password', [App\Http\Controllers\User\MyChangePasswordController::class, 'index']);
+    Route::post('/my-change-password', [App\Http\Controllers\User\MyChangePasswordController::class, 'changePassword']);
 
 });
 
