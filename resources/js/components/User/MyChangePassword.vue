@@ -19,7 +19,7 @@
                                             :type="errors.old_password ? 'is-danger':''"
                                             :message="errors.old_password ? errors.old_password[0] : ''">
                                             <b-input type="password" password-reveal 
-                                                v-model="user.old_password" placeholder="Old Password"></b-input>
+                                                v-model="fields.old_password" placeholder="Old Password"></b-input>
                                         </b-field>
                                     </div>
                                 </div>
@@ -30,7 +30,7 @@
                                             :type="errors.password ? 'is-danger':''"
                                             :message="errors.password ? errors.password[0] : ''">
                                             <b-input type="password" password-reveal 
-                                                v-model="user.password" placeholder="Password"></b-input>
+                                                v-model="fields.password" placeholder="Password"></b-input>
                                         </b-field>
                                     </div>
                                 </div>
@@ -41,7 +41,7 @@
                                             :type="errors.password_confirmation ? 'is-danger':''"
                                             :message="errors.password_confirmation ? errors.password_confirmation[0] : ''">
                                             <b-input type="password" password-reveal 
-                                                v-model="user.password_confirmation" placeholder="First Name"></b-input>
+                                                v-model="fields.password_confirmation" placeholder="First Name"></b-input>
                                         </b-field>
                                     </div>
                                 </div>
@@ -50,9 +50,9 @@
 
                         <div class="box-footer">
                             <div class="buttons mt-2 is-right">
-                                <b-button label="Update Profile"
+                                <b-button label="Change Password"
                                     class="is-primary is-outlined"
-                                    @click="updateProfile"></b-button>
+                                    @click="submit"></b-button>
                             </div>
                         </div>
                     </div><!-- box -->
@@ -69,35 +69,29 @@ export default{
 
     data(){
         return {
-            user: {
-                lname: '',
-                fname: '',
-                mname: '',
-                sex: '',
-                email: '',
-                contact_no: '',
-
+            fields: {
+                old_password: '',
+                password: '',
+                password_confirmation: '',
             },
             errors: {},
         }
     },
 
     methods: {
-        loadProfile(){
-            axios.get('/load-profile').then(res=>{
-                this.user = res.data
-            })
-        },
+      
 
-        updateProfile(){
+        submit(){
             this.errors = {}
-            axios.put('/my-profile/' + this.user.user_id, this.user).then(res=>{
+            axios.put('/my-change-password', this.fields).then(res=>{
                 if(res.data.status === 'updated'){
                     this.$buefy.dialog.alert({
-                        title: 'Updated!',
-                        message: 'Profile successfully updated.',
+                        title: 'Password Changed!',
+                        message: 'Password successfully change.',
                         onConfirm: ()=>{
-                            this.loadProfile()
+                            this.fields.old_password = ''
+                            this.fields.password = ''
+                            this.fields.password_confirmation = ''
                         }
                     });
                 }
@@ -108,7 +102,7 @@ export default{
     },
 
     mounted(){
-        this.loadProfile()
+        
     }
 }
 </script>

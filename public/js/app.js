@@ -10699,47 +10699,37 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      user: {
-        lname: '',
-        fname: '',
-        mname: '',
-        sex: '',
-        email: '',
-        contact_no: ''
+      fields: {
+        old_password: '',
+        password: '',
+        password_confirmation: ''
       },
       errors: {}
     };
   },
   methods: {
-    loadProfile: function loadProfile() {
+    submit: function submit() {
       var _this = this;
 
-      axios.get('/load-profile').then(function (res) {
-        _this.user = res.data;
-      });
-    },
-    updateProfile: function updateProfile() {
-      var _this2 = this;
-
       this.errors = {};
-      axios.put('/my-profile/' + this.user.user_id, this.user).then(function (res) {
+      axios.put('/my-change-password', this.fields).then(function (res) {
         if (res.data.status === 'updated') {
-          _this2.$buefy.dialog.alert({
-            title: 'Updated!',
-            message: 'Profile successfully updated.',
+          _this.$buefy.dialog.alert({
+            title: 'Password Changed!',
+            message: 'Password successfully change.',
             onConfirm: function onConfirm() {
-              _this2.loadProfile();
+              _this.fields.old_password = '';
+              _this.fields.password = '';
+              _this.fields.password_confirmation = '';
             }
           });
         }
       })["catch"](function (err) {
-        _this2.errors = err.response.data.errors;
+        _this.errors = err.response.data.errors;
       });
     }
   },
-  mounted: function mounted() {
-    this.loadProfile();
-  }
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -55982,11 +55972,11 @@ var render = function () {
                               placeholder: "Old Password",
                             },
                             model: {
-                              value: _vm.user.old_password,
+                              value: _vm.fields.old_password,
                               callback: function ($$v) {
-                                _vm.$set(_vm.user, "old_password", $$v)
+                                _vm.$set(_vm.fields, "old_password", $$v)
                               },
-                              expression: "user.old_password",
+                              expression: "fields.old_password",
                             },
                           }),
                         ],
@@ -56021,11 +56011,11 @@ var render = function () {
                               placeholder: "Password",
                             },
                             model: {
-                              value: _vm.user.password,
+                              value: _vm.fields.password,
                               callback: function ($$v) {
-                                _vm.$set(_vm.user, "password", $$v)
+                                _vm.$set(_vm.fields, "password", $$v)
                               },
-                              expression: "user.password",
+                              expression: "fields.password",
                             },
                           }),
                         ],
@@ -56062,11 +56052,15 @@ var render = function () {
                               placeholder: "First Name",
                             },
                             model: {
-                              value: _vm.user.password_confirmation,
+                              value: _vm.fields.password_confirmation,
                               callback: function ($$v) {
-                                _vm.$set(_vm.user, "password_confirmation", $$v)
+                                _vm.$set(
+                                  _vm.fields,
+                                  "password_confirmation",
+                                  $$v
+                                )
                               },
-                              expression: "user.password_confirmation",
+                              expression: "fields.password_confirmation",
                             },
                           }),
                         ],
@@ -56086,8 +56080,8 @@ var render = function () {
                 [
                   _c("b-button", {
                     staticClass: "is-primary is-outlined",
-                    attrs: { label: "Update Profile" },
-                    on: { click: _vm.updateProfile },
+                    attrs: { label: "Change Password" },
+                    on: { click: _vm.submit },
                   }),
                 ],
                 1
