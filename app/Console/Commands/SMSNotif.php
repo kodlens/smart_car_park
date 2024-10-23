@@ -153,7 +153,8 @@ class SMSNotif extends Command
     }
 
     public function sendSemaphoreSMS(){
-
+        
+        $settings = \DB::table('settings')->get();
         $notifBeforeEntrance = $settings->firstWhere('setting_name', 'notif_before_entrance');
         $notifPriorExit = $settings->firstWhere('setting_name', 'notif_prior_exit');
 
