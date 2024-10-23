@@ -177,7 +177,7 @@ class SMSNotif extends Command
         if ($exit) {
             foreach ($exit as $user) {
                 $ch = curl_init();
-                $msg = 'Reminders Mr/Mrs. ' . $user->user->lname . ': \nYour ' . $user->hour . ' hr(s) Park Reservation at ' . $user->park->name . ' will end 30 minutes from now. Thank You!';
+                $msg = 'Reminders Mr/Mrs. ' . $user->user->lname . ': Your ' . $user->hour . ' hr(s) Park Reservation at ' . $user->park->name . ' will end 30 minutes from now. Thank You!';
 
                 $parameters = array(
                     'apikey' => $apiKey,
@@ -226,7 +226,7 @@ class SMSNotif extends Command
 
         if ($enter) {
             foreach ($enter as $user) {
-                $msg = 'Reminders Mr/Mrs. ' . $user->user->lname . ': \nYour ' . $user->hour . ' hr(s) Park Reservation at ' . $user->park->name . ' will start 10 minutes from now. Thank You!';
+                $msg = 'Reminders Mr/Mrs. ' . $user->user->lname . ': Your ' . $user->hour . ' hr(s) Park Reservation at ' . $user->park->name . ' will start 10 minutes from now. Thank You!';
                 $contact = $user->user->contact_no;
 
                 //logic for gateway here...
