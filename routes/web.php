@@ -99,9 +99,11 @@ Route::middleware(['auth', 'user'])->group(function(){
 
     Route::get('/get-my-reservation/{id}', [App\Http\Controllers\User\MyReservationController::class, 'getMyReservation']);
   
-
     Route::resource('/my-profile', App\Http\Controllers\User\MyProfileController::class);
     Route::get('/load-profile', [App\Http\Controllers\User\MyProfileController::class, 'loadProfile']);
+
+
+    Route::get('/change-password', [App\Http\Controllers\User\MyChangePasswordController::class, 'index']);
 
 });
 
