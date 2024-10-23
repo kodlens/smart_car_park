@@ -25,12 +25,21 @@ and this action will delete all data on the database and will re populate with n
     php artisan migrate:refresh --seed
 
 
-## Update Notes
-- Dashboard Graph
-- Reports (Monthly and Weekly reports)
-- Dynamically adding and editing Park Module (ESP8266 Device)
 
 ## For SMS
 We use semaphore for the SMS gateway and used the task schedule of laravel. To run the schedule
 
     php artisan schedule:work
+
+
+## Update Notes
+- Dashboard Graph
+- Reports (Monthly and Weekly reports)
+- Dynamically adding and editing Park Module (ESP8266 Device)
+
+
+## Update as of Oct 24, 2024
+- Fix SMS Sending Error
+- Optimize sending SMS using semaphore
+- Centralize the time settings for sending SMS
+- Added Change Password
