@@ -154,19 +154,22 @@ class SMSNotif extends Command
 
     public function sendSemaphoreSMS(){
 
-        $beforeEnter = Carbon::now()->addMinutes(10);
-        $errorEnter = Carbon::now()->addMinutes(11);
+        $notifBeforeEntrance = $settings->firstWhere('setting_name', 'notif_before_entrance');
+        $notifPriorExit = $settings->firstWhere('setting_name', 'notif_prior_exit');
+
+        $beforeEnter = Carbon::now()->addMinutes($notifBeforeEntrance);
+        $errorEnter = Carbon::now()->addMinutes(((int)$notifBeforeEntrance + 1));
         $enter = ParkReservation::whereBetween('start_time', [$beforeEnter, $errorEnter])->with('user')->with('park')->get();
 
-        $beforeExit = Carbon::now()->addMinutes(30);
-        $errorExit = Carbon::now()->addMinutes(31);
+        $beforeExit = Carbon::now()->addMinutes($notifPriorExit);
+        $errorExit = Carbon::now()->addMinutes(((int)$notifPriorExit + 1));
         $exit = ParkReservation::whereBetween('end_time', [$beforeExit, $errorExit])->with('user')->with('park')->get();
 
 
         if ($enter) {
             foreach ($enter as $user) {
 
-                $msg = 'Reminders Mr/Mrs. ' . $user->user->lname . ': Your ' . $user->hour . ' hr(s) Park Reservation at ' . $user->park->name . ' will start 10 minutes from now. Thank You!';
+                $msg = 'Reminders Mr/Mrs. ' . $user->user->lname . ': Your ' . $user->hour . ' hr(s) Park Reservation at ' . $user->park->name . ' will start '. $notifBeforeEntrance.' minute(s) from now. Thank You!';
                 $contactNo = $user->user->contact_no;
                 $remarks = 'ENTRANCE/SMS';
                 $recipientName = $user->user->lname . ', ' . $user->user->fname;
@@ -179,7 +182,7 @@ class SMSNotif extends Command
         if ($exit) {
             foreach ($exit as $user) {
 
-                $msg = 'Reminders Mr/Mrs. ' . $user->user->lname . ': Your ' . $user->hour . ' hr(s) Park Reservation at ' . $user->park->name . ' will end 30 minutes from now. Thank You!';
+                $msg = 'Reminders Mr/Mrs. ' . $user->user->lname . ': Your ' . $user->hour . ' hr(s) Park Reservation at ' . $user->park->name . ' will end '. $notifPriorExit.' minute(s) from now. Thank You!';
                 $contactNo = $user->user->contact_no;
                 $remarks = 'EXIT/SMS';
                 $recipientName = $user->user->lname . ', ' . $user->user->fname;

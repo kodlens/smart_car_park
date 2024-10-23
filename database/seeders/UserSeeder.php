@@ -37,7 +37,7 @@ class UserSeeder extends Seeder
                 'suffix' => '',
                 'sex' => 'MALE',
                 'email' => 'rhea@dev.com',
-                'contact_no' => '09684014603',
+                'contact_no' => '9684014603',
                 'role' => 'USER',
                 'password' => Hash::make('aa')
             ],

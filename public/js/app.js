@@ -10741,6 +10741,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -10766,6 +10768,7 @@ __webpack_require__.r(__webpack_exports__);
     updateProfile: function updateProfile() {
       var _this2 = this;
 
+      this.errors = {};
       axios.put('/my-profile/' + this.user.user_id, this.user).then(function (res) {
         if (res.data.status === 'updated') {
           _this2.$buefy.dialog.alert({
@@ -55810,7 +55813,15 @@ var render = function () {
                   [
                     _c(
                       "b-field",
-                      { attrs: { label: "Contact No." } },
+                      {
+                        attrs: {
+                          label: "Contact No. Format(9161112244)",
+                          type: _vm.errors.contact_no ? "is-danger" : "",
+                          message: _vm.errors.contact_no
+                            ? _vm.errors.contact_no[0]
+                            : "",
+                        },
+                      },
                       [
                         _c("b-input", {
                           attrs: { type: "text", placeholder: "Contact No." },

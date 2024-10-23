@@ -63,7 +63,9 @@
 
                             <div class="columns">
                                 <div class="column">
-                                    <b-field label="Contact No.">
+                                    <b-field label="Contact No. Format(9161112244)"
+                                        :type="errors.contact_no ? 'is-danger':''"
+                                        :message="errors.contact_no ? errors.contact_no[0] : ''">
                                         <b-input type="text" v-model="user.contact_no" placeholder="Contact No."></b-input>
                                     </b-field>
                                 </div>
@@ -135,6 +137,7 @@ export default{
         },
 
         updateProfile(){
+            this.errors = {}
             axios.put('/my-profile/' + this.user.user_id, this.user).then(res=>{
                 if(res.data.status === 'updated'){
                     this.$buefy.dialog.alert({
