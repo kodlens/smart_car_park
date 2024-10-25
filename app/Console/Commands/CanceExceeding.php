@@ -3,6 +3,9 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Carbon;
+use App\Models\ParkReservation;
+use App\Models\Park;
 
 class CanceExceeding extends Command
 {
@@ -37,12 +40,23 @@ class CanceExceeding extends Command
      */
     public function handle()
     {
-        
+        $this->cancelExceeding();
     }
 
     public function cancelExceeding(){
 
-        $exceedLists = ParkReservation::whereBetween('start_time', [$beforeEnter, $errorEnter])->with('user')->with('park')->get();
+        $twoDaysAgo = Carbon::now()->subDays(2);
+        $now = Carbon::now();
 
+        $exceedLists = ParkReservation::with(['user', 'park'])
+            ->whereBetween('end_time', [$twoDaysAgo, $now])
+            ->get();
+
+        foreach($exceedLists as $list){
+            $park = Park::find($list->park_id);
+            $park->is_occupied = 0;
+            $park->save();
+        }
     }
+
 }

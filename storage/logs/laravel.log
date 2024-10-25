@@ -1379,3 +1379,71 @@
 #27 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\server.php(21): require_once('C:\\\\Users\\\\etien\\\\...')
 #28 {main}
 "} 
+[2024-10-25 12:27:00] local.ERROR: syntax error, unexpected token "}" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"}\" at C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\app\\Console\\Commands\\CanceExceeding.php:56)
+[stacktrace]
+#0 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\composer\\ClassLoader.php(427): Composer\\Autoload\\{closure}('C:\\\\Users\\\\etien\\\\...')
+#1 [internal function]: Composer\\Autoload\\ClassLoader->loadClass('App\\\\Console\\\\Com...')
+#2 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(229): is_subclass_of('App\\\\Console\\\\Com...', 'Illuminate\\\\Cons...')
+#3 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\app\\Console\\Kernel.php(91): Illuminate\\Foundation\\Console\\Kernel->load(Array)
+#4 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(316): App\\Console\\Kernel->commands()
+#5 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#6 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#7 {main}
+"} 
+[2024-10-25 12:28:01] local.ERROR: Class "App\Console\Commands\Park" not found {"exception":"[object] (Error(code: 0): Class \"App\\Console\\Commands\\Park\" not found at C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\app\\Console\\Commands\\CanceExceeding.php:55)
+[stacktrace]
+#0 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\app\\Console\\Commands\\CanceExceeding.php(42): App\\Console\\Commands\\CanceExceeding->cancelExceeding()
+#1 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): App\\Console\\Commands\\CanceExceeding->handle()
+#2 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(40): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#3 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#4 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#5 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(653): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#6 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(136): Illuminate\\Container\\Container->call(Array)
+#7 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\symfony\\console\\Command\\Command.php(298): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#8 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(120): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#9 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\symfony\\console\\Application.php(1040): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#10 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\symfony\\console\\Application.php(301): Symfony\\Component\\Console\\Application->doRunCommand(Object(App\\Console\\Commands\\CanceExceeding), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#11 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#12 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(94): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#13 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#14 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#15 {main}
+"} 
+[2024-10-25 12:29:01] local.ERROR: Class "App\Console\Commands\Park" not found {"exception":"[object] (Error(code: 0): Class \"App\\Console\\Commands\\Park\" not found at C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\app\\Console\\Commands\\CanceExceeding.php:55)
+[stacktrace]
+#0 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\app\\Console\\Commands\\CanceExceeding.php(42): App\\Console\\Commands\\CanceExceeding->cancelExceeding()
+#1 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): App\\Console\\Commands\\CanceExceeding->handle()
+#2 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(40): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#3 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#4 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#5 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(653): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#6 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(136): Illuminate\\Container\\Container->call(Array)
+#7 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\symfony\\console\\Command\\Command.php(298): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#8 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(120): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#9 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\symfony\\console\\Application.php(1040): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#10 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\symfony\\console\\Application.php(301): Symfony\\Component\\Console\\Application->doRunCommand(Object(App\\Console\\Commands\\CanceExceeding), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#11 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#12 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(94): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#13 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#14 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#15 {main}
+"} 
+[2024-10-25 12:30:01] local.ERROR: Class "App\Console\Commands\Park" not found {"exception":"[object] (Error(code: 0): Class \"App\\Console\\Commands\\Park\" not found at C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\app\\Console\\Commands\\CanceExceeding.php:55)
+[stacktrace]
+#0 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\app\\Console\\Commands\\CanceExceeding.php(42): App\\Console\\Commands\\CanceExceeding->cancelExceeding()
+#1 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): App\\Console\\Commands\\CanceExceeding->handle()
+#2 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(40): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#3 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#4 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#5 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(653): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#6 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(136): Illuminate\\Container\\Container->call(Array)
+#7 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\symfony\\console\\Command\\Command.php(298): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#8 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(120): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#9 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\symfony\\console\\Application.php(1040): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#10 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\symfony\\console\\Application.php(301): Symfony\\Component\\Console\\Application->doRunCommand(Object(App\\Console\\Commands\\CanceExceeding), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#11 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#12 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(94): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#13 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#14 C:\\Users\\etien\\OneDrive\\Desktop\\Github Proj\\smart_car_park\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#15 {main}
+"} 
