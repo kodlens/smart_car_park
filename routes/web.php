@@ -159,40 +159,44 @@ Route::get('/exit/{ip}', [App\Http\Controllers\ParkController::class, 'exit']);
 
 
 
-use App\Mail\EntranceMailNotif;
-use Illuminate\Support\Facades\Mail;
-use App\Models\SmsLog;
-use App\Models\ParkReservation;
-use App\Models\Park;
-use Illuminate\Support\Carbon;
+
+/**
+ * THIS IS FOR TESTING ONLY
+ */
+// use App\Mail\EntranceMailNotif;
+// use Illuminate\Support\Facades\Mail;
+// use App\Models\SmsLog;
+// use App\Models\ParkReservation;
+// use App\Models\Park;
+// use Illuminate\Support\Carbon;
 
 
-Route::get('/test-exceed', function(){
+// Route::get('/test-exceed', function(){
     
-    $ago = Carbon::now()->subDays(1);
-    $now = Carbon::now();
+//     $ago = Carbon::now()->subDays(1);
+//     $now = Carbon::now();
 
-    $exceedLists = ParkReservation::with(['user', 'park'])
-        ->whereBetween('end_time', [$ago, $now])
-        ->whereNull('enter_time')
-        ->where('active', 1)
-        ->get();
+//     $exceedLists = ParkReservation::with(['user', 'park'])
+//         ->whereBetween('end_time', [$ago, $now])
+//         ->whereNull('enter_time')
+//         ->where('active', 1)
+//         ->get();
 
-    ParkReservation::with(['user', 'park'])
-        ->whereBetween('end_time', [$ago, $now])
-        ->whereNull('enter_time')
-        ->where('active', 1)
-        ->update([
-            'active' => 0
-        ]);
-        
-    foreach($exceedLists as $list){
-        $park = Park::find($list->park_id);
-        $park->is_occupied = 0;
-        $park->save();
-    }
+//     ParkReservation::with(['user', 'park'])
+//         ->whereBetween('end_time', [$ago, $now])
+//         ->whereNull('enter_time')
+//         ->where('active', 1)
+//         ->update([
+//             'active' => 0
+//         ]);
+
+//     foreach($exceedLists as $list){
+//         $park = Park::find($list->park_id);
+//         $park->is_occupied = 0;
+//         $park->save();
+//     }
 
 
     
-    return $exceedLists;
-});
+//     return $exceedLists;
+// });
