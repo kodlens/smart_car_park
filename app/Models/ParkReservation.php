@@ -21,7 +21,8 @@ class ParkReservation extends Model
         'enter_time',
         'exit_time',
         'qr_ref',
-        'remarks'
+        'remarks',
+        'active'
     ];
 
     public function user(){

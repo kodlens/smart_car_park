@@ -124,6 +124,7 @@ class PaymongoController extends Controller
             'price'   => $price/100,
             'start_time' => $start_time,
             'end_time'  => $end_time,
+            'active'  => 1,
             'qr_ref' => $qr
         ]);
 

@@ -183,6 +183,7 @@ class ParkExitController extends Controller
         $data = ParkReservation::find($reservation_id);
         $currentTime = Carbon::now();
         $data->exit_time = $currentTime;
+        $data->active = 0;
         $data->save();
 
         $park = Park::find($park_id);

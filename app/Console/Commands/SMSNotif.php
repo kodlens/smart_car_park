@@ -67,11 +67,14 @@ class SMSNotif extends Command
 
         $beforeEnter = Carbon::now()->addMinutes((int)$notifBeforeEntrance->setting_value);
         $errorEnter = Carbon::now()->addMinutes(((int)$notifBeforeEntrance->setting_value) + 1);
-        $enter = ParkReservation::whereBetween('start_time', [$beforeEnter, $errorEnter])->with('user')->with('park')->get();
+        $enter = ParkReservation::whereBetween('start_time', [$beforeEnter, $errorEnter])->with('user')->with('park')
+            ->where('active', 1)->get();
 
         $beforeExit = Carbon::now()->addMinutes((int)$notifPriorExit->setting_value);
         $errorExit = Carbon::now()->addMinutes(((int)$notifPriorExit->setting_value) + 1);
-        $exit = ParkReservation::whereBetween('end_time', [$beforeExit, $errorExit])->with('user')->with('park')->get();
+        $exit = ParkReservation::whereBetween('end_time', [$beforeExit, $errorExit])->with('user')->with('park')
+            ->where('active', 1)->get();
+
         
         if ($enter) {
             foreach ($enter as $user) {

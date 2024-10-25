@@ -35,6 +35,7 @@ class CreateParkReservationsTable extends Migration
             $table->datetime('enter_time')->nullable();
             $table->datetime('exit_time')->nullable();
             $table->string('remarks', 50)->nullable();
+            $table->tinyInteger('active')->nullable()->default(1);
             $table->timestamps();
         });
     }

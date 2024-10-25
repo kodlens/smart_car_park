@@ -45,13 +45,24 @@ class CanceExceeding extends Command
 
     public function cancelExceeding(){
 
-        $twoDaysAgo = Carbon::now()->subDays(2);
+         
+        $ago = Carbon::now()->subDays(1);
         $now = Carbon::now();
 
         $exceedLists = ParkReservation::with(['user', 'park'])
-            ->whereBetween('end_time', [$twoDaysAgo, $now])
+            ->whereBetween('end_time', [$ago, $now])
+            ->whereNull('enter_time')
+            ->where('active', 1)
             ->get();
 
+        ParkReservation::with(['user', 'park'])
+            ->whereBetween('end_time', [$ago, $now])
+            ->whereNull('enter_time')
+            ->where('active', 1)
+            ->update([
+                'active' => 0
+            ]);
+            
         foreach($exceedLists as $list){
             $park = Park::find($list->park_id);
             $park->is_occupied = 0;
