@@ -35,6 +35,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('sms:send')->everyMinute();
+        $schedule->command('cancel:exceeding')->everyMinute();
 
         // $schedule->call(function () {
         //     Log::info('Scheduled task is running...');
