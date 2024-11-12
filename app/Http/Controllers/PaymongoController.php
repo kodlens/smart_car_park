@@ -134,7 +134,7 @@ class PaymongoController extends Controller
             'park_id' => $park_id,
             'park_reservation_id' => $parkReservation->park_reservation_id,
             'price'   => $price/100,
-            'transaction_date' => date('Y-m-d')
+            'transaction_date' => date('Y-m-d H:i:s')
         ]);
         
         return redirect('/home');

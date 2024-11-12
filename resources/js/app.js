@@ -96,7 +96,9 @@ Vue.filter('formatDateAndTime', function(value) {
 });
 
 
+import moment from 'moment'
 
+Vue.prototype.moment = moment
 
 Vue.prototype.$formatDate = function(value) {
     if (!value) return '';

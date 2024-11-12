@@ -63,7 +63,7 @@
                             </b-table-column>
 
                             <b-table-column field="transaction_date" label="Transaction Date" v-slot="props">
-                                {{ new Date(props.row.transaction_date).toLocaleString() }}
+                                {{ moment(props.row.transaction_date).format("YYYY-MM-DD  hh:mm:ss A") }}
                             </b-table-column>
 
                             <!-- <b-table-column label="OPTIONS" v-slot="props">
@@ -107,8 +107,10 @@
 
 <script>
 
+
 export default{
-   
+
+
     data() {
         return{
             data: [],

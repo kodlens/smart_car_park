@@ -52,8 +52,6 @@ class ScannerHomeController extends Controller
                 return response()->json([
                     'status' => 'updated'
                 ],200);
-    
-    
             }
 
         }catch(\Exception $err){
