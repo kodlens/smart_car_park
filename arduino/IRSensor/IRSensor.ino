@@ -82,8 +82,8 @@ void loop() {
   Serial.println("Waiting Request...");
   WiFiClient client = server.available();
   
-  IRState1 = dig2italRead(IR1);
-  IRState2 = dig2italRead(IR2); //exit sensor
+  IRState1 = digitalRead(IR1);
+  IRState2 = digitalRead(IR2); //exit sensor
 
   //Serial.println(IRState1);
 
