@@ -22,8 +22,13 @@ int servoPin = D4;
 //int servoPin = 2;
 
 //output for IR
-int IR = D1;
+int IR1 = D1;
 //int IR = 5;
+
+//new sensor, for closing the gate after car exited
+int IR2 = D2;
+
+
 String parkId = "";
 int msg = 0;
 
@@ -60,25 +65,30 @@ void setup() {
   Serial.println("Connected to WiFi");
 
   //for the IR (sending input)
-  pinMode(IR, INPUT);
+  pinMode(IR1, INPUT);
+  pinMode(IR2, INPUT);
 
-  //for the IR (sending input)
+  //for the SERVO (sending input)
   gate.attach(servoPin);
   gate.write(0);
 
 }
-int IRState = 1; //set wala sakyanan
+int IRState1 = 1; //set wala sakyanan
+int IRState2 = 1; //set wala sakyanan
 bool isToExecuteToPark = false;
 bool isToExecuteExit = false;
+
 void loop() {
   Serial.println("Waiting Request...");
   WiFiClient client = server.available();
   
-  IRState = digitalRead(IR);
-  Serial.println(IRState);
+  IRState1 = dig2italRead(IR1);
+  IRState2 = dig2italRead(IR2); //exit sensor
+
+  //Serial.println(IRState1);
 
   if(isToExecuteToPark == true){
-    if(IRState == 0){ //dapat naa koi makita nga sakyanan
+    if(IRState1 == 0){ //dapat naa koi makita nga sakyanan
       Serial.print("Vehicle Detected to Park!");  
       delay(5000);
       gate.write(0); //close the gate
@@ -86,13 +96,22 @@ void loop() {
     }
   }
 
+  /* IR 0 means there is an object detect in front of the device */
   if(isToExecuteExit == true){
-    if(IRState == 1){ //dapat wala ang sakyanan 10 sec before mo close ang gates
+    
+    if(IRState1 == 1 && IRState2 == 1){ //dapat wala ang sakyanan 3 sec before mo close ang gates
       Serial.print("Vehicle Detected to move out!");  
-      delay(10000);
+      delay(3000);
       gate.write(0); //close the gate
       isToExecuteExit = false;
     }
+
+    // if(IRState2 == 0){ //dapat wala ang sakyanan 10 sec before mo close ang gates
+    //   delay(3000);
+    //   //gate.write(0); //close the gate
+    //   //isToExecuteExit = false;
+    // }
+
   }
   
 
@@ -111,10 +130,19 @@ void loop() {
     gate.write(180);
   }//end if
 
+
+  /* ========== FOR SERVO TESTING ========== */
   if (request.indexOf("/close") != -1)  
   {
     gate.write(0);
   }//end if
+    if (request.indexOf("/open") != -1)  
+  {
+    gate.write(180);
+  }//end if
+ /* ========== FOR SERVO TESTING ========== */
+
+
 
   client.println("HTTP/1.1 200 OK");
   client.println("Content-Type: text/html");
