@@ -37,7 +37,7 @@ class ScannerHomeController extends Controller
                 
                 //comment for debugging purpose
 
-                Http::get($ngrokUrl. '/enter'. '/'.$reservation->park_id);
+                Http::get($ngrokUrl. '/enter'. '/'.$reservation->park->park_id);
 
     
                 ParkReservation::where('park_reservation_id', $reservation->park_reservation_id)
@@ -46,7 +46,7 @@ class ScannerHomeController extends Controller
                         'remarks'=> 'RESERVE',
                     ]);
     
-                Park::where('park_id',$reservation->park_id)
+                Park::where('park_id',$reservation->park->park_id)
                     ->update([
                         'is_occupied' => 1,
                     ]);
