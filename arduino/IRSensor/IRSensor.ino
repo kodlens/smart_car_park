@@ -33,12 +33,12 @@ String parkId = "";
 int msg = 0;
 
 //wifi name and password
-const char* ssid = "CAPSTONE";
-const char* password = "Adraincem12345";
+const char* ssid = "One Piece";
+const char* password = "Airjordan*23";
 
-IPAddress staticIP(192, 168, 254, 103); // Set the desired static IP address
+IPAddress staticIP(192, 168, 1, 40); // Set the desired static IP address
 //Default gateway
-IPAddress gateway(192, 168, 254, 254); // Set your router's gateway IP address
+IPAddress gateway(192, 168, 1, 1); // Set your router's gateway IP address
 
 
 IPAddress subnet(255, 255, 255, 0); // Set your subnet mask
@@ -77,6 +77,8 @@ int IRState1 = 1; //set wala sakyanan
 int IRState2 = 1; //set wala sakyanan
 bool isToExecuteToPark = false;
 bool isToExecuteExit = false;
+int counter = 0;
+
 
 void loop() {
   Serial.println("Waiting Request...");
@@ -85,25 +87,42 @@ void loop() {
   IRState1 = digitalRead(IR1);
   IRState2 = digitalRead(IR2); //exit sensor
 
-  //Serial.println(IRState1);
+  Serial.println("--------SENSOR STATE---------");
+  Serial.print("IR SENSOR 1: ");
+  Serial.println(IRState1);
+
+  Serial.print("IR SENSOR 2: ");
+  Serial.println(IRState2);
+  Serial.println("--------END SENSOR STATE---------");
+
 
   if(isToExecuteToPark == true){
+    Serial.println("-------EXECUTE TO PARK IS TRUE----------");
+
     if(IRState1 == 0){ //dapat naa koi makita nga sakyanan
-      Serial.print("Vehicle Detected to Park!");  
+      Serial.println("-------EXECUTE TO PARK----------");
+      Serial.println("Vehicle Detected to Park!");  
       delay(5000);
       gate.write(0); //close the gate
+      Serial.println("Servo close!");  
+      Serial.println("--------END EXECUTE TO PARK---------");
       isToExecuteToPark = false;
     }
   }
 
   /* IR 0 means there is an object detect in front of the device */
   if(isToExecuteExit == true){
+    Serial.println("-------EXECUTE TO EXIT IS TRUE (waiting for the ir1 and ir2)----------");
     
     if(IRState1 == 1 && IRState2 == 1){ //dapat wala ang sakyanan 3 sec before mo close ang gates
-      Serial.print("Vehicle Detected to move out!");  
+      Serial.println("--------START EXIT PROCEDURE---------");
+      Serial.println("Vehicle Detected to move out!");  
       delay(3000);
       gate.write(0); //close the gate
+      Serial.println("Servo close!");  
       isToExecuteExit = false;
+      Serial.println("-------SETTING TO EXECUTE TO FALSE----------");
+      Serial.println("---------END EXI PROCEDURE--------");
     }
 
     // if(IRState2 == 0){ //dapat wala ang sakyanan 10 sec before mo close ang gates
@@ -118,27 +137,45 @@ void loop() {
   String request = client.readStringUntil('\r');
   if (request.indexOf("/enter") != -1)
   {
+    Serial.println("--------DETECT ENTER---------");
     isToExecuteToPark = true;
     msg = 1;
     gate.write(180); //open gate
+    Serial.println("Servo open!");  
+    Serial.println("--------END ENTER---------");
+
+
   }//end if
 
   if (request.indexOf("/exit") != -1)  
   {
+    Serial.println("--------DETECT EXIT---------");
     isToExecuteExit = true;
     msg = 0;
     gate.write(180);
+    Serial.println("Servo open!");  
+    Serial.println("--------END EXIT---------");
+
   }//end if
 
 
   /* ========== FOR SERVO TESTING ========== */
   if (request.indexOf("/close") != -1)  
   {
+    Serial.println("--------DEBUG CLOSE---------");
     gate.write(0);
+    Serial.println("Servo close!");  
+    Serial.println("--------END DEBUG CLOSE---------");
+
+
   }//end if
-    if (request.indexOf("/open") != -1)  
+
+  if (request.indexOf("/open") != -1)  
   {
+    Serial.println("--------DEBUG OPEN---------");
     gate.write(180);
+    Serial.println("Servo open!");  
+    Serial.println("--------END DEBUG OPEN---------");
   }//end if
  /* ========== FOR SERVO TESTING ========== */
 
