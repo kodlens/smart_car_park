@@ -25,7 +25,7 @@ class ParkController extends Controller
         
         $park = Park::find($id);
 
-        $response = Http::get("http://$park->device_ip/enter");
+        $response = Http::get("http://$park->device_ip/exit");
 
         return response()->json([
             'status'=>'exited'
