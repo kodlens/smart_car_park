@@ -126,8 +126,8 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/paymongo/success-extend',[App\Http\Controllers\PaymongoController::class,'successExtend']);
 
     
-    Route::post('/exit-park',[App\Http\Controllers\ParkReservationController::class,'exitPark']);
-    Route::post('/enter-park',[App\Http\Controllers\ParkReservationController::class,'enterPark']);
+    //Route::post('/exit-park',[App\Http\Controllers\ParkReservationController::class,'exitPark']);
+    //Route::post('/enter-park',[App\Http\Controllers\ParkReservationController::class,'enterPark']);
 
 
 
