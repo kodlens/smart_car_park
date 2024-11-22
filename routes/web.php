@@ -154,8 +154,8 @@ Route::middleware(['auth', 'scanner'])->group(function(){
 
 //  ------------------------API SERVO------------------------------------
 
-Route::get('/enter/{ip}', [App\Http\Controllers\ParkController::class, 'enter']);
-Route::get('/exit/{ip}', [App\Http\Controllers\ParkController::class, 'exit']);
+Route::get('/enter/{id}', [App\Http\Controllers\ParkController::class, 'enter']);
+Route::get('/exit/{id}', [App\Http\Controllers\ParkController::class, 'exit']);
 
 
 

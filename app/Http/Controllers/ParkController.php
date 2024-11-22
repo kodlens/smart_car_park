@@ -10,17 +10,21 @@ class ParkController extends Controller
 {
     //
 
-    public function enter($ip){
-        $esp8266IpAddress = $ip;
-        $response = Http::get("http://$esp8266IpAddress/enter");
+    public function enter($id){
+
+        $park = Park::find($id);
+
+        $response = Http::get("http://$park->device_ip . '/enter");
         
         return response()->json([
             'status'=>'entered'
         ],200);
     }
-    public function exit($ip){
-        $esp8266IpAddress = $ip;
-        $response = Http::get("http://$esp8266IpAddress/exit");
+    public function exit($id){
+        
+        $park = Park::find($id);
+
+        $response = Http::get("http://$park->device_ip . '/exit");
 
         return response()->json([
             'status'=>'exited'

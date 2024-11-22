@@ -18,6 +18,7 @@ class ParkExitController extends Controller
 {
 
     public function exitPark($id){
+
         $reservation = ParkReservation::with('park')->find($id);
         $parkPrice = ParkPrice::first()->park_price;
     
@@ -57,8 +58,9 @@ class ParkExitController extends Controller
                 // if(env('ESP_DEBUG') == 0){
                 //     Http::get("http://".$esp8266IpAddress."/exit");
                 // }
+                $ngrokURL = env('NGROK_TUNNEL');
                 if(env('ESP_DEBUG') == 0){
-                    Http::get("http://".$esp8266IpAddress."/exit");
+                    Http::get("$ngrokURL/exit/".$reservation->park_id);
                 }
         
                 return response()->json([
@@ -203,11 +205,10 @@ class ParkExitController extends Controller
         ]);
 
         //return $response;
-            //comment for debugging
+        $ngrokURL = env('NGROK_TUNNEL');
         if(env('ESP_DEBUG') == 0){
-            Http::get("http://".$park->device_ip."/exit");
+            Http::get("$ngrokURL/exit/".$park_id);
         }
-        
 
         return redirect('/home');
     }
