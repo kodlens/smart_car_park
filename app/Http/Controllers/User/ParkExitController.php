@@ -60,7 +60,7 @@ class ParkExitController extends Controller
                 // }
                 $ngrokURL = env('NGROK_TUNNEL');
                 if(env('ESP_DEBUG') == 0){
-                    Http::get("$ngrokURL/exit/".$reservation->park_id);
+                    Http::get("$ngrokURL/exit/".$reservation->park->park_id);
                 }
         
                 return response()->json([
