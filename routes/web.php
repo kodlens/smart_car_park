@@ -158,6 +158,14 @@ Route::get('/enter/{id}', [App\Http\Controllers\ParkController::class, 'enter'])
 Route::get('/exit/{id}', [App\Http\Controllers\ParkController::class, 'exit']);
 
 
+use App\Models\Park;
+
+Route::get('/test', function(){
+    $park = Park::find($id);
+
+    Http::get($ngrokUrl. '/enter'. '/'.$park->park_id);
+
+});
 
 
 /**
