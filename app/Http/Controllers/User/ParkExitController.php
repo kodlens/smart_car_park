@@ -21,17 +21,7 @@ class ParkExitController extends Controller
         $reservation = ParkReservation::with('park')->find($id);
         $parkPrice = ParkPrice::first()->park_price;
     
-        $esp8266IpAddress = '';
-        
-        if(env('IS_NGROK')==1){
-            $esp8266IpAddress = env('NGROK_TUNNEL');
-
-        }else{
-            $esp8266IpAddress = $reservation->park->device_ip;
-        }
-
-       
-    
+        $esp8266IpAddress = $reservation->park->device_ip;
 
         if($reservation && $reservation->enter_time){
             //$response = Http::get("https://native-awake-ewe.ngrok-free.app/exit/$esp8266IpAddress");
@@ -63,13 +53,12 @@ class ParkExitController extends Controller
                         'is_occupied' => 0,
                     ]);
                     //exit the vehicle on device
-                
 
                 // if(env('ESP_DEBUG') == 0){
                 //     Http::get("http://".$esp8266IpAddress."/exit");
                 // }
                 if(env('ESP_DEBUG') == 0){
-                    Http::get($esp8266IpAddress."/exit");
+                    Http::get("http://".$esp8266IpAddress."/exit");
                 }
         
                 return response()->json([
@@ -88,13 +77,8 @@ class ParkExitController extends Controller
 
         $reservation = ParkReservation::with('park')->find($id);
         $parkPrice = ParkPrice::first()->park_price;
-        $esp8266IpAddress = '';
-        if(env('IS_NGROK')==1){
-            $esp8266IpAddress = env('NGROK_TUNNEL');
 
-        }else{
-            $esp8266IpAddress = $reservation->park->device_ip;
-        }
+        $esp8266IpAddress = $reservation->park->device_ip;
 
         if($reservation && $reservation->enter_time){
             //$response = Http::get("https://native-awake-ewe.ngrok-free.app/exit/$esp8266IpAddress");
@@ -217,22 +201,13 @@ class ParkExitController extends Controller
             'price'   => $price,
             'transaction_date' => date('Y-m-d')
         ]);
-        
-        $esp8266IpAddress = env('NGROK_TUNNEL');
 
         //return $response;
             //comment for debugging
         if(env('ESP_DEBUG') == 0){
-            if(env('IS_NGROK') == 1){
-                
-                Http::get($esp8266IpAddress."/exit");
-            }else{
-                Http::get("http://".$park->device_ip."/exit");
-            }
-
-            //Http::get("http://".$park->device_ip."/exit");
-            Http::get($esp8266IpAddress."/exit");
+            Http::get("http://".$park->device_ip."/exit");
         }
+        
 
         return redirect('/home');
     }

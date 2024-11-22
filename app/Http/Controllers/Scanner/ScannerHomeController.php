@@ -22,12 +22,10 @@ class ScannerHomeController extends Controller
 
         try {
             $reservation = ParkReservation::with('park')->where('qr_ref', $qr)->first();
+
             $esp8266IpAddress = $reservation->park->device_ip;
-    
             //return $reservation;
-    
             //return $esp8266IpAddress;
-    
            // return $reservation;
             if($reservation && $reservation->enter_time == null){
                 // return $reservation->park_reservation_id;
@@ -36,6 +34,7 @@ class ScannerHomeController extends Controller
                 
                 //comment for debugging purpose
                 $res = Http::get("http://".$esp8266IpAddress."/enter");
+                
 
     
                 ParkReservation::where('park_reservation_id', $reservation->park_reservation_id)
