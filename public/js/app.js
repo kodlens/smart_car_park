@@ -76159,7 +76159,7 @@ var render = function () {
                             attrs: {
                               type: "tel",
                               pattern: "^(09|\\+639)\\d{9}$",
-                              placeholder: "Format: 09191112222",
+                              placeholder: "Format: 9191112222",
                               icon: "",
                             },
                             model: {

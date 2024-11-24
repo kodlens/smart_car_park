@@ -45,8 +45,8 @@
                             <div class="columns">
                                 <div class="column">
                                     <b-field label="E-mail"
-                                             :type="errors.email ? 'is-danger':''"
-                                             :message="errors.email ? errors.email[0] : ''">
+                                        :type="errors.email ? 'is-danger':''"
+                                        :message="errors.email ? errors.email[0] : ''">
                                         <b-input type="email" v-model="fields.email" 
                                             placeholder="E-mail" icon="email"
                                                 required></b-input>
@@ -54,12 +54,12 @@
                                 </div>
                                 <div class="column">
                                     <b-field label="Contact No."
-                                             :type="errors.contact_no ? 'is-danger':''"
-                                             :message="errors.contact_no ? errors.contact_no[0] : ''">
+                                        :type="errors.contact_no ? 'is-danger':''"
+                                        :message="errors.contact_no ? errors.contact_no[0] : ''">
                                         <b-input type="tel" 
                                             v-model="fields.contact_no" 
                                             pattern="^(09|\+639)\d{9}$"
-                                            placeholder="Format: 09191112222" icon=""></b-input>
+                                            placeholder="Format: 9191112222" icon=""></b-input>
                                     </b-field>
                                 </div>
                             </div>
