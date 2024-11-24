@@ -25,7 +25,7 @@ class RegistrationController extends Controller
             'lname' => ['string', 'max: 50', 'required'],
             'fname' => ['string', 'max: 50', 'required'],
             'sex' => ['string', 'max: 10', 'required'],
-            'contact_no' => ['required', 'regex:/^(9|\+639)\d{9}$/', 'unique:users'],
+            'contact_no' => ['required', 'regex:/^9\d{9}$/', 'unique:users'],
             // 'province' => ['string', 'max: 10', 'required'],
             // 'city' => ['string', 'max: 10', 'required'],
             // 'barangay' => ['string', 'max: 10', 'required'],

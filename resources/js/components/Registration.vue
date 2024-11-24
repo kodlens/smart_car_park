@@ -58,7 +58,7 @@
                                         :message="errors.contact_no ? errors.contact_no[0] : ''">
                                         <b-input type="tel" 
                                             v-model="fields.contact_no" 
-                                            pattern="^(09|\+639)\d{9}$"
+                                            pattern="^(9)\d{9}$"
                                             placeholder="Format: 9191112222" icon=""></b-input>
                                     </b-field>
                                 </div>

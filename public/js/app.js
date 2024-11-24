@@ -76158,7 +76158,7 @@ var render = function () {
                           _c("b-input", {
                             attrs: {
                               type: "tel",
-                              pattern: "^(09|\\+639)\\d{9}$",
+                              pattern: "^(9)\\d{9}$",
                               placeholder: "Format: 9191112222",
                               icon: "",
                             },
