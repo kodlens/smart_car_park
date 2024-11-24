@@ -4,7 +4,7 @@
         <div class="section">
 
             <div class="columns is-centered">
-                <div class="column is-6-widescreen is-8-desktop">
+                <div class="column is-8-tablet is-4-desktop">
 
                     <div class="box">
 

@@ -1,7 +1,7 @@
 <template>
     <section class="section">
         <div class="columns is-centered">
-            <div class="column is-6 is-8-tablet">
+            <div class="column is-8-tablet is-5-widescreen">
                 <form @submit.prevent="submit">
 
                     <div class="box">
@@ -95,7 +95,9 @@
                                         <b-input type="text" v-model="fields.suffix" placeholder="Extension (Jr, III, Sr.)"></b-input>
                                     </b-field>
                                 </div>
+                            </div>
 
+                            <div class="columns">
                                 <div class="column">
                                     <b-field label="Sex" expanded
                                             :type="errors.sex ? 'is-danger':''"

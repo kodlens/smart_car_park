@@ -10,7 +10,7 @@
                             <div class="column">
                                 <b-field label="Search" label-position="on-border">
                                     <b-input type="text"
-                                        v-model="search.parking_hour" placeholder="Search Lastname"
+                                        v-model="search.parking_hour" placeholder="Search..."
                                         @keyup.native.enter="loadAsyncData"/>
                                     <p class="control">
                                             <b-tooltip label="Search" type="is-success">

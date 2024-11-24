@@ -2,7 +2,7 @@
     <div>
         <div class="section">
             <div class="columns is-centered">
-                <div class="column is-8">
+                <div class="column is-10-tablet is-8-desktop">
                     <div class="box">
                         <div class="has-text-weight-bold subtitle is-4 table-header">LIST OF USERS</div>
 
@@ -132,8 +132,8 @@
                             <div class="columns">
                                 <div class="column">
                                     <b-field label="Username" label-position="on-border"
-                                             :type="this.errors.username ? 'is-danger':''"
-                                             :message="this.errors.username ? this.errors.username[0] : ''">
+                                             :type="errors.username ? 'is-danger':''"
+                                             :message="errors.username ? errors.username[0] : ''">
                                         <b-input v-model="fields.username"
                                                  placeholder="Username" required>
                                         </b-input>
@@ -144,8 +144,8 @@
                             <div class="columns">
                                 <div class="column">
                                     <b-field label="Last Name" label-position="on-border"
-                                             :type="this.errors.lname ? 'is-danger':''"
-                                             :message="this.errors.lname ? this.errors.lname[0] : ''">
+                                             :type="errors.lname ? 'is-danger':''"
+                                             :message="errors.lname ? errors.lname[0] : ''">
                                         <b-input v-model="fields.lname"
                                             icon="account"
                                             placeholder="Last Name" required>
@@ -154,8 +154,8 @@
                                 </div>
                                 <div class="column">
                                     <b-field label="First Name" label-position="on-border"
-                                             :type="this.errors.fname ? 'is-danger':''"
-                                             :message="this.errors.fname ? this.errors.fname[0] : ''">
+                                             :type="errors.fname ? 'is-danger':''"
+                                             :message="errors.fname ? errors.fname[0] : ''">
                                         <b-input v-model="fields.fname"
                                                  placeholder="First Name" required>
                                         </b-input>
@@ -166,8 +166,8 @@
                             <div class="columns">
                                 <div class="column">
                                     <b-field label="Middle Name" label-position="on-border"
-                                             :type="this.errors.mname ? 'is-danger':''"
-                                             :message="this.errors.mname ? this.errors.mname[0] : ''">
+                                             :type="errors.mname ? 'is-danger':''"
+                                             :message="errors.mname ? errors.mname[0] : ''">
                                         <b-input v-model="fields.mname"
                                                  placeholder="Middle Name">
                                         </b-input>
@@ -175,8 +175,8 @@
                                 </div>
                                 <div class="column">
                                     <b-field label="Suffix" label-position="on-border"
-                                             :type="this.errors.suffix ? 'is-danger':''"
-                                             :message="this.errors.suffix ? this.errors.suffix[0] : ''">
+                                             :type="errors.suffix ? 'is-danger':''"
+                                             :message="errors.suffix ? errors.suffix[0] : ''">
                                         <b-input v-model="fields.suffix"
                                                  placeholder="Suffix">
                                         </b-input>
@@ -186,18 +186,19 @@
 
                             <div class="columns">
                                 <div class="column">
-                                    <b-field label="Contact No" label-position="on-border"
-                                             :type="this.errors.contact_no ? 'is-danger':''"
-                                             :message="this.errors.contact_no ? this.errors.contact_no[0] : ''">
-                                        <b-input type="number" v-model="fields.contact_no"
-                                                 placeholder="Contact No" required>
-                                        </b-input>
+                                    <b-field label="Contact No." label-position="on-border"
+                                        :type="errors.contact_no ? 'is-danger':''"
+                                        :message="errors.contact_no ? errors.contact_no[0] : ''">
+                                         <b-input type="tel" 
+                                            v-model="fields.contact_no" 
+                                            pattern="^(9)\d{9}$"
+                                            placeholder="Format: 9191112222" icon=""></b-input>
                                     </b-field>
                                 </div>
                                 <div class="column">
                                     <b-field label="Email" label-position="on-border"
-                                             :type="this.errors.email ? 'is-danger':''"
-                                             :message="this.errors.email ? this.errors.email[0] : ''">
+                                             :type="errors.email ? 'is-danger':''"
+                                             :message="errors.email ? errors.email[0] : ''">
                                         <b-input type="email" v-model="fields.email" icon="email"
                                                  placeholder="Email" required>
                                         </b-input>
@@ -209,8 +210,8 @@
                             <div class="columns" v-if="global_id < 1">
                                 <div class="column">
                                     <b-field label="Password" label-position="on-border"
-                                             :type="this.errors.password ? 'is-danger':''"
-                                             :message="this.errors.password ? this.errors.password[0] : ''">
+                                             :type="errors.password ? 'is-danger':''"
+                                             :message="errors.password ? errors.password[0] : ''">
                                         <b-input type="password" password-reveal v-model="fields.password"
                                                  placeholder="Password" required>
                                         </b-input>
@@ -218,8 +219,8 @@
                                 </div>
                                 <div class="column">
                                     <b-field label="Confirm Password" label-position="on-border"
-                                             :type="this.errors.password_confirmation ? 'is-danger':''"
-                                             :message="this.errors.password_confirmation ? this.errors.password_confirmation[0] : ''">
+                                             :type="errors.password_confirmation ? 'is-danger':''"
+                                             :message="errors.password_confirmation ? errors.password_confirmation[0] : ''">
                                         <b-input type="password" password-reveal v-model="fields.password_confirmation"
                                                  placeholder="Confirm Password" required>
                                         </b-input>
@@ -231,8 +232,8 @@
                             <div class="columns">
                                 <div class="column">
                                     <b-field label="Sex" label-position="on-border" expanded
-                                             :type="this.errors.sex ? 'is-danger':''"
-                                             :message="this.errors.sex ? this.errors.sex[0] : ''"
+                                             :type="errors.sex ? 'is-danger':''"
+                                             :message="errors.sex ? errors.sex[0] : ''"
                                             >
                                         <b-select v-model="fields.sex" expanded>
                                             <option value="MALE">MALE</option>
@@ -243,8 +244,8 @@
 
                                 <div class="column">
                                     <b-field label="Role" label-position="on-border" expanded
-                                             :type="this.errors.role ? 'is-danger':''"
-                                             :message="this.errors.role ? this.errors.role[0] : ''">
+                                             :type="errors.role ? 'is-danger':''"
+                                             :message="errors.role ? errors.role[0] : ''">
                                         <b-select v-model="fields.role" expanded>
                                             <option value="ADMINISTRATOR">ADMINISTRATOR</option>
                                             <option value="USER">USER</option>

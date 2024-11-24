@@ -8751,6 +8751,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -9270,6 +9271,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
 //
 //
 //
@@ -73914,10 +73917,7 @@ var render = function () {
                         },
                         [
                           _c("b-input", {
-                            attrs: {
-                              type: "text",
-                              placeholder: "Search Lastname",
-                            },
+                            attrs: { type: "text", placeholder: "Search..." },
                             nativeOn: {
                               keyup: function ($event) {
                                 if (
@@ -74301,7 +74301,7 @@ var render = function () {
     [
       _c("div", { staticClass: "section" }, [
         _c("div", { staticClass: "columns is-centered" }, [
-          _c("div", { staticClass: "column is-8" }, [
+          _c("div", { staticClass: "column is-10-tablet is-8-desktop" }, [
             _c(
               "div",
               { staticClass: "box" },
@@ -74772,9 +74772,9 @@ var render = function () {
                               attrs: {
                                 label: "Username",
                                 "label-position": "on-border",
-                                type: this.errors.username ? "is-danger" : "",
-                                message: this.errors.username
-                                  ? this.errors.username[0]
+                                type: _vm.errors.username ? "is-danger" : "",
+                                message: _vm.errors.username
+                                  ? _vm.errors.username[0]
                                   : "",
                               },
                             },
@@ -74811,9 +74811,9 @@ var render = function () {
                               attrs: {
                                 label: "Last Name",
                                 "label-position": "on-border",
-                                type: this.errors.lname ? "is-danger" : "",
-                                message: this.errors.lname
-                                  ? this.errors.lname[0]
+                                type: _vm.errors.lname ? "is-danger" : "",
+                                message: _vm.errors.lname
+                                  ? _vm.errors.lname[0]
                                   : "",
                               },
                             },
@@ -74849,9 +74849,9 @@ var render = function () {
                               attrs: {
                                 label: "First Name",
                                 "label-position": "on-border",
-                                type: this.errors.fname ? "is-danger" : "",
-                                message: this.errors.fname
-                                  ? this.errors.fname[0]
+                                type: _vm.errors.fname ? "is-danger" : "",
+                                message: _vm.errors.fname
+                                  ? _vm.errors.fname[0]
                                   : "",
                               },
                             },
@@ -74888,9 +74888,9 @@ var render = function () {
                               attrs: {
                                 label: "Middle Name",
                                 "label-position": "on-border",
-                                type: this.errors.mname ? "is-danger" : "",
-                                message: this.errors.mname
-                                  ? this.errors.mname[0]
+                                type: _vm.errors.mname ? "is-danger" : "",
+                                message: _vm.errors.mname
+                                  ? _vm.errors.mname[0]
                                   : "",
                               },
                             },
@@ -74922,9 +74922,9 @@ var render = function () {
                               attrs: {
                                 label: "Suffix",
                                 "label-position": "on-border",
-                                type: this.errors.suffix ? "is-danger" : "",
-                                message: this.errors.suffix
-                                  ? this.errors.suffix[0]
+                                type: _vm.errors.suffix ? "is-danger" : "",
+                                message: _vm.errors.suffix
+                                  ? _vm.errors.suffix[0]
                                   : "",
                               },
                             },
@@ -74956,20 +74956,21 @@ var render = function () {
                             "b-field",
                             {
                               attrs: {
-                                label: "Contact No",
+                                label: "Contact No.",
                                 "label-position": "on-border",
-                                type: this.errors.contact_no ? "is-danger" : "",
-                                message: this.errors.contact_no
-                                  ? this.errors.contact_no[0]
+                                type: _vm.errors.contact_no ? "is-danger" : "",
+                                message: _vm.errors.contact_no
+                                  ? _vm.errors.contact_no[0]
                                   : "",
                               },
                             },
                             [
                               _c("b-input", {
                                 attrs: {
-                                  type: "number",
-                                  placeholder: "Contact No",
-                                  required: "",
+                                  type: "tel",
+                                  pattern: "^(9)\\d{9}$",
+                                  placeholder: "Format: 9191112222",
+                                  icon: "",
                                 },
                                 model: {
                                   value: _vm.fields.contact_no,
@@ -74996,9 +74997,9 @@ var render = function () {
                               attrs: {
                                 label: "Email",
                                 "label-position": "on-border",
-                                type: this.errors.email ? "is-danger" : "",
-                                message: this.errors.email
-                                  ? this.errors.email[0]
+                                type: _vm.errors.email ? "is-danger" : "",
+                                message: _vm.errors.email
+                                  ? _vm.errors.email[0]
                                   : "",
                               },
                             },
@@ -75038,11 +75039,11 @@ var render = function () {
                                   attrs: {
                                     label: "Password",
                                     "label-position": "on-border",
-                                    type: this.errors.password
+                                    type: _vm.errors.password
                                       ? "is-danger"
                                       : "",
-                                    message: this.errors.password
-                                      ? this.errors.password[0]
+                                    message: _vm.errors.password
+                                      ? _vm.errors.password[0]
                                       : "",
                                   },
                                 },
@@ -75079,11 +75080,11 @@ var render = function () {
                                   attrs: {
                                     label: "Confirm Password",
                                     "label-position": "on-border",
-                                    type: this.errors.password_confirmation
+                                    type: _vm.errors.password_confirmation
                                       ? "is-danger"
                                       : "",
-                                    message: this.errors.password_confirmation
-                                      ? this.errors.password_confirmation[0]
+                                    message: _vm.errors.password_confirmation
+                                      ? _vm.errors.password_confirmation[0]
                                       : "",
                                   },
                                 },
@@ -75129,9 +75130,9 @@ var render = function () {
                                 label: "Sex",
                                 "label-position": "on-border",
                                 expanded: "",
-                                type: this.errors.sex ? "is-danger" : "",
-                                message: this.errors.sex
-                                  ? this.errors.sex[0]
+                                type: _vm.errors.sex ? "is-danger" : "",
+                                message: _vm.errors.sex
+                                  ? _vm.errors.sex[0]
                                   : "",
                               },
                             },
@@ -75176,9 +75177,9 @@ var render = function () {
                                 label: "Role",
                                 "label-position": "on-border",
                                 expanded: "",
-                                type: this.errors.role ? "is-danger" : "",
-                                message: this.errors.role
-                                  ? this.errors.role[0]
+                                type: _vm.errors.role ? "is-danger" : "",
+                                message: _vm.errors.role
+                                  ? _vm.errors.role[0]
                                   : "",
                               },
                             },
@@ -75962,7 +75963,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("section", { staticClass: "section" }, [
     _c("div", { staticClass: "columns is-centered" }, [
-      _c("div", { staticClass: "column is-6 is-8-tablet" }, [
+      _c("div", { staticClass: "column is-8-tablet is-5-widescreen" }, [
         _c(
           "form",
           {
@@ -76309,7 +76310,9 @@ var render = function () {
                     ],
                     1
                   ),
-                  _vm._v(" "),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "columns" }, [
                   _c(
                     "div",
                     { staticClass: "column" },
@@ -77816,7 +77819,7 @@ var render = function () {
   return _c("div", [
     _c("div", { staticClass: "section" }, [
       _c("div", { staticClass: "columns is-centered" }, [
-        _c("div", { staticClass: "column is-6-widescreen is-8-desktop" }, [
+        _c("div", { staticClass: "column is-8-tablet is-4-desktop" }, [
           _c("div", { staticClass: "box" }, [
             _c("div", { staticClass: "box-body" }, [
               _c("div", { staticClass: "mb-2" }, [
