@@ -26,11 +26,11 @@
 
                             <div class="columns">
                                 <div class="column">
-                                    <b-field label="Password"
+                                    <b-field label="Password (Min 6 character)"
                                              :type="errors.password ? 'is-danger':''"
                                              :message="errors.password ? errors.password[0] : ''">
                                         <b-input type="password"  v-model="fields.password"
-                                            placeholder="Password" icon="lock" password-reveal
+                                            placeholder="Min 6 character" icon="lock" password-reveal
                                                 required></b-input>
                                     </b-field>
                                 </div>
@@ -53,7 +53,7 @@
                                     </b-field>
                                 </div>
                                 <div class="column">
-                                    <b-field label="Contact No."
+                                    <b-field label="Contact No. (9161234455)"
                                         :type="errors.contact_no ? 'is-danger':''"
                                         :message="errors.contact_no ? errors.contact_no[0] : ''">
                                         <b-input type="tel" 

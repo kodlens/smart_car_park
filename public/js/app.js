@@ -76034,7 +76034,7 @@ var render = function () {
                         "b-field",
                         {
                           attrs: {
-                            label: "Password",
+                            label: "Password (Min 6 character)",
                             type: _vm.errors.password ? "is-danger" : "",
                             message: _vm.errors.password
                               ? _vm.errors.password[0]
@@ -76045,7 +76045,7 @@ var render = function () {
                           _c("b-input", {
                             attrs: {
                               type: "password",
-                              placeholder: "Password",
+                              placeholder: "Min 6 character",
                               icon: "lock",
                               "password-reveal": "",
                               required: "",
@@ -76148,7 +76148,7 @@ var render = function () {
                         "b-field",
                         {
                           attrs: {
-                            label: "Contact No.",
+                            label: "Contact No. (9161234455)",
                             type: _vm.errors.contact_no ? "is-danger" : "",
                             message: _vm.errors.contact_no
                               ? _vm.errors.contact_no[0]
