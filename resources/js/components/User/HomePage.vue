@@ -40,7 +40,13 @@
                                         </div>
                                     </div>
                                     <div class="" v-else>
-                                        <div class="mb-2 occupied">OCCUPIED</div>
+                                        <div>
+                                            <div class="mb-2 occupied" v-if="(park.parkReservation.enter_time !== null)">
+                                                OCCUPIED
+                                            </div>
+                                            <div class="mb-2 occupied" v-else>RESERVED</div>
+                                        </div>
+
                                         <div>
                                             <img src="/img/car.png" style="width: 250px;" alt="">
                                         </div>

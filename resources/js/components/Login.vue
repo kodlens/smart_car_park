@@ -25,13 +25,14 @@
                             </b-field>
 
                             <div class="buttons expanded mt-4">
-                                <button 
+                                <b-button
+                                    native-type="submit"
+                                    :loading="loading"
+                                    label="LOGIN"
+                                    icon-right="login"
                                     class="button is-fullwidth is-primary is-outlined
                                         has-text-weight-bold">
-                                        LOGIN
-
-                                        <b-icon class="ml-2" icon="login"></b-icon>
-                                    </button>
+                                </b-button>
                             </div>
 
                             <div class="mb-2">
@@ -58,6 +59,7 @@ export default {
                 username: null,
                 password: null,
             },
+            loading: false,
 
             errors: {},
         }
@@ -65,10 +67,17 @@ export default {
 
     methods: {
         submit: function(){
+            console.log('I am the login');
+            
+            this.loading = true
+
             axios.post('/login', this.fields).then(res=>{
                 window.location = '/login';
                //window.location = '/dashboard';
+           
             }).catch(err=>{
+                 this.loading = false
+
                 if(err.response.status === 422){
                     this.errors = err.response.data.errors;
                 }

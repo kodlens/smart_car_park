@@ -2,7 +2,7 @@
     <div>
         <div class="section">
             <div class="columns is-centered">
-                <div class="column is-10-tablet is-8-desktop">
+                <div class="column is-8-widescreen is-10-desktop">
                     <div class="box">
                         <div class="has-text-weight-bold subtitle is-4 table-header">LIST OF USERS</div>
 

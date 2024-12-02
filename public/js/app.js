@@ -9047,6 +9047,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -9054,6 +9055,7 @@ __webpack_require__.r(__webpack_exports__);
         username: null,
         password: null
       },
+      loading: false,
       errors: {}
     };
   },
@@ -9061,9 +9063,13 @@ __webpack_require__.r(__webpack_exports__);
     submit: function submit() {
       var _this = this;
 
+      console.log('I am the login');
+      this.loading = true;
       axios.post('/login', this.fields).then(function (res) {
         window.location = '/login'; //window.location = '/dashboard';
       })["catch"](function (err) {
+        _this.loading = false;
+
         if (err.response.status === 422) {
           _this.errors = err.response.data.errors;
         }
@@ -10163,6 +10169,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -30443,7 +30455,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".login-card[data-v-6bdc8b8e] {\r\n    max-width: 500px;\r\n    background: rgb(255, 255, 255);\r\n    border-radius: 0.4em;\r\n    box-shadow: 0.3em 0.3em 0.7em #00000015;\r\n    transition: border 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);\r\n    border: rgb(250, 250, 250) 0.2em solid;\r\n    padding: 25px;\n}\n.login-card[data-v-6bdc8b8e]:hover {\r\n    border: #1426c2 0.2em solid;\n}\n.login-wrapper[data-v-6bdc8b8e]{\r\n    height: 100vh;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.box[data-v-6bdc8b8e]{\r\n    padding: 50px 25px 50px 25px;\r\n    border: 1px solid rgb(223, 223, 223);\r\n    border: 1px solid #1426c2;\n}\n.hr-line[data-v-6bdc8b8e]{\r\n    background-color: #1426c2;\n}\n.login-input[data-v-6bdc8b8e]{\r\n    margin-bottom: 25px;\n}\n.logo[data-v-6bdc8b8e]{\r\n    height: 180px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".login-card[data-v-6bdc8b8e] {\r\n    max-width: 500px;\r\n    background: rgb(255, 255, 255);\r\n    border-radius: 0.4em;\r\n    box-shadow: 0.3em 0.3em 0.7em #00000015;\r\n    transition: border 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);\r\n    border: rgb(250, 250, 250) 0.2em solid;\r\n    padding: 25px;\n}\n.login-card[data-v-6bdc8b8e]:hover {\r\n    border: #1426c2 0.2em solid;\n}\n.login-wrapper[data-v-6bdc8b8e]{\r\n    height: 100vh;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.box[data-v-6bdc8b8e]{\r\n    padding: 50px 25px 50px 25px;\r\n    border: 1px solid rgb(223, 223, 223);\r\n    border: 1px solid #1426c2;\r\n    width: 500px;\n}\n.hr-line[data-v-6bdc8b8e]{\r\n    background-color: #1426c2;\n}\n.login-input[data-v-6bdc8b8e]{\r\n    margin-bottom: 25px;\n}\n.logo[data-v-6bdc8b8e]{\r\n    height: 180px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -74301,7 +74313,7 @@ var render = function () {
     [
       _c("div", { staticClass: "section" }, [
         _c("div", { staticClass: "columns is-centered" }, [
-          _c("div", { staticClass: "column is-10-tablet is-8-desktop" }, [
+          _c("div", { staticClass: "column is-8-widescreen is-10-desktop" }, [
             _c(
               "div",
               { staticClass: "box" },
@@ -75572,25 +75584,23 @@ var render = function () {
                     1
                   ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "buttons expanded mt-4" }, [
-                    _c(
-                      "button",
-                      {
+                  _c(
+                    "div",
+                    { staticClass: "buttons expanded mt-4" },
+                    [
+                      _c("b-button", {
                         staticClass:
                           "button is-fullwidth is-primary is-outlined has-text-weight-bold",
-                      },
-                      [
-                        _vm._v(
-                          "\n                                    LOGIN\n\n                                    "
-                        ),
-                        _c("b-icon", {
-                          staticClass: "ml-2",
-                          attrs: { icon: "login" },
-                        }),
-                      ],
-                      1
-                    ),
-                  ]),
+                        attrs: {
+                          "native-type": "submit",
+                          loading: _vm.loading,
+                          label: "LOGIN",
+                          "icon-right": "login",
+                        },
+                      }),
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
                   _vm._m(1),
                 ],
@@ -76997,8 +77007,22 @@ var render = function () {
                               ),
                             ])
                           : _c("div", {}, [
-                              _c("div", { staticClass: "mb-2 occupied" }, [
-                                _vm._v("OCCUPIED"),
+                              _c("div", [
+                                park.parkReservation.enter_time !== null
+                                  ? _c(
+                                      "div",
+                                      { staticClass: "mb-2 occupied" },
+                                      [
+                                        _vm._v(
+                                          "\n                                            OCCUPIED\n                                        "
+                                        ),
+                                      ]
+                                    )
+                                  : _c(
+                                      "div",
+                                      { staticClass: "mb-2 occupied" },
+                                      [_vm._v("RESERVED")]
+                                    ),
                               ]),
                               _vm._v(" "),
                               _vm._m(0, true),
